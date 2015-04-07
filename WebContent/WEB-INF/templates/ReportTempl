@@ -1,0 +1,276 @@
+<html>
+<head>
+<style>
+
+@page {
+	size: auto;
+	margin-top: 1.75in; /* this affects the margin in the printer settings */
+	margin-bottom: 0.5in;
+	margin-left: 0.25in;
+	margin-right: 0.25in;
+}
+
+@media print {
+	
+ 	.topOffsetArea {
+		display: none;
+	}
+	
+	.topBar {
+		display: none;
+	}
+	
+}
+body {
+	font-family: Tahoma;
+	margin: 0px;
+}
+
+h1 {
+	font-family: Tahoma;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.topOffsetArea {
+	padding-top: 70px;
+}
+
+.printButton {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight:bold;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor: pointer;
+	text-align: center;
+	background-color: #3e4d64;
+	color: white;
+	width: 100px;
+	height: 15px;
+	margin-left: 10px;
+}
+
+.printButton:active {
+	background-color: #9EA6B2;
+}
+
+.topBar {
+	position: fixed;
+	top: 0px;
+	height: 50px; 
+	width: 100%; 
+	padding-left: 0px; 
+	padding-top:10px; 
+	background-color:orange;
+	box-shadow: 0px 2px 5px darkgray;
+}
+
+.simpletable {
+    width: 95%;
+    margin: auto;
+    border: 1px solid darkgray;
+	border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+.patientInformation_name {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	border-bottom: 1px solid darkgray;
+	border-right: 1px solid darkgray;
+	padding:3px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.patientInformation_value {
+	font-family: Tahoma;
+	font-size: 12px;
+	border-bottom: 1px solid darkgray;
+	border-right: 1px solid darkgray;
+	padding:3px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.reporttable {
+	width: 95%;
+	margin: auto;
+	border-spacing: 0px;
+    border-collapse: collapse;
+    
+}
+
+.reporttable th {
+	margin: auto;
+	text-align: center;
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	border-right: 1px solid darkgray;
+}
+
+.reporttable td {
+	font-family: Tahoma;
+	font-size: 12px;
+	padding-top:6px;
+}
+
+.td_test_level_0 {
+	padding-left: 0px;
+}
+
+.td_test_level_1 {
+	padding-left: 40px;
+}
+
+.td_test_level_2 {
+	padding-left: 80px;
+}
+
+.td_test_level_3 {
+	padding-left: 120px;
+}
+
+.td_test_description_level_0 {
+	padding-left: 10px;
+}
+
+.td_test_description_level_1 {
+	padding-left: 50px;
+}
+
+.td_test_description_level_2 {
+	padding-left: 90px;
+}
+
+.td_test_description_level_3 {
+	padding-left: 130px;
+}
+
+.td_category_level_0 {
+	padding-left: 0px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.td_category_level_1 {
+	padding-left: 40px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.td_category_level_2 {
+	padding-left: 80px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.td_collection_level_0 {
+	padding-left: 0px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.td_collection_level_1 {
+	padding-left: 40px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.td_package {
+	padding-left: 0px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.td_recommendation_header {
+	padding-top: 50px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.td_recommendation {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.designation_label {
+	font-size: 12px;
+}
+
+.subscript_text {
+	font-size: 11px;
+}
+
+</style>
+<title>Report - %BillNumber%</title>
+</Head>
+<body>
+
+<div style='height: 100%; width: 100%;padding: 0px;'>
+		<div class='topBar'>
+			<div class='printButton' onclick='window.print(); return false;'>Print</div>
+		</div>
+		<p class='topOffsetArea'></p>
+		<h1>Report</h1>
+		<table class='simpletable' id='customer_info'>
+			<tr>
+				<td class='patientInformation_name'>Name</td>
+				<td class='patientInformation_value'>!@#$Name$#@!</td>
+			    <td class='patientInformation_name'>Customer ID</td>
+				<td class='patientInformation_value'>!@#$CustomerID$#@!</td>
+			</tr>
+			<tr>
+				<td class='patientInformation_name'>Age/Sex</td>
+				<td class='patientInformation_value'>!@#$Age$#@! / !@#$Sex$#@!</td>
+			    <td class='patientInformation_name'>Referred By</td>
+			    <td class='patientInformation_value'>!@#$ReferedBy$#@!</td>
+			</tr>
+			<tr>
+			   	<td class='patientInformation_name'>Bill Number</td>
+				<td class='patientInformation_value'>!@#$BillNumber$#@!</td>
+			   	<td class='patientInformation_name'>Report Date</td>
+				<td class='patientInformation_value'>!@#$ReportDate$#@!</td>
+			</tr>
+		
+		</table>
+		
+		<br>
+		
+		<TABLE class='reporttable'>
+			<tr style='border: 1px solid darkgray;'>
+				<th width='50%'>Particulars</th>
+				<th width='15%' align='center'>Observed	Values</th>
+				<th width='10%' align='center'>Units</th>
+				<th width='25%' align='center'>Reference Range</th>
+			</tr>
+			!@#$Report$#@!
+			
+			!@#$Recommendation$#@!
+		</TABLE>
+		
+		<table width='100%' style='border: 0px;margin-top: 50px;'>
+		<tr width='100%'><td width='33%' align='center'><font face="Tahoma" size='2'></font></td>
+			<td width='33%' align='center'><font face="Tahoma" size='2'></font></td>
+			<td width='33%' align='center' class='designation_label'>Dr. Pradeep R <span class='subscript_text'> MBBS, MD</span></td>
+		</TR>
+		</table>
+		<table width='100%' style='border: 0px;'>
+		<tr width='100%'>
+			<td width='33%' align='center' class='designation_label'>LAB TECHNICIAN</td>
+			<td width='33%' align='center' class='designation_label'>MICROBIOLOGIST</td>
+			<td width='33%' align='center' class='designation_label'>PATHOLOGIST</td>
+		</TR>
+		</table>
+		<br>
+		<p align="center" style='font-size:12px;font-weight: bold;'>
+		End Of Report
+		</p>
+	</div>
+</body>
+
+</html>

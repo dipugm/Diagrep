@@ -1,0 +1,221 @@
+
+/* Main container covers the whole screen */
+div.popup_main_container {
+    display: block;
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10000;
+	text-align: center;
+	background-color: rgba(255,255,255,.6);
+}
+
+/* Popup container is the visible area of the popup. */
+div.popup_container {
+    display: block;
+    position: absolute;
+    z-index:1000005;
+	left: 30%;
+	top: 20%;
+}
+
+/* The top arrow */
+div.popup_arrow{
+	background-image:url('../images/popup-arrow.png');
+	width:25px;
+    height: 12px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	background-repeat:no-repeat;
+	background-position:center top;
+	z-index:1000006;
+}
+
+.popup-content-table {
+	border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+
+td.popup-content-table {
+	padding: 0px;
+}
+.popup_top_arrow {
+	height: 11px;
+	padding: 0px;
+}
+
+div.popup_top_arrow {
+	height: 12px;
+    width: 20px;
+    margin: auto;
+	z-index:1000006;
+	background-color: #3e4d64;
+	-webkit-border-top-left-radius: 10px;
+	-moz-border-top-left-radius: 10px;
+	border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-top-right-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.nav-bar {
+	background-color: #3e4d64;
+	height : 44px;
+	border-bottom: 1px solid darkgray;
+	color: white;
+	
+}
+
+.nav-bar-left-button {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size:14px;
+	text-align: center;
+	border-bottom: 1px solid gray;
+	cursor: pointer;
+	width: 25%;
+	height: 100%;
+}
+
+.nav-bar-left-button:active {
+	background-color: #8B94A2;
+}
+
+.nav-bar-left-button-hidden {
+	border-bottom: 1px solid gray;
+	width: 25%;
+}
+
+
+.nav-bar-right-button {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size:14px;
+	text-align: center;
+	border-bottom: 1px solid gray;
+	cursor: pointer;
+}
+
+.nav-bar-right-button:active {
+	background-color: #8B94A2;
+}
+
+
+.nav-bar-title {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size:16px;
+	font-weight: bold;
+	align: center;
+	text-align: center;
+	border-bottom: 1px solid gray;
+}
+
+.popup-container-cell {
+	background-color: #e3e3e3;
+	border : 1px solid darkgray;
+	padding-bottom: 10px;
+	align: center;
+	padding-top: 20px;
+}
+
+
+h4 {
+	color: white;
+}
+
+
+/* 
+	An 1 pixel strip just below the nav bar. This is added so that we can give 
+	this strip a shadow. If we give a shadow to the nav bar, it destroys the 
+	corner radius 
+*/
+div.popup_content_header {
+    position:absolute;
+    display: block;
+	left:0px;
+	top:47px;
+    height: 1px;
+    box-shadow: 0px 5px #999;
+    background-color: #EEEEEE;
+	z-index:100006;
+}
+    
+.dialog_label {
+	display: block;
+	padding-right: 20px;
+	font-family:Trebuchet MS,Arial,sans-serif;
+	font-size:12px;
+	color: #1c3c53;
+	float: left;
+	position: relative;
+	right:0;
+	width:100px;
+	font-weight: bold;
+	text-align:right;
+}
+
+.dialog_controls {
+	display: block;
+	text-align:left;
+	padding-left:20px;
+}
+
+.dialog_units {
+	font-family:Trebuchet MS,Arial,sans-serif;
+	font-size:12px;
+	font-style:italic;
+	color: #1c3c53;
+	position: relative;
+	right:0;
+	text-align:left;
+}
+
+.radioHeader {
+	font-family:Trebuchet MS,Arial,sans-serif;
+	font-size:12px;
+	color: #1c3c53;
+	padding-left: 20px;
+	padding-top: 30px;
+/*	width:100px;*/
+	font-weight: bold;
+	text-align:left;
+}
+
+.labelforoptioninput {
+	font-family:Trebuchet MS,Arial,sans-serif;
+	font-size:12px;
+	font-style:italic;
+	color: #1c3c53;
+	padding-left: 40px;
+	position: relative;
+	right:0;
+	text-align:left;
+	
+}
+
+
+.td_busyindicator {
+	margin:20px;
+	padding-top: 30px;
+	text-align: center;
+}
+
+.td_busymessage {
+	padding:20px;
+	text-align: left;
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size:12px;
+}
+
+.table_container {
+	padding:2px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	overflow: auto;
+	
+}
+
+p.dialog_caption {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	color: darkblue;
+	font-size: 12px;
+}
+

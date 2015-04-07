@@ -1,0 +1,6 @@
+<tr>
+	<td class='td_test_level_%Level%'>%TestName%</td>
+	<td align='center'>%TestedValue%</td>
+	<td align='center'>%Units%</td>
+	<td align='center'>%NormalValue%</td>
+</tr>

@@ -1,0 +1,85 @@
+
+/*
+Styles for the alert messages
+*/
+
+.alertdialog_background {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 900000;
+	text-align: center;
+    opacity: 0.3;
+    background-color: black;
+}
+
+.alertdialog_container {
+    position: absolute;
+    z-index: 900010;
+
+}
+
+.alertdialog_table {
+    position: absolute;
+    background-color: white;
+    border-radius : 5px;
+
+}
+
+.alertdialog_title_bar {
+    font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 16px;
+    font-weight: bold;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 10px;
+}
+
+.alertdialog_separator {
+    color: black;
+    width: 100%;
+    height: 1px;
+    background-color: lightgray
+}
+
+.alertdialog_icon {
+    width: 32px;
+    height: 32px;
+    float: left;
+    background-repeat: no-repeat;
+}
+
+.alertdialog_message {
+    width: 100%;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 14px;
+    text-align: center;    
+    text-shadow: 0px 2px white;
+}
+
+.alertdialog_text_button {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 12px;
+	font-weight:bold;
+	padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+	cursor: pointer;
+	text-align: center;
+    margin: 12px;
+    position: relative;
+    color: darkblue;
+    border-right-color: lightgray;
+  /*  float: left; */
+
+}
+
+.alertdialog_text_button:active
+{
+	color: lightblue;
+}
+
+

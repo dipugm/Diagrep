@@ -1,0 +1,5 @@
+<tr>
+	<td class='particulars_td'>%SlNo%</td>
+	<td class='particulars_td'>%TestName%</td>
+	<td class='particulars_td' align='right'>%Cost%</td>
+</tr>

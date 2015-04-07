@@ -1,0 +1,258 @@
+<HTML>
+<HEAD>
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+    
+    <link rel="stylesheet" type="text/css" href="../common/css/popup.css" />
+	<link rel="stylesheet" type="text/css" href="../common/css/buttons.css" />
+    <link rel="stylesheet" type="text/css" href="../common/css/alertdialog.css" />
+    <link rel="stylesheet" type="text/css" href="../common/css/progressdialog.css" />
+    <link rel="stylesheet" type="text/css" href="../common/css/statusdialog.css" />
+	<link rel='stylesheet' type="text/css" href='../common/css/calendar.css'>
+	<link rel='stylesheet' type="text/css" href='../common/css/calendar_blue.css'>
+	<link rel='stylesheet' type="text/css" href='../common/css/texteditor.css'>
+	<link rel="stylesheet" type="text/css" href="styles/main.css" />
+	<link rel="stylesheet" type="text/css" href="styles/dialogs.css" />
+
+	<script type='text/javascript' src="../common/js/jquery.js"></script>
+	<script type='text/javascript' src="../common/js/utils.js"></script>
+	<script type='text/javascript' src="../common/js/common.js"></script>
+    <script type='text/javascript' src="../common/js/alertdialog.js"></script>
+    <script type='text/javascript' src="../common/js/progressdialog.js"></script>
+    <script type='text/javascript' src="../common/js/statusdialog.js"></script>
+    <script type='text/javascript' src="../common/js/popup.js"></script>
+    <script type='text/javascript' src='../common/js/calendar.js'></script>
+    <script type='text/javascript' src="../common/js/texteditor.js"></script>
+	<script type='text/javascript' src="js/print.js"></script>
+    <script type='text/javascript' src="js/main.js"></script>
+	<script type='text/javascript' src="js/dialogs.js"></script>
+	<script type='text/javascript' src='js/customers.js'></script>
+	<script type='text/javascript' src='js/report.js'></script>
+
+</HEAD>
+<BODY style='background-color: #222222;' onLoad="initializeDocument()">
+
+<img class="title" src="images/apptitle.png" style="display:inline" width='320px' height='64px'>
+
+<p align='left'>
+	<span onclick="javascript:showSearchCustomers(this)" class='toolbar_button'>
+		<img src='images/search-user.png' >Search Customers
+	</span>
+	
+	<span onclick="javascript:showCreateCustomers(this)" class='toolbar_button'>
+		<img src='images/add-user.png'>Create Customers
+	</span>
+	
+	<span onclick="javascript:showSearchBill(this)" class='toolbar_button'>
+		<img src='images/search-bill-icon.png'>Search Bill
+	</span>
+	
+	<span onclick="javascript:showSearchReport(this)" class='toolbar_button' style='width: 120px;'>
+			<img src='images/search-reports-icon.png'>Search Report
+	</span>
+</p>
+
+<table height="90%" width="98%" border="0" cellspacing="0" cellpadding="0">
+    
+    <tr>
+        <td width="60px" align="right">
+            <img id="createBill" src="images/create_new_bill_active.png" onClick="itemClicked(this)">
+            <img id="editReport" src="images/edit_report_inactive.png" onClick="itemClicked(this)">
+        </td>
+        
+        <td bgcolor="#e3e3e3">
+	
+            <table id="table_createbill" class="newbill" width="100%" height="100%" bgcolor="#e3e3e3">
+                  <tr width='80%'>
+                      <td width='40%' valign='top' id='new_bill_left_side_panel'>
+  						<br>
+  						<table width='100%' style="padding-bottom:20px;">
+  							<tr>
+  								<td class='bill_params_key' style='color:#4C4C4C;'>Customer Name:</td>
+								<td valign='center'><input type='text' class='text_box' style='width: 180px;' size='30' id='text_customer_name'>
+									<a href='javascript:void(0)' class='image_button' id="search_button" style='background-image: url(images/search.png)' onclick='lookupCustomerByName()'></a></td>
+  							</tr>
+  							<tr>
+  								<td class='bill_params_key'>Customer ID:</td>
+								<td><input type='text' class='text_box' style='width: 180px;' id='text_customer_id' ></td>								
+  							</tr>
+  							<tr>
+  								<td class='bill_params_key'>Referred By:</td>
+								<td><input type='text' class='text_box' style='width: 180px;' id='text_referred_by'></td>
+  							</tr>
+  							<tr>
+  								<td class='bill_params_key'>Report Date:</td>
+								<td><input type='text' class='text_box' style='width: 180px;' id='text_report_date'>
+									<span class='image_button' style='background-image: url(images/calendar.png)' 
+									onmouseover="fnInitCalendar(this, 'text_report_date', 'drag=false,close=true,title=Report Date')"></span> </td>
+  							</tr>
+  						</table>
+					
+						<ul class='tabLayout' style='padding-left:20px'>
+	  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice_selected' id='tab_choice_tests' onclick="javascript:onTabSelected('tab_choice_tests')">Tests</a></li>
+	  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice' id='tab_choice_categories' onclick="javascript:onTabSelected('tab_choice_categories')">Categories</a></li>
+	  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice' id='tab_choice_collections' onclick="javascript:onTabSelected('tab_choice_collections')">Collections</a></li>
+	  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice' id='tab_choice_packages' onclick="javascript:onTabSelected('tab_choice_packages')">Packages</a></li>
+  						</ul>
+
+						<div style='width: 95%;height: 65%; padding-left:10px;'>
+							<div class="search_box_for_entities" id="search_box_for_entities" onclick='javascript:clickInSearchEntityAndScroll();'>
+								<input type='text' id='text_search_and_scroll' onkeyup='javascript:searchEntityAndScroll();'>
+							</div>
+							<div class='entity_tab_container' id='entity_tab_container' >
+							
+								<div class='entity_container' id='entity_container_tests'>
+			   						<table class='entity_table' id='table_tests'>
+			   						</table>
+								</div>
+								<div class='entity_container' id='entity_container_categories' style="display: none;" >
+									<table class='entity_table' id='table_categories'>
+			   						</table>
+								</div>
+								<div class='entity_container' id='entity_container_collections' style="display: none;">	
+									<table class='entity_table' id='table_collections'>
+			   						</table>
+								</div>
+								<div class='entity_container' id='entity_container_packages' style="display: none;">
+									<table class='entity_table' id='table_packages'>
+			   						</table>
+								</div>
+							</div>
+						</div>
+  	
+                </td>
+
+				<td height='100%' valign='top'>
+					<table width='100%' style='padding-top:20px;'>
+						<tr>
+							<td height='10%' align='left' class='billdetailsheader'>Bill Details</td>
+							<td height='10%' width='35%' align='right' style='padding-right: 10px;'>
+								<div onclick='javascript:clearBill()' class='text_button' style='width: 100px;'>Clear</div>
+							</td>
+						</tr>
+						<tr>
+							<td height='65%' colspan='2' style='padding-bottom:20px; padding-top:20px;' >
+								<div class='bill_details_container' id='bill_details_container'>
+									<table width='100%' class='bill_contents' id='bill_contents' border='0' cellspacing='0'>
+										<tr class='bill_details_header_row'>
+											<th width='10%'>Sl No</th>
+											<th width='70%'>Particulars</th>
+											<th>Cost</th>
+										</tr>
+									</table>
+								</div>
+								
+							</td>
+						</tr>
+						<tr>
+							<td align='right' class='bill_params_key'>Sub Total :</td>
+							<td class='bill_params_value' id='bill_sub_total'>0.00</td>
+						</tr>
+						<tr>
+							<td height='5%' class='bill_params_key'>Advance :</td>
+							<td class='bill_params_value' valign='center'>
+								<div style="float:left;width:100px;padding-top:5px; padding-bottom:5px;" href='' onclick='javascript:onAdvance()' class='text_button'>Update</div>
+								<div>
+									<input type='text' onkeypress='return isNumberKey(event)' class='number_box' style="width:100px;" id='text_box_advance'>
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<td height='5%'  align='Right' class='bill_params_key'>Balance :</td>
+							<td class='bill_params_total' id='bill_balance'>0.0</td>
+						</tr>
+						
+						<tr>
+							<td align='right' colspan='2' style='padding-top: 20px;padding-right:20px;'>
+								<div onclick='javascript:generateBill()' class='text_button' style='width:200px;'>Generate Bill</div>
+							</td>
+						</tr>
+						
+					</table>
+					
+				</td>
+					
+                </tr>
+            </table>
+            
+            <table id="table_editreport" class="editreport" width="100%" height="100%" bgcolor="#e3e3e3">
+                <tr>
+                    <td valign='top' height='10'>
+						<div style='padding-left: 20px; padding-top:10px;'>
+							<span class='bill_params_key' style='font-size:12px;float:left;'>Enter the bill number : </span><input type='text' id='report_bill_number' class='text_box' style='width: 150px;height:30px;'>
+							<span class='text_button' style='padding-left: 30px; padding-right: 30px;' onclick='javascript:getBillDetailsForReportEditing()'> Get Details</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td height='40%' valign='center' style='padding-top: 10px;'>
+						<table class='bill_contents_header'>
+							<tr>
+								<th width='6%'>Sl No.</th>
+								<th width='50%'>Test </th>
+								<th width='15%'>Value </th>
+								<th>Reference Range</th>
+							</tr>	
+						</table>
+						<div class='holder_for_report_tests_table' id='holder_for_report_tests_table' style='height:300px;'>
+							<table class='bill_contents' id='table_report_tests'>
+							</table>
+						</div>
+						<div class='holder_for_report_values' id='holder_for_report_values'>
+							<div style='padding-bottom: 10px'>
+								Select a test from the table to edit its value
+							</div>
+							<div style='padding-bottom: 10px; font-weight: bold;'>
+								Selected Test : 
+								<span id='span_test_name' style='color:#9e521c'></span>
+							</div>
+							<div>
+								<input type='text' class='text_box' id='text_test_value' style='width: 150px;height:30px;' onkeyup='javascript:onChangeInTestValue(this)'>
+								<span class='text_button' style='padding:10px;' onclick="javascript:changeTestValue()">Change</span>
+							</div>
+							<div style='padding-top:5px; padding-bottom: 10px; color:#9e521c; font-weight: bold;'>
+								[Normal Value: 
+								<span id='span_normal_value'></span>]
+							</div>
+							<div style='padding-bottom: 20px'>
+								<input type='checkbox' id='checkbox_is_highlighted'> Value Outside Reference Range.
+							</div>
+							<div style='padding-top:20px; padding-bottom: 10px; font-size:12px;'>
+								<div class='text_button' style='width:200px;' onclick='javascript:onGenerateReportFromMainView()'>Generate Report</div>
+							</div>
+						</div>
+					</td>
+               	</tr>
+				<tr>
+					<td height='45%' width='100%'>
+						<table width='100%' height='100%' class='tableTextHolder'>
+							<tr>
+								<td height='30px' width='30%' style='padding-left: 10px'>
+									<span>Description (per Test) :</span>
+								</td>
+								<td style='padding-left: 10px'>
+									<span >Recommendations: (Overall) </span>
+									<span id='save_data_button' class='text_button' onclick="javascript:displaySaveDataDialog(this)" style='padding-right:20px;padding-left:20px;margin-right:10px;'> Save </span>
+									<span class='text_button' onclick="javascript:displayLoadDataDialog()" style='padding-right:20px;padding-left:20px;margin-right:5px'> Load </span>
+								</td>
+							</tr>
+							<tr>
+								<td style='padding-left: 10px'>
+									<div class='holder_for_test_description' id='holder_for_test_description' ondblclick="javascript:displayTextEditor('holder_for_test_description', 'Test Description','onDescriptionChanged')" ></div>
+								</td>
+								<td style='padding-left: 10px; padding-right: 10px'>
+									<div class='holder_for_report_recommendations' id='holder_for_report_recommendations' ondblclick="javascript:displayTextEditor('holder_for_report_recommendations', 'Recommendations', 'onRecommendationsChanged')"></div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+    
+</BODY>
+</HTML>

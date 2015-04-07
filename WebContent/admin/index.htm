@@ -1,0 +1,82 @@
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	
+	<link rel="stylesheet" type="text/css" href="../common/css/buttons.css" />
+    <link rel="stylesheet" type="text/css" href="../common/css/alertdialog.css" />
+    <link rel="stylesheet" type="text/css" href="../common/css/progressdialog.css" />
+    <link rel="stylesheet" type="text/css" href="../common/css/statusdialog.css" />
+    <link rel="stylesheet" type="text/css" href="../common/css/texteditor.css" />
+    <link rel="stylesheet" type="text/css" href="../common/css/popup.css" />
+	<link rel="stylesheet" type="text/css" href="css/admin.css" />
+	<link rel="stylesheet" type="text/css" href="css/popup_options.css" />
+	
+	<script type='text/javascript' src="../common/js/jquery.js"></script>
+	<script type='text/javascript' src="../common/js/utils.js"></script>
+	<script type='text/javascript' src="../common/js/common.js"></script>
+    <script type='text/javascript' src="../common/js/alertdialog.js"></script>
+    <script type='text/javascript' src="../common/js/progressdialog.js"></script>
+    <script type='text/javascript' src="../common/js/statusdialog.js"></script>
+    <script type='text/javascript' src="../common/js/texteditor.js"></script>
+    <script type='text/javascript' src="../common/js/popup.js"></script>
+	<script type="text/javascript" src="js/choicesPopup.js"></script>
+    <script type="text/javascript" src="js/entityFetchStateMachine.js"></script>
+	<script type="text/javascript" src="js/admin.js"></script>
+	<script type="text/javascript" src="js/testpanel.js"></script>
+	<script type="text/javascript" src="js/categorypanel.js"></script>
+	<script type="text/javascript" src="js/collectionpanel.js"></script>
+	<script type="text/javascript" src="js/packagepanel.js"></script>
+    
+	
+</head>
+<body marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" onload="javascript:initializeDocument()">
+	
+	
+<div style="width:100%; height:100%; padding:0px;overflow:hidden;">	
+	<div style="width:100%; height: 90%;">
+		<div class="panelbar">
+			<div class='panelbar_button_selected'  id="panel_button_tests" onclick="javascript:toolbar_button_clicked('tests')">
+				<div style='width:90px; float:left;'>
+					<img src='images/testsIcon.png'><br><a>Tests</a>
+				</div>
+			</div>				
+			
+			<div class='panelbar_button'  id="panel_button_categories" onclick="javascript:toolbar_button_clicked('categories')">
+				<div style='width:90px; float:left;'>
+					<img src='images/groupIcon.png'><br><a href="javascript:void()">Categories</a>
+				</div>
+			</div>
+	
+			<div class='panelbar_button'  id="panel_button_collections" onclick="javascript:toolbar_button_clicked('collections')">
+				<div style='width:90px; float:left;'>
+					<img src='images/collectionIcon.png'><br><a href="javascript:void()"> Collections </a>
+				</div>
+			</div>
+						
+			<div class='panelbar_button'  id="panel_button_packages" onclick="javascript:toolbar_button_clicked('packages')">
+				<div style='width:90px; float:left;'>
+					<img src='images/packageIcon.png'><br><a href="javascript:void()"> Packages </a>
+				</div>
+			</div>
+	
+		</div>
+		<div class="centeranellayout" id="center_panel_layout">
+		</div>
+		<div class="rightpanellayout" id="right_panel_layout">
+		</div>
+	</div>
+	<div class="bottom_status_panel">
+		<table style="width:50%;padding:20px;">
+			<tr>
+				<td rowspan='2' ><img src='images/Busy.gif' id='status_image' style='width:36px; height:36px;'></td>
+				<td class='status_main_task' width='85%' id='status_main_task'>Main task</td>
+			</tr>
+			<tr>
+				
+				<td class='status_result' width='80%' id='status_result'>Result</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</body>
+</html>

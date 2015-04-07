@@ -1,0 +1,197 @@
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<style>
+
+@page
+{
+    size: auto ;
+    margin: 0in;  /* this affects the margin in the printer settings */
+}
+
+
+@media print {
+	.topBar {
+		display: none;
+	}
+	
+	.topOffsetArea {
+		display: none;
+	}
+}
+
+.topOffsetArea {
+	padding-top: 70px;
+}
+
+.printButton {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight:bold;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor: pointer;
+	text-align: center;
+	background-color: #3e4d64;
+	color: white;
+	width: 100px;
+	height: 15px;
+	margin-left: 10px;
+}
+
+.printButton:active {
+	background-color: #9EA6B2;
+}
+
+.topBar {
+	position: fixed;
+	top: 0px;
+	height: 50px; 
+	width: 100%; 
+	padding-left: 0px; 
+	padding-top:10px; 
+	background-color:orange;
+	box-shadow: 0px 2px 5px darkgray;
+}
+
+
+
+.h1 {
+	font-family: Tahoma;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: underline;
+	color: black;
+	text-align:center;
+	
+}
+
+.h2 {
+	font-family: Tahoma;
+	font-size: 10px;
+	text-align:center;
+}
+
+.simpletable {
+	border: 1px solid darkgray;
+	border-spacing: 0px;
+    border-collapse: collapse;
+    width: 95%;
+    margin: auto;
+}
+
+.patientInformation_name {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	border-bottom: 1px solid darkgray;
+	border-right: 1px solid darkgray;
+	padding:3px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.patientInformation_value {
+	font-family: Tahoma;
+	font-size: 12px;
+	border-bottom: 1px solid darkgray;
+	border-right: 1px solid darkgray;
+	padding:3px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.particulars_th {
+	font-family: Tahoma;
+	font-size: 12px;
+	border-right: 1px solid darkgray;
+}
+
+.particulars_td {
+	font-family: Tahoma;
+	font-size: 12px;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.particulars_td_bold {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+</style>
+
+<title>Bill - %BillNumber%</title>
+</head>
+<body style='margin:0px;'>
+	<div style='height: 100%; width: 100%;padding: 0px;'>
+		<div class='topBar'>
+			<div class='printButton' onclick='window.print(); return false;'>Print</div>
+		</div>
+		<p class='topOffsetArea'></p>
+		<p align='center' class='h1'>Kanishka Diagnostic and Research Centre</p>
+		<p align='center' class='h2'> 
+			No 116/01, Kothnur Dinne Main Road, Gaurav Nagar, JP Nagar 7<sup>th</sup>
+				Phase, Bangalore - 560078, Ph: 26850500, 9448032867
+			<br> 
+			Working hours: Mon to Sat 7:30 AM to 9 PM Sun 7:30 AM to 1 PM
+		</p>
+		<p align='center' style='font-family:Tahoma; font-size:12px; font-weight:bold; text-decoration:underline;'>
+			Cash Bill
+		</p>
+		<br>
+		
+		<table class='simpletable'>
+			<tr class='patientInformation_row'>
+				<td class='patientInformation_name'>Name</td>
+				<td class='patientInformation_value'>!@#$Name$#@!</td>
+				<td class='patientInformation_name'>Bill Number</td>
+				<td class='patientInformation_value'>!@#$BillNumber$#@!</td>
+			</tr>
+			<tr>
+				<td class='patientInformation_name'>Age/Sex</td>
+				<td class='patientInformation_value'>!@#$Age$#@!/!@#$Sex$#@!</td>
+				<td class='patientInformation_name'>Bill Date</td>
+				<td class='patientInformation_value'>!@#$BillDate$#@!</td>
+			</tr>
+			<tr>
+				<td class='patientInformation_name'>Refered By</td>
+				<td class='patientInformation_value'>!@#$ReferedBy$#@!</td>
+				<td class='patientInformation_name'>Report On</td>
+				<td class='patientInformation_value'>!@#$ReportDate$#@!</td>
+			</tr>
+		</table>
+		<br>
+		<table class='simpletable' style='width:95%;'>
+			<tr style='border: 1px solid darkgray;'>
+				<th width='5%' class='particulars_th'>Sl No</th>
+				<th width='82%' class='particulars_th'>Particulars</th>
+				<th width='13%' align='right' class='particulars_th' style='padding-right: 20px;'>Amount (Rs)</th>
+			</tr>
+			
+		!@#$BillDetails$#@!
+		
+			<tr style='border: 1px solid darkgray;'>
+				<td colspan='2' align='right' class='particulars_td_bold' style='border-right:1px solid darkgray'><b>Total (Rs)</b></td>
+				<td align='right' class='particulars_td'>!@#$Total$#@!</td>
+			</tr>
+			<tr >
+				<td colspan='2' align='right' class='particulars_td_bold'>Advance Paid (Rs)</td>
+				<td align="right" class='particulars_td'>!@#$Advance$#@!</td>
+			</tr>
+			<tr>
+				<td colspan='2' align='right' class='particulars_td_bold'>Balance (Rs)</td>
+				<td align="right" class='particulars_td'>!@#$Balance$#@!</td>
+			</tr>
+		</table>
+		
+		<p align='left' style='padding-left: 50px;'><font face="Tahoma" size='2'>Please bring this bill to collect the report</font></p>
+		<p align='right' style='padding-right: 50px;'>
+			<font face="Tahoma" size='2'>Signature</font>
+		</p>
+	</div>
+</body>
+</html>

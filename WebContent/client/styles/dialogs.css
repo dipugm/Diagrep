@@ -1,0 +1,270 @@
+
+.table-dialog-contents {
+	width:85%; 
+	margin:auto;
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 12px; 
+}
+
+div.search_results {
+	height:403px; 
+	width:500px;
+	border-top: 5px solid #3e4d64 ;
+	overflow: auto;
+	z-index: 110;
+	background-color: white;
+}
+
+.td-dialog-content-option-name {
+	font-weight: bold;
+	padding-top:10px; 
+	padding-bottom: 10px;
+	color: #1c3c53;
+}
+
+.no-data-message-cell {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 14px;
+	margin: auto;
+	text-align:center;
+	padding-top: 20px;
+	color: #3e4d64;
+}
+
+/* Search results styles */
+.search_results_container {
+	height: 400px; 
+    width: 500px;
+    border-spacing: 0px; 
+    border-collapse:collapse;
+    position: relative;
+}
+
+.search_result_row {
+	background: white;
+	
+}
+
+.search_result_row:hover {
+	background: #FFEBD6;
+}
+
+.search_result_row:active {
+	background: #CCBCAB;
+}
+
+.search_name {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: left;
+	border-bottom: 1px solid lightskyblue;
+	padding-left:10px;
+}
+
+.search_age {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 12px;
+	color: #4C4C4C;
+	text-align: right;
+}
+
+.search_id {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 13px;
+	text-decoration: underline;
+	text-align: left;
+	color: #E65C00;
+}
+
+.search_contact {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 12px;
+	text-align: right;
+	color: #4C4C4C;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right:10px;
+	border-bottom: 1px solid lightskyblue;
+
+}
+
+.search_address {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 12px;
+	text-align: left;
+	color: black;
+}
+
+
+.popup_search_results_container {
+	display: block;
+    position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	z-index: 9999999;
+	background-color: rgba(0,0,0,.4);
+}
+
+.popup_customer_search_contents {
+	display: block;
+    position: absolute;
+	width: 500px;
+	height: 300px;
+	border: 1px solid #4C4C4C;
+	background-color: #E6F5FA;
+	box-shadow: 2px 2px 5px darkgray;
+}
+
+.popup_customer_search_table_holder {
+	border-top: darkgray;
+	width: 100%;
+	height: 88%;
+	overflow: auto;
+}
+
+.popup_customer_lookup_title {
+	font-family: Trebuchet MS, Arial, sans serif;
+	font-size:12;
+	font-weight: bold;
+	text-align: center;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #3e4d64;
+	border-bottom: 1px solid lightgray;
+}
+
+.close_icon_button {
+	background-image: url('../images/close_icon.png');
+	background-repeat: no-repeat;
+	background-size:24px 24px;
+	background-position: center;
+	cursor: pointer;
+	width: 36px;
+	height: 36px;
+	position: absolute;
+}
+
+.close_icon_button:active {
+	background-image: url('../images/close_icon_clicked.png');
+	background-repeat: no-repeat;
+	background-size: 24px 24px;
+}
+
+.templates_list_area {
+	
+}
+
+.templates_list_preview_area {
+	border-right: lightgray;
+}
+
+.templates_list_table_holder {
+	height: 80%;
+	width: 95%;
+	overflow: auto;
+	border: 1px solid #B2B2B2;
+	margin:auto;
+}
+
+.templates_list_table {
+	width: 100%; 
+	border-collapse: collapse; 
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 12px;
+}
+
+.templates_list_preview_label {
+	margin:10px;
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.templates_list_preview_pane {
+	height:500px; 
+	width:358px; 
+	overflow-x: none; 
+	overflow-y: auto; 
+	box-shadow: inset 0px 2px 10px darkgray;
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 12px;
+	border-top: 1px solid lightgray;
+	padding: 10px;
+	background-color: white;
+}
+
+.td_remove {
+	
+}
+
+.td_remove:hover {
+	background-image:url('../../common/images/cross_icon.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 16px 16px;
+}
+
+.search_results_header {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #526629;
+	text-align: center;
+	padding-top: 12px;
+	background-color: #E0FFC2;
+	width: 90%;
+	height: 30px;
+	border: 1px solid #A3CC52;
+	margin: auto;
+	
+	-webkit-border-top-left-radius: 10px;
+   	-moz-border-top-left-radius: 10px;
+   	border-top-left-radius: 10px;
+   	-webkit-border-top-right-radius: 10px;
+   	-moz-border-top-right-radius: 10px;
+   	border-top-right-radius: 10px; 
+}
+
+.customer_report_list_table_container {
+	border: 1px solid lightgray;
+	padding-bottom: 20px;
+	height: 350px;
+	width: 90%; 
+	overflow-y: auto; 
+	background-color: white;
+	margin: auto;
+}
+
+.customer_report_list_table {
+	background-color: white;
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 12px;
+	width: 100%;
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+
+.customer_report_list_table tr:hover {
+	background-color: lightgray;
+}
+
+.customer_report_list_table tr:active {
+	background-color: darkgray;
+}
+
+.customer_report_list_billnumber {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 20px;
+	text-align: center;
+}
+
+.customer_report_list_dates {
+	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-size: 12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}

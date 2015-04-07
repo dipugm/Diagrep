@@ -1,0 +1,6 @@
+<tr>
+	<td class='td_recommendation_header' colspan='4'>Recommendation :</td>
+</tr>
+<tr>
+	<td class='td_recommendation' colspan='4'>%Recommendation%</td>
+</tr>
