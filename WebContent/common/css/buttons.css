@@ -196,17 +196,3 @@ span:active#dialog_close_button {
 	background: #c5e3f8;
 	border: 1px solid lightgray;
 }
-
-div#separator {
-	background-color: #3e4d64;
-	width: 2px;
-	margin-left:10px;
-	margin-right:10px;
-	height:30px;
-	float: left;
-}
-
-
-
-
-

@@ -21,7 +21,7 @@ function show_tests() {
 	body += "<th width='50%'>Name</th>";
 	body += "<th width='10%'>Unit</th>";
 	body += "<th width='20%'>Range</th>";
-	body += "<th width='10%'>Cost</th>";
+	body += "<th width='10%' style='padding-right:30px;'>Cost</th>";
 	body += "</tr></table>";
 	
 	body += "<div class='page_contents'>";
@@ -40,7 +40,7 @@ function show_tests() {
 		body += "	<td width='50%'>" + test.name + "</td>";
 		body += "	<td width='10%'>" + test.unit + "</td>";
 		body += "	<td width='20%'>" + test.normalValue + "</td>";
-		body += "	<td width='10%' style='text-align:right;'>" + test.cost + "</td>";
+		body += "	<td width='10%' style='text-align:right;padding-right:30px;'>" + test.cost + "</td>";
 		body += "</tr>";
 	}
 	
@@ -101,7 +101,7 @@ function showViewForTestDetails( test ) {
 	
 	body += "<tr>";
 	body += "	<td>Reference Range (double click to edit):</td>";
-	body += "	<td><div class='styled_text_area' ondblclick='javascript:editTestNormalRange();' style='width: 300px; height: 100px;' id='text_test_normalvalue'> " + normalvalue + " </div></td>";
+	body += "	<td><div class='styled_text_area' style='width: 300px; height: 100px;' id='text_test_normalvalue'></div></td>";
 	body += "</tr>";
 	body += "<tr>";
 	body += "<td>Units :</td>";
@@ -152,6 +152,8 @@ function showViewForTestDetails( test ) {
 	var rightPanel = document.getElementById( 'right_panel_layout' );
 	rightPanel.innerHTML = body;
 	
+	makeElementEditable('text_test_normalvalue', kEditorNoBar, normalvalue );
+	
 }
 
 function rowClickedForTests( rowNum ) {
@@ -161,19 +163,11 @@ function rowClickedForTests( rowNum ) {
 
 }
 
-function editTestNormalRange( ) {
-	showSmallEditor( 'text_test_normalvalue', "Test Normal Range", "onNormalRangeEdited" );
-}
-
-function onNormalRangeEdited() {
-	gTestEdited.normalValue = document.getElementById('text_test_normalvalue').innerHTML;
-}
-
 function createTestOnServer() {
 	
 	gTestEdited.name=document.getElementById('text_test_name').value;
 	gTestEdited.method=document.getElementById('text_test_method').value;
-	gTestEdited.normalValue = document.getElementById('text_test_normalvalue').innerHTML;
+	gTestEdited.normalValue = getTextFromEditor( 'text_test_normalvalue' );
 	gTestEdited.cost=document.getElementById('text_test_cost').value;
 	gTestEdited.unit=document.getElementById('text_test_units').value;
 	
@@ -227,7 +221,7 @@ function modifyTestOnServer() {
 	if( gTestEdited.method == "" ) { 
 		gTestEdited.method = "-"; 
 	}
-	gTestEdited.normalValue = document.getElementById('text_test_normalvalue').innerHTML;
+	gTestEdited.normalValue = getTextFromEditor( 'text_test_normalvalue' );
 	gTestEdited.cost = document.getElementById('text_test_cost').value;
 	
 	if( dataValidityCheck("dummy", gTestEdited.cost) == false) {

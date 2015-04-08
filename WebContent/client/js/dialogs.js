@@ -475,8 +475,8 @@ function onRecommendationTemplatesAvailable( resp ) {
 }
 
 function onSavedTemplateClicked( name ) {
-	dt = gArrayRecommendationTemplates[ name ];
-	pane = document.getElementById('templates_list_preview_pane');
+	var dt = gArrayRecommendationTemplates[ name ];
+	var pane = document.getElementById('templates_list_preview_pane');
 	pane.innerHTML = dt.content;
 	
 	document.getElementById('template_selected').innerHTML = dt.name;
@@ -491,23 +491,23 @@ function onSelectSavedData( ) {
 		return;
 	}
 	
-	document.getElementById( 'holder_for_report_recommendations' ).innerHTML = gSelectedRecommendationTemplate.content;
+	setTextInEditor( 'holder_for_report_recommendations' , gSelectedRecommendationTemplate.content );
 	onDone();
 }
 
 function onSaveAsTemplate() {
 	
-	name = document.getElementById( 'name_for_template_data' ).value;
-	data = document.getElementById( 'holder_for_report_recommendations' ).innerHTML;
-	data = encodeURIComponent( data );
+	var name = document.getElementById( 'name_for_template_data' ).value;
+	var data = getTextFromEditor( 'holder_for_report_recommendations' );
+	data 	 = encodeURIComponent( data );
 	
-	query = "name=" + name + "&content=" + data;
+	var query = "name=" + name + "&content=" + data;
 	sendAsyncAjaxRequestToServer( '/Diagrep/StoreRecommendationTemplate', 'POST', query, "onSaveTemplateResponse" );
 	
 }
 
 function onSaveTemplateResponse( resp ) {
-	dictResp = JSON.parse( resp );
+	var dictResp = JSON.parse( resp );
 	
 	if( dictResp.status == 'failure' ) {
 		showError( dictResp.info, "Save Failed" );

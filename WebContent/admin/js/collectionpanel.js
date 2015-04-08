@@ -18,7 +18,8 @@ function show_collections() {
 	body += "<table class='entity_table_header' border='0' cellspacing='0'>";
 	body += "<tr>";
 	body += "<th width='10%'>Sl No.</th>";
-	body += "<th width='90%'>Name</th>";
+	body += "<th width='70%'>Name</th>";
+	body += "<th width='20%'>Cost</td>";
 	body += "</tr>";
 	body += "</table>";
 	
@@ -32,7 +33,8 @@ function show_collections() {
 		body += " class='odd_row'";
 		body += " onclick=\"javascript:rowClickedForCollections(" + i + ")\">";
 		body += "	<td width='10%' align='center'>" + (i+1) + "</td>";
-		body += "	<td width='90%'>" + col.name + "</td>";
+		body += "	<td width='70%'>" + col.name + "</td>";
+		body += "	<td width='20%' style='text-align:right;padding-right:30px;'>" + col.cost + "</td>";	
 		body += "</tr>";
 	}
 	

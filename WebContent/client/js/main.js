@@ -40,6 +40,9 @@ function itemClicked( item ) {
 
 function initializeDocument() {
 	
+	makeElementEditable( 'holder_for_test_description', kEditorMiniBar, "" );
+	makeElementEditable( 'holder_for_report_recommendations', kEditorFullBar, "" );
+	
     document.getElementById("table_createbill").style.display = "";
     document.getElementById("table_editreport").style.display = "none";
 

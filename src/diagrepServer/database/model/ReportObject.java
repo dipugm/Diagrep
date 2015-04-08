@@ -68,6 +68,7 @@ public class ReportObject extends ModelObject implements IEntityObject {
 		}
 		sb.append( "\",\"entities\":[" );
 		
+		boolean appendComma = false;
 		for( int i=0; i < fk_reportDetails.size(); i++ ) {
 			ReportDetailsObject rdo = fk_reportDetails.get( i );
 			TestObject to = (TestObject)new GetSingleTestAction( rdo.entityId ).doAction();
@@ -77,9 +78,11 @@ public class ReportObject extends ModelObject implements IEntityObject {
 				continue;
 			}
 			
-			if( i > 0 ) {
+			if( appendComma ) {
 				sb.append( "," );
 			}
+			appendComma = true;
+			
 			sb.append( "{" );
 			
 			sb.append( "\"id\":" );

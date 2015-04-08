@@ -36,7 +36,7 @@ function show_categories() {
 		body += " onclick=\"javascript:rowClickedForCategories(" + i + ")\">";
 		body += "	<td width='10%' align='center'>" + (i+1) + "</td>";
 		body += "	<td width='75%'>" + cat.name + "</td>";
-		body += "	<td width='15%'>" + cat.cost + "</td>";
+		body += "	<td width='15%' style='text-align:right;padding-right:30px;'>" + cat.cost + "</td>";
 		body += "</tr>";
 	}
 	

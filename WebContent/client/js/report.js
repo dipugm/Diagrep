@@ -2,6 +2,7 @@
 var gTestValueDetails = [];
 var gCurrentEditedTest = 0;
 var gQueriedBillNum = "";
+var gMethodToExecuteAfterUpdate=0;
 
 function checkIfConditionsFineForReportEditing(divElement) {
 	if( document.getElementById('table_report_tests').rows.length == 0 ) {
@@ -99,8 +100,7 @@ function onGetBillForEditingResponseFromServer( resp ) {
 			addToReportTests( test, i );
 		}
         
-		document.getElementById('holder_for_report_recommendations').innerHTML = 
-			decodeURLEncodedString(jresp.recommendations);
+		setTextInEditor('holder_for_report_recommendations', decodeURLEncodedString( jresp.recommendations ) );
 	}
     
     closeStatusDialog();
@@ -173,8 +173,7 @@ function testSelectedForEditing( test_id ) {
 	
 	textB.value = oTest.testedValue;
 	
-	var inpDesc = document.getElementById('holder_for_test_description');
-	inpDesc.innerHTML = oTest.description;
+	setTextInEditor('holder_for_test_description', oTest.description);
 	
 	var span = document.getElementById( 'span_normal_value' );
 	if( oTest.normal_value != '' ) {
@@ -200,7 +199,7 @@ function onChangeInTestValue( obj ) {
 	var range = gCurrentEditedTest.normalValue;
 	var value = parseFloat( textB.value );
 	
-	if( range.indexOf(',') < 0 ) {
+	if( value != 'NaN' && range.indexOf(',') < 0 ) {
 		var values = range.split( "-" );
 		var lowerlimit = parseFloat(values[0]);
 		var upperlimit = parseFloat(values[1]);
@@ -234,8 +233,7 @@ function changeTestValue() {
 	var td = document.getElementById( 'td_report_test_value_for_' + gCurrentEditedTest.id );
 	td.innerHTML = gCurrentEditedTest.testedValue;
 	
-	var inpDesc = document.getElementById('holder_for_test_description');
-	gCurrentEditedTest.description = inpDesc.innerHTML;
+	gCurrentEditedTest.description = getTextFromEditor('holder_for_test_description');
 	
 	var checkbox = document.getElementById( 'checkbox_is_highlighted' );
 	gCurrentEditedTest.is_highlighted = checkbox.checked;
@@ -281,13 +279,13 @@ function onRecommendationsChanged () {
 
 function onUpdateReport( updateTestsAlso ) {
 	
-	if( gCurrentEditedTest == 0 ) {
+	if( updateTestsAlso && (gCurrentEditedTest == 0) ) {
 		return;
 	}
 	
 	var billNum = document.getElementById( 'report_bill_number' ).value;
     
-	var recom = document.getElementById('holder_for_report_recommendations').innerHTML;
+	var recom = getTextFromEditor('holder_for_report_recommendations');
 	
 	var jsonBody = "{\"bill_number\":\"" + billNum + "\",";
 	jsonBody += "\"fullUpdate\":" + (updateTestsAlso | 0 ) + ",";
@@ -310,16 +308,30 @@ function onUpdateReportResponseFromServer( resp ) {
 	var jresp = JSON.parse( resp );
 	if( jresp.status == 'failure' ) {
 		showError( jresp.info, "Editing value Failed" );
+	} else {
+		if( gMethodToExecuteAfterUpdate != 0 ) {
+			gMethodToExecuteAfterUpdate();
+		}
 	}
 }
 
-function onGenerateReportFromMainView() {
+function generateReportPressed() {
+	
 	var billNum = document.getElementById('report_bill_number').value;
 	if( billNum == '' ) {
 		showWarning( "Please specify a Bill Number to first get the report contents.", "No Bill Specified");
 		return;
 	}
 	
+	gMethodToExecuteAfterUpdate = onGenerateReportFromMainView;
+	onUpdateReport( false );
+}
+
+function onGenerateReportFromMainView() {
+	
+	gMethodToExecuteAfterUpdate = 0;
+	
+	var billNum = document.getElementById('report_bill_number').value;	
 	getReportDetailsAsHtml( billNum );
 }
 

@@ -384,7 +384,6 @@ table.newbill {
 
 .holder_for_test_description {
 	box-shadow: 5px 5px 5px #999;
-	padding: 10px;
 	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
 	font-weight: normal;
 	width: 400px;
@@ -396,7 +395,6 @@ table.newbill {
 
 .holder_for_report_recommendations {
 	box-shadow: 5px 5px 5px #999;
-	padding: 10px;
 	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
 	font-weight: normal;
 	width: 90%;

@@ -36,7 +36,7 @@ function show_packages() {
 		body += " onclick=\"javascript:rowClickedForPackages(" + i + ")\">";
 		body += "	<td width='10%' align='center'>" + (i+1) + "</td>";
 		body += "	<td width='75%'>" + pkg.name + "<BR><font size='1'>[" + pkg.description + "]</font></td>";
-		body += "	<td width='15%'>" + pkg.cost + "</td>";
+		body += "	<td width='15%' style='text-align:right;padding-right:30px;'>" + pkg.cost + "</td>";
 		body += "</tr>";
 	}
 	
@@ -98,7 +98,7 @@ function showViewForPackageEditing( pack ) {
 	if( fModify ){
 		body += "	<td><b>" + desc + "</b></td>";
 	} else {
-		body += "	<td colspan='4'><div class='styled_text_area' ondblclick='javascript:editPackageDescription();' style='width: 300px; height: 70px;' id='text_package_description'></div></td>";
+		body += "	<td colspan='4'><div class='styled_text_area' style='width: 300px; height: 70px;' id='text_package_description'></div></td>";
 	}
 	
 	body += "</tr>";
@@ -173,6 +173,8 @@ function showViewForPackageEditing( pack ) {
 	
 	var rightPanel = document.getElementById( 'right_panel_layout' );
 	rightPanel.innerHTML = body;
+	
+	makeElementEditable( 'text_package_description', kEditorNoBar );
 
 }
 
@@ -181,14 +183,6 @@ function rowClickedForPackages( rowNum ) {
 	var pkg = gArrayEntities[kPackageType][ rowNum ];
 	showViewForPackageEditing(pkg);
 
-}
-
-function editPackageDescription() {
-	showSmallEditor('text_package_description', 'Package Description','onPackageDescriptionChanged');
-}
-
-function onPackageDescriptionChanged( ) {
-	gPackageEdited.description = document.getElementById( 'text_package_description' ).innerHTML;
 }
 
 function showTestsForPackage() {
@@ -253,7 +247,7 @@ function validityCheckForPackage(name,cost) {
 function createPackageOnServer() {
 	gPackageEdited.name = document.getElementById('text_package_name').value;
 	gPackageEdited.cost = document.getElementById('text_package_cost').value;
-	gPackageEdited.description = document.getElementById('text_package_description').value;
+	gPackageEdited.description = getTextFromEditor('text_package_description');
 	
 	if( dataValidityCheck( gPackageEdited.name, gPackageEdited.cost ) == true ) {
 		

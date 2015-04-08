@@ -219,7 +219,7 @@
 								<input type='checkbox' id='checkbox_is_highlighted'> Value Outside Reference Range.
 							</div>
 							<div style='padding-top:20px; padding-bottom: 10px; font-size:12px;'>
-								<div class='text_button' style='width:200px;' onclick='javascript:onGenerateReportFromMainView()'>Generate Report</div>
+								<div class='text_button' style='width:200px;' onclick='javascript:generateReportPressed();'>Generate Report</div>
 							</div>
 						</div>
 					</td>
@@ -239,10 +239,10 @@
 							</tr>
 							<tr>
 								<td style='padding-left: 10px'>
-									<div class='holder_for_test_description' id='holder_for_test_description' ondblclick="javascript:displayTextEditor('holder_for_test_description', 'Test Description','onDescriptionChanged')" ></div>
+									<div class='holder_for_test_description' id='holder_for_test_description' ></div>
 								</td>
 								<td style='padding-left: 10px; padding-right: 10px'>
-									<div class='holder_for_report_recommendations' id='holder_for_report_recommendations' ondblclick="javascript:displayTextEditor('holder_for_report_recommendations', 'Recommendations', 'onRecommendationsChanged')"></div>
+									<div class='holder_for_report_recommendations' id='holder_for_report_recommendations'></div>
 								</td>
 							</tr>
 						</table>
