@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
+import diagrepServer.CommonDefs;
 import diagrepServer.database.core.*;
 import diagrepServer.database.core.DatabaseCallParams.*;
 import diagrepServer.database.model.DataDictionary;
@@ -28,6 +29,10 @@ public class DatabaseUtility {
 
 	public static String getDbFileNameForIdAndType( String identifier, int type ) {
 
+		if( type == CommonDefs.CUSTOMER_TYPE ) {
+			identifier = identifier.replace( DiagrepConfig.getConfig().get( DiagrepConfig.CUSTOMER_ID_PREFIX ) + "-", "");
+		}
+		
 		String[] idSplit = StringUtilities.splitTextAndNumberParts( identifier );
 		String fileName = "";
 		
@@ -52,10 +57,14 @@ public class DatabaseUtility {
 		return fileName;
 	}
 	
-	public static String getOrCreateDbFileNameForIdAndType( String billNumber, int type ) {
+	public static String getOrCreateDbFileNameForIdAndType( String identifier, int type ) {
 		
 		// Check if we already have a file for this bill number
-		String fileName = DatabaseUtility.getDbFileNameForIdAndType( billNumber, type );
+		String fileName = DatabaseUtility.getDbFileNameForIdAndType( identifier, type );
+		
+		if( type == CommonDefs.CUSTOMER_TYPE ) {
+			identifier = identifier.replace( DiagrepConfig.getConfig().get( DiagrepConfig.CUSTOMER_ID_PREFIX ) + "-", "");
+		}
 		
 		boolean fileDoesNotExist = false;
 		if( fileName == null || fileName.isEmpty() ) {
@@ -68,7 +77,7 @@ public class DatabaseUtility {
 			}
 			
 			// Since this is no file, we need to create one.
-			String[] billSplit = StringUtilities.splitTextAndNumberParts( billNumber );
+			String[] billSplit = StringUtilities.splitTextAndNumberParts( identifier );
 			
 			DbFileMapping dfm = new DbFileMapping();
 			dfm.textPart 	= billSplit[0];

@@ -52,7 +52,9 @@ public class CreateOrModifyCustomerAction extends BaseAction {
 				if( this.customerIdForModify != null ) {
 					return true;
 				} else {
-					DataDictionaryUtitlities.storeNextCustomerId( this.customerObject.customerId );
+					DataDictionaryUtitlities.storeNextCustomerId( 
+							this.customerObject.customerId.replace( 
+									DiagrepConfig.getConfig().get( DiagrepConfig.CUSTOMER_ID_PREFIX) + "-", "") );
 					return this.customerObject.customerId;
 				}
 				

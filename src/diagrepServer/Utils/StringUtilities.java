@@ -7,16 +7,16 @@ import java.util.regex.Pattern;
 public class StringUtilities {
 	
 	public static void main( String[] args ) {
-		String[] szs = {"KDRC-1222", "KDD-FFF", "990-S", "DFFF" };
-		
-		for( int i=0; i < szs.length; i++ ) {
-			String s = szs[i];
-			if( s.matches( "[A-Z]+-[0-9]+") ) {
-				System.out.println( s + " matches the pattern" );
-			} else {
-				System.out.println( s + " DOES NOT match the pattern" );
-			}
-		}
+//		String[] szs = {"KDRC-1222", "KDD-FFF32123", "990-S", "DFFF" };
+//		
+//		for( int i=0; i < szs.length; i++ ) {
+//			String s = szs[i];
+//			if( s.matches( "[A-Z]+-[A-Z]+[0-9]+") ) {
+//				System.out.println( s + " matches the pattern" );
+//			} else {
+//				System.out.println( s + " DOES NOT match the pattern" );
+//			}
+//		}
 	}
 	
 	public static boolean isBillNumber( String billNumber ) {
@@ -26,9 +26,11 @@ public class StringUtilities {
 	}
 	
 	public static boolean isCustomerId( String custId ) {
-		String pattern = "[A-Z]+-[0-9]+";
+		String patternOld = "[A-Z]+-[0-9]+";	// KDRC-1002
+		String patternNew = "[A-Z]+-[A-Z]+[0-9]+";	// KDRC-A1222;
 		
-		return custId.toUpperCase().matches( pattern );
+		custId = custId.toUpperCase();
+		return (custId.matches( patternOld ) || custId.matches( patternNew));
 	}
 
 	public static String[] splitTextAndNumberParts( String combinedString ) {

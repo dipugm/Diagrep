@@ -25,7 +25,13 @@ public class DataDictionaryUtitlities {
 	}
 	
 	public static String getNextCustomerNumber() {
-		return getDataFromDb( "Last_Customer_ID" );
+		String custId = getDataFromDb( "Last_Customer_ID" );
+		String[] comp = custId.split("-");
+		
+		if( comp.length > 1 ) {
+			return "A00001";
+		}
+		return custId;
 	}
 	
 	public static void storeNextBillNumber( String billNumber ) {
