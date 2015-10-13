@@ -26,8 +26,50 @@ public class BillDetailsObject extends ModelObject implements IEntityObject  {
 
 	@Override
 	public double getCost() {
-		// TODO Auto-generated method stub
-		return cost;
+		double c = cost;
+		if( c == 0.0 ) {
+			switch( EntityType.fromValue( String.valueOf(entityType) ) ) {
+				case Test: {
+					GetSingleTestAction action	= new GetSingleTestAction( entityId );
+					TestObject to = (TestObject)action.doAction();
+					if( to != null ) {
+						c = to.cost;
+					}
+					
+				} break;
+					
+				case Category: {
+					GetSingleCategoryAction action	= new GetSingleCategoryAction( entityId );
+					CategoryObject co = (CategoryObject)action.doAction();
+					
+					if( co != null ) {
+						c = co.cost;
+					}
+		
+				} break;
+					
+				case Collection: {
+					GetSingleCollectionAction action	= new GetSingleCollectionAction( entityId );
+					CollectionObject co = (CollectionObject)action.doAction();
+					
+					if( co != null ) {
+						c = co.cost;
+					}
+		
+				} break;
+					
+				case Package: {
+					GetSinglePackageAction action	= new GetSinglePackageAction ( entityId );
+					PackageObject po = (PackageObject)action.doAction();
+					
+					if( po != null ) {
+						c = po.cost;
+					}
+		
+				} break;
+			}
+		}
+		return c;
 	}
 
 	@Override
@@ -90,7 +132,7 @@ public class BillDetailsObject extends ModelObject implements IEntityObject  {
 		
 		templ = templ.replace( "%SlNo%", String.valueOf(fk_index) );
 		templ = templ.replace( "%TestName%", name );
-		templ = templ.replace( "%Cost%", String.valueOf(cost) );
+		templ = templ.replace( "%Cost%", String.valueOf( getCost() ) );
 		
 		return templ;
 	}

@@ -3,6 +3,7 @@ package diagrepServer.database.actions.customer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import diagrepServer.Utils.DiagrepConfig;
 import diagrepServer.database.actions.BaseAction;
 import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseCallParams.ConditionLike;
@@ -52,8 +53,13 @@ public class LookupCustomers extends BaseAction {
 			arrCustomers.addAll( searchForCustomersInDbFile( dfmInt.databaseFileName ) );
 		}
 		
-		if( arrCustomers.size() > 100 ) {
-			arrCustomers = (ArrayList<CustomerObject>)arrCustomers.subList(0,  100);
+		int limit = 500;
+		String sz = DiagrepConfig.getConfig().get( DiagrepConfig.CUSTOMER_SEARCH_LIMIT);
+		if( sz != null ) {
+			limit = Integer.parseInt( sz );
+		}
+		if( arrCustomers.size() > limit ) {
+			arrCustomers = (ArrayList<CustomerObject>)arrCustomers.subList(0,  limit);
 		}
 		// Return only 100 search hits.
 		searchedCustomers.put( "customers", arrCustomers );
@@ -79,8 +85,19 @@ public class LookupCustomers extends BaseAction {
 		
 		ArrayList<ModelObject> arr = dc.fetch(params);
 		ArrayList<CustomerObject> arrOut = new ArrayList<CustomerObject>();
+		
+		int limit = 500;
+		String sz = DiagrepConfig.getConfig().get( DiagrepConfig.CUSTOMER_SEARCH_LIMIT);
+		if( sz != null ) {
+			limit = Integer.parseInt( sz );
+		}
+		
 		for( int i=0; i < arr.size(); i++ ) {
 			arrOut.add( (CustomerObject) arr.get(i) );
+			
+			if( i > limit ) {
+				break;
+			}
 		}
 		
 		return arrOut;

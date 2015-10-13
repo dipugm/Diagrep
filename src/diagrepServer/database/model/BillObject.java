@@ -24,6 +24,18 @@ public class BillObject extends ModelObject implements IEntityObject {
 	public BillObject( ) {
 	}
 	
+	public Object doAnyTypeConversions( String columnName, Object value ) {
+		if( columnName.equalsIgnoreCase("billDate") && (value.getClass().equals( Integer.class)) ) {
+			return ((Integer)value).longValue();
+		}
+		if( columnName.equalsIgnoreCase("reportDate") && (value.getClass().equals( Integer.class)) ) {
+			return ((Integer)value).longValue();
+		}
+		if( columnName.equalsIgnoreCase("advancePaid") && (value.getClass().equals( Float.class)) ) {
+			return ((Float)value).doubleValue();
+		}
+		return value;
+	}
 	
 	@Override
 	public double getCost() {
@@ -98,9 +110,7 @@ public class BillObject extends ModelObject implements IEntityObject {
 			buf.append( bdo.getAsHtml() );
 			buf.append("\n");
 			
-			if( bdo.cost != null ) {
-				totalCost += bdo.cost.doubleValue();
-			}
+			totalCost += bdo.getCost();
 		}
 		
 		templ = templ.replace( "!@#$BillDetails$#@!", buf.toString() );

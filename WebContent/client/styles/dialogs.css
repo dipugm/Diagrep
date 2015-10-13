@@ -2,8 +2,8 @@
 .table-dialog-contents {
 	width:85%; 
 	margin:auto;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px; 
+	font-family: Tahoma;
+	font-size: 11px; 
 }
 
 div.search_results {
@@ -23,8 +23,8 @@ div.search_results {
 }
 
 .no-data-message-cell {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 14px;
+	font-family: Tahoma;
+	font-size: 11px;
 	margin: auto;
 	text-align:center;
 	padding-top: 20px;
@@ -54,8 +54,8 @@ div.search_results {
 }
 
 .search_name {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 14px;
+	font-family: Tahoma;
+	font-size: 12px;
 	font-weight: bold;
 	text-align: left;
 	border-bottom: 1px solid lightskyblue;
@@ -63,23 +63,23 @@ div.search_results {
 }
 
 .search_age {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px;
+	font-family: Tahoma;
+	font-size: 10px;
 	color: #4C4C4C;
 	text-align: right;
 }
 
 .search_id {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 13px;
+	font-family: Tahoma;
+	font-size: 11px;
 	text-decoration: underline;
 	text-align: left;
 	color: #E65C00;
 }
 
 .search_contact {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px;
+	font-family: Tahoma;
+	font-size: 10px;
 	text-align: right;
 	color: #4C4C4C;
 	padding-top: 5px;
@@ -90,7 +90,7 @@ div.search_results {
 }
 
 .search_address {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-family: Tahoma;
 	font-size: 12px;
 	text-align: left;
 	color: black;
@@ -163,7 +163,7 @@ div.search_results {
 }
 
 .templates_list_table_holder {
-	height: 80%;
+	height: 70%;
 	width: 95%;
 	overflow: auto;
 	border: 1px solid #B2B2B2;
@@ -173,25 +173,25 @@ div.search_results {
 .templates_list_table {
 	width: 100%; 
 	border-collapse: collapse; 
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px;
+	font-family: Tahoma;
+	font-size: 11px;
 }
 
 .templates_list_preview_label {
 	margin:10px;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 13px;
+	font-family: Tahoma;
+	font-size: 11px;
 	font-weight: bold;
 }
 
 .templates_list_preview_pane {
-	height:500px; 
+	height:300px; 
 	width:358px; 
 	overflow-x: none; 
 	overflow-y: auto; 
 	box-shadow: inset 0px 2px 10px darkgray;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px;
+	font-family: Tahoma;
+	font-size: 11px;
 	border-top: 1px solid lightgray;
 	padding: 10px;
 	background-color: white;
@@ -209,8 +209,8 @@ div.search_results {
 }
 
 .search_results_header {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 14px;
+	font-family: Tahoma;
+	font-size: 11px;
 	font-weight: bold;
 	color: #526629;
 	text-align: center;
@@ -241,8 +241,8 @@ div.search_results {
 
 .customer_report_list_table {
 	background-color: white;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px;
+	font-family: Tahoma;
+	font-size: 11px;
 	width: 100%;
 	border-spacing: 0px;
 	border-collapse: collapse;
@@ -257,14 +257,14 @@ div.search_results {
 }
 
 .customer_report_list_billnumber {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 20px;
+	font-family: Tahoma;
+	font-size: 16px;
 	text-align: center;
 }
 
 .customer_report_list_dates {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px;
+	font-family: Tahoma;
+	font-size: 11px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }

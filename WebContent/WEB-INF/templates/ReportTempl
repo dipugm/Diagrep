@@ -4,7 +4,7 @@
 
 @page {
 	size: auto;
-	margin-top: 1.75in; /* this affects the margin in the printer settings */
+	margin-top: 1.85in; /* this affects the margin in the printer settings */
 	margin-bottom: 0.5in;
 	margin-left: 0.25in;
 	margin-right: 0.25in;

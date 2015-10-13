@@ -11,7 +11,7 @@ function show_tests() {
 	var body = "";
 	body += "<div class='page_header' style='width: 100%; background-color:#336699;'>";
 	body += "<div class='page_header_title' style='width: 80%;'>Available Tests</div>";
-	body += "<div id='create_new' onclick='javascript:showViewForTestDetails(0)' class='main_option_button' style='width:17%;' >Create New</div>";
+	body += "<div id='create_new' onclick='javascript:showViewForTestDetails(0)' class='main_option_button' style='width:17%;line-height:40px;' >Create New</div>";
 	body += "</div>";
 	
 	body += "<table class='entity_table_header' border='0' cellspacing='0'>";
@@ -100,7 +100,7 @@ function showViewForTestDetails( test ) {
 	body += "</tr>";
 	
 	body += "<tr>";
-	body += "	<td>Reference Range (double click to edit):</td>";
+	body += "	<td>Reference Range:</td>";
 	body += "	<td><div class='styled_text_area' style='width: 300px; height: 100px;' id='text_test_normalvalue'></div></td>";
 	body += "</tr>";
 	body += "<tr>";

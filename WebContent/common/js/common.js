@@ -31,10 +31,17 @@ function getMousePosition(e) {
 	return pos;
 }
 
+function isStandardKey( evt ) {
+	
+	var charCode = (evt.which) ? evt.which : evt.keyCode;
+	return charCode == 32 || charCode == 8 || 
+			charCode == 9 || charCode == 13 || 
+			charCode == 127 || (charCode >= 37 && charCode <= 40);  
+}
+
 function isNumberKey(evt) {
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if( (charCode >= 48 && charCode <= 57)  
-			|| charCode == 32 || charCode == 9 || charCode == 13 || charCode == 127 ) {
+    if( (charCode >= 48 && charCode <= 57) || isStandardKey(evt) ) {
         return true;
     }
     return false;
@@ -43,7 +50,7 @@ function isNumberKey(evt) {
 function isTextAlphabetsOnly( evt ) {
 	var charCode = (evt.which) ? evt.which : evt.keyCode;
 	if( (charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) 
-			|| charCode == 32 || charCode == 8 || charCode == 9 || charCode == 13 || charCode == 127 ) {
+			|| isStandardKey(evt) ) {
 		return true;
 	}
 		

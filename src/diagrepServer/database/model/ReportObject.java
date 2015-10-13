@@ -38,6 +38,7 @@ public class ReportObject extends ModelObject implements IEntityObject {
 	
 	public Object doAnyTypeConversions( String columnName, Object value ) {
 		if( columnName.equalsIgnoreCase("recommendations") && value != null ) {
+			
 			String ret = new String(javax.xml.bind.DatatypeConverter.parseBase64Binary( (String)value ));
 			return ret;
 		}
@@ -156,7 +157,12 @@ public class ReportObject extends ModelObject implements IEntityObject {
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		reportString	= reportString.replace("!@#$ReportDate$#@!", formatter.format( new Date(bo.reportDate) ) );
 		
-		if( recommendations != null ) {
+		if( recommendations != null && ! recommendations.isEmpty() ) {
+			// Some reports might just have a line break in them. So eliminating that case also.
+			if( recommendations.trim().equalsIgnoreCase("<br>") ) {
+				recommendations = "";
+			}
+
 			String recoTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kReportRecommendationRow );
 			recoTempl	= recoTempl.replace( "%Recommendation%", recommendations );
 			reportString	= reportString.replace("!@#$Recommendation$#@!", recoTempl );
@@ -234,7 +240,7 @@ public class ReportObject extends ModelObject implements IEntityObject {
 		rowTemplate = rowTemplate.replace( "%NormalValue%", to.normalValue);
 		rowTemplate = rowTemplate.replace( "%Units%", to.unit );
 		
-		String testValue = rdo.entityValue != null ? rdo.entityValue : "";
+		String testValue = ((rdo != null) && (rdo.entityValue != null)) ? rdo.entityValue : "";
 		try {
 			testValue = URLDecoder.decode( testValue, "UTF-8" );
 		} catch (UnsupportedEncodingException e) {

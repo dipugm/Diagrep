@@ -14,7 +14,7 @@ function show_categories() {
 	body += "<div class='page_header' style='background-color:#FF6600;'>";
 	body += "<div class='page_header_title' style='width: 80%; padding-left:10px;'>Available Categories</div>";
 
-	body += "<div class='main_option_button' id='create_new' onclick='javascript:showViewForCategoryEditing(0)' style='width:17%;' >Create New</div>";
+	body += "<div class='main_option_button' id='create_new' onclick='javascript:showViewForCategoryEditing(0)' style='width:17%;line-height:40px;' >Create New</div>";
 	body += "</div>";
 
 	body += "<table class='entity_table_header' border='0' cellspacing='0'>";
@@ -97,7 +97,7 @@ function showViewForCategoryEditing( category ) {
 	
 	body += "<tr>";
 	body += "	<td colspan='2'>";
-	body += " <div style='width:400px; height:300px;overflow:auto; border:1px solid lightgray;'>";
+	body += " <div style='width:400px; height:200px;overflow:auto; border:1px solid lightgray;'>";
 	body += "<table class='table_sub_entity' id='table_category_subentities' cellPadding=0 cellSpacing=0>";
 	
 	// Display the tests in this category

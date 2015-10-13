@@ -5,7 +5,7 @@ function lookupCustomerByName( ) {
 	if( szSearchString == '') {
 		showError("Enter part or the complete name of the customer to search.", "Invalid Input");
 	} else {
-		var query = 'customerName=' + szSearchString + '&shouldSearchOldDb=';
+		var query = 'customerName=' + szSearchString + '&shouldSearchOldDb=true';
 		sendAsyncAjaxRequestToServer( '/Diagrep/SearchCustomers', 'GET', query, "onSearchCustomerResponseForAnchoring");
 		
 	}

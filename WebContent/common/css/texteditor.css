@@ -4,13 +4,13 @@
 	background-color: #FFFFFF;
 	border: 0px;
 	border-top: 1px solid lightgray; 
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-family: Tahoma;
 	margin: auto;
 }
 
 .styled-select-header {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px;
+	font-family: Tahoma;
+	font-size: 11px;
 	color: #3e4d64;
 }
 
@@ -18,10 +18,10 @@
 	float: left;
  	width: 150px;
    	height: 26px;
-	font-size:12px;
+	font-size:11px;
 	border: 1px solid #cbddea;
 	color: #3e4d64;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-family: Tahoma;
    	overflow: hidden;
 	background-color: white;
 }

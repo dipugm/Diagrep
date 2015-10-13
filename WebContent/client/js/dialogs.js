@@ -12,7 +12,7 @@ function showCreateCustomers( anchor ) {
 	szBody += "<tr style='padding-top:10px; padding-bottom: 10px;'>";
 	szBody += "<td align='right' class='td-dialog-content-option-name'>Name :</td>";
 	szBody += "<td style='padding-left: 10px;'>";
-	szBody += "<input type='text' onkeypress='return isTextAlphabetsOnly(event)' id='textName' class='text_box' style='width:250px;text-align:left;'></td>";
+	szBody += "<input type='text' id='textName' class='text_box' style='width:250px;text-align:left;'></td>";
 	szBody += "</tr>";
 
 	szBody += "<tr>";
@@ -309,7 +309,7 @@ function printHtmlContents() {
 
 function anchorCustomerSearchResults( results, anchor ) {
 	
-	var customers = results.customers;
+	var customers = results.customers.concat( results.customers_legacy );
 	
 	if( customers.length == 0 ) {
 		showWarning("No Customers matching this name", "No Match");
@@ -428,7 +428,7 @@ function onRecommendationTemplatesAvailable( resp ) {
 			
 			szBody = "<table style='width: 600px; height: 400px; border-collapse: collapse;'>";
 			szBody += "<tr>";
-			szBody += "	<td width='40%' class='templates_list_area'>";
+			szBody += "	<td width='40%' class='templates_list_area' valign='top'>";
 			szBody += "		<p class='templates_list_preview_label'>Select a saved template from the list to preview</p>";
 			szBody += "		<div class='templates_list_table_holder'>";
 			szBody += "			<table class='templates_list_table' id='templates_list_table'>";
@@ -469,7 +469,7 @@ function onRecommendationTemplatesAvailable( resp ) {
 			szBody += "</table>";
 
 			
-			createPopupContainer(600, 600, 'Load a Template', szBody, 'Cancel', undefined );
+			createPopupContainer(600, 400, 'Load a Template', szBody, 'Cancel', undefined );
 		}
 	}	
 }
@@ -491,14 +491,14 @@ function onSelectSavedData( ) {
 		return;
 	}
 	
-	setTextInEditor( 'holder_for_report_recommendations' , gSelectedRecommendationTemplate.content );
+	setTextInEditor( 'holder_for_test_description' , gSelectedRecommendationTemplate.content );
 	onDone();
 }
 
 function onSaveAsTemplate() {
 	
 	var name = document.getElementById( 'name_for_template_data' ).value;
-	var data = getTextFromEditor( 'holder_for_report_recommendations' );
+	var data = getTextFromEditor( 'holder_for_test_description' );
 	data 	 = encodeURIComponent( data );
 	
 	var query = "name=" + name + "&content=" + data;

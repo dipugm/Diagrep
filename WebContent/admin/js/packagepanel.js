@@ -11,7 +11,7 @@ function show_packages() {
 	var body = "";
 	body += "<div class='page_header' style='background-color:#5A0000;'>";
 	body += "<div class='page_header_title' style='width: 80%;'>Available Packges</div>";
-	body += "<div class='main_option_button' style='width: 17%;' id='create_new' onclick='javascript:showViewForPackageEditing(0)' >Create New</div>";
+	body += "<div class='main_option_button' style='width: 17%;line-height:40px;' id='create_new' onclick='javascript:showViewForPackageEditing(0)' >Create New</div>";
 	body += "</div>";
 	
 	body += "<table class='entity_table_header' border='0' cellspacing='0'>";
@@ -35,7 +35,11 @@ function show_packages() {
 		body += " class='odd_row'";
 		body += " onclick=\"javascript:rowClickedForPackages(" + i + ")\">";
 		body += "	<td width='10%' align='center'>" + (i+1) + "</td>";
-		body += "	<td width='75%'>" + pkg.name + "<BR><font size='1'>[" + pkg.description + "]</font></td>";
+		body += "	<td width='75%'>" + pkg.name; 
+		if( pkg.description != null && pkg.description != "" ) {
+			body += "	<br><font size='1'>[" + pkg.description + "]</font></td>";
+		}
+		body += "</td>";
 		body += "	<td width='15%' style='text-align:right;padding-right:30px;'>" + pkg.cost + "</td>";
 		body += "</tr>";
 	}
@@ -118,7 +122,7 @@ function showViewForPackageEditing( pack ) {
 	
 	body += "<tr>";
 	body += "	<td colspan='2'>";
-	body += " <div style='width:400px; height:300px;overflow:auto; border:1px solid lightgray;'>";
+	body += " <div style='width:400px; height:200px;overflow:auto; border:1px solid lightgray;'>";
 	body += "<table class='table_sub_entity' id='table_package_subentities' cellPadding=0 cellSpacing=0>";
 
 	// Display the entities in this category

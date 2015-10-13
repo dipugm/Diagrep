@@ -218,11 +218,12 @@ public class DatabaseImporter {
 					sqlWrite.append( ")");
 					
 					destDbConn.createStatement().execute( sqlWrite.toString() );
-					destDbConn.commit();
 					
 					++rowCount;
 					
 				}
+				
+				destDbConn.commit();
 			}
 			
 			System.out.println( "Success! [" + String.valueOf( rowCount ) + " records]");
@@ -256,8 +257,8 @@ public class DatabaseImporter {
 					sqlM += " VALUES( 1," + String.valueOf(groupId) + ",0," + String.valueOf(testId) + ")";
 					
 					dbDestConnection.createStatement().execute( sqlM );
-					dbDestConnection.commit();
 				}
+					dbDestConnection.commit();
 				
 			}
 			
@@ -294,9 +295,9 @@ public class DatabaseImporter {
 					sqlM += " VALUES( 2," + String.valueOf(entityId) + ","+ String.valueOf(contType) + "," + String.valueOf(contId) + ")";
 					
 					dbDestConnection.createStatement().execute( sqlM );
+				}
 					dbDestConnection.commit();
 				}
-			}
 			
 			System.out.println( " Success!");
 			
@@ -330,9 +331,9 @@ public class DatabaseImporter {
 					sqlM += " VALUES( 3," + String.valueOf(entityId) + ","+ String.valueOf(contType) + "," + String.valueOf(contId) + ")";
 					
 					dbDestConnection.createStatement().execute( sqlM );
-					dbDestConnection.commit();
-
 				}
+				
+					dbDestConnection.commit();
 				
 			}
 			
@@ -462,8 +463,8 @@ public class DatabaseImporter {
 					String billNumber 	= rs.getString(1);
 					String patientId	= rs.getString(2);
 					String refBy		= rs.getString(3);
-					Long billDate		= rs.getLong(4);
-					Long reportDate		= rs.getLong(5);
+					Long billDate		= rs.getLong(4) * 1000;
+					Long reportDate		= rs.getLong(5) * 1000;
 					Double advance		= rs.getDouble(6);
 
 					String sqlM = "INSERT INTO Bill( billNumber, customerId, referredBy, billDate, reportDate, advancePaid)";
@@ -471,9 +472,9 @@ public class DatabaseImporter {
 					sqlM += "," + String.valueOf( reportDate ) + "," + String.valueOf(advance) + ")";
 					
 					cnDest.createStatement().execute( sqlM );
+				}
 					cnDest.commit();
 				}
-			}
 			
 			System.out.println( " Success!");
 			
@@ -507,9 +508,9 @@ public class DatabaseImporter {
 					sqlM += ",0.0)";
 					
 					cnDest.createStatement().execute( sqlM );
+				}
 					cnDest.commit();
 				}
-			}
 			
 			System.out.println( " Success!");
 			
@@ -537,14 +538,19 @@ public class DatabaseImporter {
 					String billNumber 	= rs.getString(1);
 					String preCond		= rs.getString(2);
 					String reco			= rs.getString(3);
+					if( reco != null ) {
+						reco = javax.xml.bind.DatatypeConverter.printBase64Binary( reco.getBytes() );
+					} else {
+						reco = "";
+					}
 	
 					String sqlM = "INSERT INTO Report( billNumber, recommendations, preConditions)";
 					sqlM += " VALUES('" + billNumber + "','"+ reco + "','" + preCond + "')";
 					
 					cnDest.createStatement().execute( sqlM );
+				}
 					cnDest.commit();
 				}
-			}
 			
 			System.out.println( " Success!");
 			
@@ -571,8 +577,20 @@ public class DatabaseImporter {
 			while( rs.next() ) {
 				String billNumber 	= rs.getString(1);
 				String desc			= rs.getString(2);
+				if( desc != null ) {
+					desc = javax.xml.bind.DatatypeConverter.printBase64Binary( desc.getBytes() );
+				} else {
+					desc = "";
+				}
+				
 				Integer entityId	= rs.getInt(3);
 				String entityValue	= rs.getString(4);
+				if( entityValue != null ) {
+					entityValue = javax.xml.bind.DatatypeConverter.printBase64Binary( entityValue.getBytes() );
+				} else {
+					entityValue = "";
+				}
+				
 				Integer isHigh		= rs.getInt(5);
 
 				String sqlM = "INSERT INTO ReportDetails( billNumber, description, entityId, entityValue, isHighlighted)";
@@ -580,9 +598,9 @@ public class DatabaseImporter {
 				sqlM += ",'" + entityValue + "'," + String.valueOf(isHigh) + ")";
 				
 				cnDest.createStatement().execute( sqlM );
+			}
 				cnDest.commit();
 			}
-		}
 		
 		System.out.println( " Success!");
 		

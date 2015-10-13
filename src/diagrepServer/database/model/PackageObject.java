@@ -84,7 +84,12 @@ public class PackageObject extends ModelObject implements IEntityObject {
 			} else {
 				CollectionObject co = (CollectionObject)mo;
 				for( int j=0; j < co.fk_subEntities.size(); j++ ) {
-					arr.addAll( co.fk_subEntities.get( j ).getContainedTests() );
+					ArrayList<ModelObject> tests = co.fk_subEntities.get( j ).getContainedTests();
+					
+					// If the sub entities also has any contained tests
+					if( tests != null ) {
+						arr.addAll( tests );
+					} 
 				}
 			}
 		}

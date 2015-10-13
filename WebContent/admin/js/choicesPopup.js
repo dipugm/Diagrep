@@ -15,9 +15,9 @@ function popupChoices( choices, title, callback ) {
 		popup_height = maxHeight;
 	}
 	
-	popup_width = 200;
+	popup_width = 300;
 	
-	var left = xPosOfCursor;
+	var left = xPosOfCursor - popup_width - 32;
 	var top = yPosOfCursor - (popup_height / 2);
 	
     // Create a div element that covers the whole screen to
@@ -32,17 +32,6 @@ function popupChoices( choices, title, callback ) {
     
     document.body.appendChild( main_container );
 	
-  
-	/*
-    Arrow above the dialog.
-	*/
-    var arrowDiv = document.createElement('DIV');
-    arrowDiv.className = 'popup_arrow';
-    arrowDiv.id = 'popup_arrow';
-  	arrowDiv.style.left = xPosOfCursor + 'px';
- 	arrowDiv.style.top = yPosOfCursor + 'px';
-   
-    main_container.appendChild( arrowDiv );
 
 	/*
 	popup container
@@ -52,8 +41,9 @@ function popupChoices( choices, title, callback ) {
     popup_container.id = 'popup_container';
 
     popup_container.style.height = popup_height + 'px';
-	popup_container.style.left = (left + 32) + 'px';
+	popup_container.style.left = left + 'px';
 	popup_container.style.top = top + 'px';
+	popup_container.style.width = popup_width + 'px';
 
 	popup_container.onclick = function( e ) {
 		e.bubbles = false;
@@ -65,6 +55,16 @@ function popupChoices( choices, title, callback ) {
 
     main_container.appendChild( popup_container );
 
+    /*
+    Arrow above the dialog.
+	*/
+    var arrowDiv = document.createElement('DIV');
+    arrowDiv.className = 'choices_popup_arrow';
+    arrowDiv.id = 'popup_arrow';
+  	arrowDiv.style.left = (xPosOfCursor - 32) + 'px';
+ 	arrowDiv.style.top = (yPosOfCursor - 16) + 'px';
+   
+    main_container.appendChild( arrowDiv );
     
 	/*
 		Navigation Bar

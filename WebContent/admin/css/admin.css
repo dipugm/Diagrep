@@ -8,7 +8,7 @@
 
 .panelbar {
 	z-index: 100;
-	width: 6%;
+	width: 8%;
 	height: 100%;
 	background-color: #474747; 
 	text-align:left;
@@ -29,12 +29,13 @@
 	width: 48%;
 	float: left;
 	border-right: 1px solid lightgray;
+	background-color: lightgray;
 }
 
 .rightpanellayout {
 	z-index: 80;
 	height: 100%;
-	width: 44%;
+	width: 43%;
 	float: left;
 	overflow: auto;
 	background-color: #FEFFFB;
@@ -45,8 +46,8 @@
 	width: 100%; 
 	height: 60px;
 	text-align:center;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px;
+	font-family: Tahoma;
+	font-size: 11px;
 	font-weight: bold;
 	text-decoration:none;
 	color:#3e4d64;
@@ -61,8 +62,8 @@
 	width: 100%; 
 	height: 60px;
 	text-align:center;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 12px;
+	font-family: Tahoma;
+	font-size: 11px;
 	font-weight: bold;
 	text-decoration:none;
 	color:#3e4d64;
@@ -84,16 +85,16 @@
 	width: 100%;
 	color: #3e4d64;
 	text-align: left;
-	height: 50px;
+	height: 40px;
 }
 
 .page_header_title {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 16px;
+	font-family: Tahoma;
+	font-size: 13px;
 	font-weight: bold;
 	text-decoration:none;	
 	float: left; 
-	line-height:50px;
+	line-height:40px;
 	vertical-align:middle; 
 	height:100%; 
 	padding-left:10px;
@@ -101,7 +102,7 @@
 }
 
 .page_contents {
-	height:89%; 
+	height:87%; 
 	width: 100%; 
 	background-color: white;
 	border-top: 1px solid darkgray;
@@ -114,9 +115,9 @@
 }
 
 .entity_table_header th {
-	height: 30px;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 14px;
+	height: 22px;
+	font-family: Tahoma;
+	font-size: 11px;
 	color: #3e4d64;
 	border-right: 1px solid darkgray;
 	background-color: #E8E8E8;
@@ -132,25 +133,25 @@
 	height: 0px;
 }
 .entity_table_contents td {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	font-size: 13px;
+	font-family: Tahoma;
+	font-size: 11px;
 }
 
 .odd_row {
 	background-color:white;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	height: 30px;
+	font-family: Tahoma;
+	height: 22px;
 }
 
 .even_row {
 	background-color:#f0f0f0;
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	height: 30px;
+	font-family: Tahoma;
+	height: 22px;
 }
 
 .sub_entity_table_row {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-	height: 30px;
+	font-family: Tahoma;
+	height: 22px;
 }
 
 .odd_row:hover, .even_row:hover {
@@ -238,44 +239,44 @@
 }
 
 .entity_text_box {
-	font-size: 14px;
+	font-size: 11px;
 	color: darkblue;
 }
 
 .input_form_table {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-family: Tahoma;
 	width: 100%;
 	padding-left: 50px;
-	padding-top: 30px;
+	padding-top: 10px;
 	align: center;
 }
 
 .input_form_table td {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-family: Tahoma;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 11px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
 .description_text {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-family: Tahoma;
 	font-style: italic;
-	font-size: 12px;
+	font-size: 11px;
 	color: darkgray;
 }
 
 .status_main_task {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-family: Tahoma;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 14px;
 	color: darkblue;
 }
 
 .status_result {
-	font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+	font-family: Tahoma;
 	font-style: italic;
-	font-size: 14px;
+	font-size: 11px;
 	color: black;
 }
 
@@ -284,7 +285,7 @@
 	border: 1px solid #CCCCCC;
 	overflow-x: none;
 	overflow-y: auto;
-	font-size: 14px;
+	font-size: 11px;
 	color: darkblue;
 	font-weight: normal;
 }

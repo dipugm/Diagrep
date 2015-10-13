@@ -129,7 +129,7 @@ function fillTestsTable( data ) {
 		
 		html += test.name;
 		if( test.method != '' ) {
-			html += "<br><font size='2' color='darkblue'>Method : " + test.method + "</font>";
+			html += "<br><font size='1' color='darkblue'>Method : " + test.method + "</font>";
 		}
 		html += "</td></tr>";
 	}
@@ -254,10 +254,15 @@ function addToBill( type, index ) {
 	subtotal = subtotal + parseFloat( szCost );
 	updateCosts();
 	
-//	gArrayBill[row_id] = entity;
-//	gArrayBill.push( row_id );
-	
 	gArrayBill.push( entity );
+	
+	var textBox = document.getElementById( 'text_search_and_scroll' );
+	textBox.value = "";
+	textBox.focus();
+	
+	textBox.style.backgroundColor = "white";
+	document.getElementById( 'search_box_for_entities' ).style.backgroundColor = "white";
+	
 }
 
 function deleteFromBill( row_id, szCost ) {
@@ -316,15 +321,12 @@ function updateCosts() {
 
 function onAdvance() {
 	var tb = document.getElementById('text_box_advance');
-	
 	advance = parseFloat(tb.value);
 	
-	if( false == isNaN(advance) ) {
+	if( isNaN(advance) ) {
+		advance = 0.0;
+	} 
 		updateCosts();
-	} else {
-		showWarning( "Not a number. Only Numbers and decimal point allowed.", "Invalid Input");
-		tb.value = '';
-	}
 }
 
 function clearBill() {

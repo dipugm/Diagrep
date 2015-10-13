@@ -11,6 +11,7 @@ public class DiagrepConfig {
 	public final static String DATE_FORMAT			= "dateFormat";
 	public final static String CUSTOMER_ID_PREFIX	= "customerIdPrefix";
 	public final static String CUSTOMER_DB_IMPORTED	= "customerDbImportedName";
+	public final static String CUSTOMER_SEARCH_LIMIT = "customerSearchResultsLimit";
 	
 	private static DiagrepConfig instance = null;
 	public static synchronized DiagrepConfig getConfig() {

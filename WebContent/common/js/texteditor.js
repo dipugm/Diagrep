@@ -81,26 +81,13 @@ function makeElementEditable( element, mode, text ) {
 			szBody += "			<img src='../common/images/text_indent.png' href='javascript:void(0)' onclick=\"fontEdit('" + id + "','indent')\" class='tool_button'>";
 			szBody += "			<img src='../common/images/text_indent_remove.png' href='javascript:void(0)' onclick=\"fontEdit('" + id + "','outdent')\" class='tool_button'>";
 			szBody += "		</td>";
-			szBody += "		<td>";
-			szBody += "			<div id='separator'></div>";			
-			szBody += "		</td>";
-			szBody += "		<td class='styled-select-header'>Text Size : </td>";
-			szBody += "		<td> <div class='styled-select'>";
-			szBody += "		<select onChange=\"javascript:fontEdit('" + id + "','fontsize',this[this.selectedIndex].value)\">";
-			szBody += "			<option value='2'>Normal</option>";
-			szBody += "			<option >-----------</option>";
-			szBody += "			<option value='5'>Heading 1</option>";
-			szBody += "			<option value='4'>Heading 2</option>";
-			szBody += "			<option value='3'>Heading 3</option>";
-			szBody += "		</select></div>";
-			szBody += "		</td>";
 		}
 		
 		szBody += "	</tr>";
 		szBody += "</table>";
 	}
 	
-	szBody += "<iframe class='textEditor' id='" + id + "' style='height:80%;";
+	szBody += "<iframe class='textEditor' id='" + id + "' style='height:76%;";
 	if( mode == kEditorNoBar ) {
 		szBody += "border: 0px;";
 	}

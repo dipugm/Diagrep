@@ -26,7 +26,10 @@ public class GetCustomerDetailsAction extends BaseAction {
 			return null;
 		}
 		
-		String fileName = DatabaseUtility.getDbFileNameForIdAndType( this.customerId, CommonDefs.CUSTOMER_TYPE );
+		String fileName = null;
+		if( this.customerId.matches( "[A-Z]+-[A-Z]+[0-9]+") ) {
+			fileName = DatabaseUtility.getDbFileNameForIdAndType( this.customerId, CommonDefs.CUSTOMER_TYPE );
+		}
 		// If there is no bill for this customer Id, we try to search the imported customer Db.
 		if( fileName == null || fileName.isEmpty() ) {
 			fileName = DiagrepConfig.getConfig().get( DiagrepConfig.CUSTOMER_DB_IMPORTED );
@@ -47,6 +50,7 @@ public class GetCustomerDetailsAction extends BaseAction {
 	}
 	
 	private boolean checkCustomerIdValidity() {
-		return (this.customerId.matches("[A-Z]+-[0-9]+"));
+		return (this.customerId.matches("[A-Z]+-[0-9]+") ||
+				this.customerId.matches("[A-Z]+-[A-Z]+[0-9]+"));
 	}
 }

@@ -12,7 +12,7 @@ function show_collections() {
 	var body = "";
 	body += "<div class='page_header' style='background-color:#214300;'>";
 	body += "<div class='page_header_title' style='width: 80%;'>Available Collections</div>";
-	body += "<div class='main_option_button' id='create_new' style='width:17%;' onclick='javascript:showViewForCollectionEditing(0)' >Create New</div>";
+	body += "<div class='main_option_button' id='create_new' style='width:17%;line-height:40px;' onclick='javascript:showViewForCollectionEditing(0)' >Create New</div>";
 	body += "</div>";
 	
 	body += "<table class='entity_table_header' border='0' cellspacing='0'>";
@@ -87,14 +87,14 @@ function showViewForCollectionEditing( coll ) {
 	body += "</tr>";
 	body += "<tr>";
 	body += "	<td colspan='2'>";
-	body += "<div class='text_button' style='float:left; width:150px; color: white; background-color:#3399FF' onclick='javascript:showTestsForCollection()'>Add Tests</div>";
+	body += "<div class='text_button' style='float:left; width:150px; color: white; background-color:#3399FF; margin-right: 10px;' onclick='javascript:showTestsForCollection()'>Add Tests</div>";
 	body += "<div class='text_button' style='float:left; width:150px; color: white; background-color:#3399FF' onclick='javascript:showCategoriesForCollection()'>Add Categories</div>";
 	body += "</td>";
 	body += "</tr>";
 	
 	body += "<tr>";
 	body += "	<td colspan='2'>";
-	body += " <div style='width:400px; height:300px;overflow:auto; border:1px solid lightgray;'>";
+	body += " <div style='width:400px; height:200px;overflow:auto; border:1px solid lightgray;'>";
 	body += "<table class='table_sub_entity' id='table_collection_subentities' cellPadding=0 cellSpacing=0>";
 		
 	for( var i=0; i < subEntitiesWithOrder.length; i++ ) {

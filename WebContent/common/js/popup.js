@@ -43,7 +43,6 @@ function createPopupContainer(width,height, szTitle, szBody, szDoneButtonText, a
 	popup_container.style.top = top + 'px';
     
     main_container.appendChild( popup_container );
-
    
     var table = document.createElement( "TABLE" );
     table.width = width;
@@ -118,7 +117,6 @@ function pushToPopupContainer( szBody, szBackButtonText ) {
 	
 	var contentCell = contentRow.cells[0];    
     contentCell.innerHTML = szBody;
-
 }
 
 function onDone() {
@@ -130,7 +128,6 @@ function onDone() {
 	while( view_stack.length > 0 ) {
 		view_stack.pop();
 	}
-	
 }
 
 function onBack() {

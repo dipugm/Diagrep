@@ -53,7 +53,7 @@ public class TestObject extends ModelObject implements IEntityObject {
 		sb.append( String.valueOf( this.cost ) );
 		if( this.normalValue != null ) {
 			sb.append(",\"normalValue\":\"");
-			sb.append( this.normalValue );
+			sb.append( this.normalValue.replace("\"", "'") );
 		}
 		sb.append("\"");
 		sb.append("}");

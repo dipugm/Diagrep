@@ -110,8 +110,8 @@ function onGetBillForEditingResponseFromServer( resp ) {
 function clearReportEditForm() {
 	var table = document.getElementById('table_report_tests');
 	count = table.rows.length;
-	for( var i=1; i < count; i++ ) {
-		table.deleteRow(1);
+	for( var i=0; i < count; i++ ) {
+		table.deleteRow(0);
 	}
 	
 	var textB = document.getElementById('text_test_value');
@@ -236,7 +236,7 @@ function changeTestValue() {
 	gCurrentEditedTest.description = getTextFromEditor('holder_for_test_description');
 	
 	var checkbox = document.getElementById( 'checkbox_is_highlighted' );
-	gCurrentEditedTest.is_highlighted = checkbox.checked;
+	gCurrentEditedTest.isHighlighted = checkbox.checked ? 1 : 0;
 	
 	var i = 0;
 	for( i=0; i < gTestValueDetails.length; i++ ) {
