@@ -1,0 +1,6 @@
+<tr>
+	<td align='center' class='td_daily_data'>%SlNo%</td>
+	<td align='center' class='td_daily_data'>%BillNumber%</td>
+	<td align='center' class='td_daily_data'>%PatientName%</td>
+	<td align='center' class='td_daily_data'>%Cost%</td>
+</tr>

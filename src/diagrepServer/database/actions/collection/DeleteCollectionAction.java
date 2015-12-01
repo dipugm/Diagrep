@@ -5,6 +5,7 @@ import diagrepServer.database.actions.CommonDefs.EntityType;
 import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseConnection;
 import diagrepServer.database.core.DatabaseConnectionPool;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.model.CollectionObject ;
 
 public class DeleteCollectionAction extends BaseAction {
@@ -20,7 +21,7 @@ public class DeleteCollectionAction extends BaseAction {
 		DatabaseConnection dc 	= DatabaseConnectionPool.getPool().getMasterDbConnection();
 		DatabaseCallParams params = co.prepareForDelete();
 		
-		if( dc.execute( params ) ) {
+		if( EnumDBResult.DB_SUCCESS == dc.execute( params ) ) {
 			
 			// Clear the entities relation table for this collection.
 			super.clearEntitiesRelations( EntityType.Collection, collectionId );

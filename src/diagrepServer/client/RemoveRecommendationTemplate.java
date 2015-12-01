@@ -1,6 +1,7 @@
 package diagrepServer.client;
 
 import diagrepServer.Utils.DiagrepTemplates;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.servlets.BaseServlet;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -36,7 +37,7 @@ public class RemoveRecommendationTemplate extends BaseServlet {
 		if( name == null || name.equalsIgnoreCase("undefined") ) {
 			response.getWriter().print( "{\"status\":\"failed\", \"info\":\"name not specified\"}" );
 		} else {
-			if( DiagrepTemplates.getInstance().deleteRecommendationTemplate( name ) ) {
+			if( EnumDBResult.DB_SUCCESS == DiagrepTemplates.getInstance().deleteRecommendationTemplate( name ) ) {
 				response.getWriter().print( "{\"status\":\"success\"}" );
 			} else {
 				response.getWriter().print( "{\"status\":\"failed\", \"info\":\"Name does not exist.\"}" );

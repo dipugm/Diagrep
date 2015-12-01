@@ -5,6 +5,7 @@ import diagrepServer.Utils.DatabaseUtility;
 import diagrepServer.database.actions.BaseAction;
 import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseCallParams.*;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.core.DatabaseConnection;
 import diagrepServer.database.core.DatabaseConnectionPool;
 import diagrepServer.database.model.ReportDetailsObject;
@@ -59,7 +60,7 @@ public class ModifyReportAction extends BaseAction {
 				DatabaseCallParams params = report.prepareForSave( true );
 				params.addCondition( new ConditionEquals("billNumber", this.billNumber) );
 				
-				if( false == dc.execute( params ) ) {
+				if( EnumDBResult.DB_SUCCESS != dc.execute( params ) ) {
 					error 	= "Failed to update recommendations. ";
 				}
 			}
@@ -75,7 +76,7 @@ public class ModifyReportAction extends BaseAction {
 				params.addCondition( new ConditionEquals("billNumber", this.billNumber) );
 				params.addCondition( new ConditionEquals("entityId", this.testId) );
 				
-				if( false == dc.execute( params ) ) {
+				if( EnumDBResult.DB_SUCCESS != dc.execute( params ) ) {
 					error += "Failed to update report details.";
 				}
 			}

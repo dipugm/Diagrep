@@ -1,11 +1,6 @@
 var prevSelItem=0;
 var prevSelectedTab=0;
 
-var kTestType=0;
-var kCategoryType=1;
-var kCollectionType=2;
-var kPackageType=3;
-
 var dictEntities=0;
 
 var subtotal=0.0;
@@ -17,6 +12,7 @@ var itemid = 0;
 var textToSearchAndScroll=0;
 
 var gArrayBill = new Array();
+var gArrayReferences = new Array();
 
 function itemClicked( item ) {
     if( prevSelItem == 0 ) {
@@ -59,6 +55,7 @@ function initializeDocument() {
 	sendAsyncAjaxRequestToServer( "/Diagrep/GetCategories", "GET", "", "fillCategoriesTable" );
 	sendAsyncAjaxRequestToServer( "/Diagrep/GetCollections", "GET", "", "fillCollectionsTable" );
 	sendAsyncAjaxRequestToServer( "/Diagrep/GetPackages", "GET", "", "fillPackagesTable" );
+	sendAsyncAjaxRequestToServer( "/Diagrep/GetReferences", "GET", "", "referencesFetched" );
 	
 	var billNoForReport = document.getElementById( 'report_bill_number' );
 	
@@ -120,6 +117,9 @@ function fillTestsTable( data ) {
 	
 	for(var i=0; i < gArrayEntities[kTestType].length; i++ ) {
 		var test = gArrayEntities[kTestType][i];
+		
+		test.name = decodeURLEncodedString( test.name );
+		test.method = decodeURLEncodedString( test.method );
 		html += "<tr id='tr_tests_" + i + "'><td id='td_tests_" + i + "'";
 		if( (i % 2) == 1 ) {
 			html += " class='entity_oddrow' onclick='javascript:addToBill(" + kTestType + "," + i + ")'>";
@@ -148,6 +148,7 @@ function fillCategoriesTable( data ) {
 	
 	for(var i=0; i < gArrayEntities[kCategoryType].length; i++ ) {
 		var cat = gArrayEntities[kCategoryType][i];
+		cat.name = decodeURLEncodedString( cat.name );
 		html += "<tr id='tr_categories_" + i + "'><td id='td_categories_" + i + "'";
 		if( (i % 2) == 1 ) {
 			html += " class='entity_oddrow' onclick='javascript:addToBill(" + kCategoryType + "," + i + ")'>";
@@ -172,6 +173,7 @@ function fillCollectionsTable( data ) {
 	
 	for(var i=0; i < gArrayEntities[kCollectionType].length; i++ ) {
 		var col = gArrayEntities[kCollectionType][i];
+		col.name = decodeURLEncodedString( col.name ); 
 		html += "<tr id='tr_collections_" + i + "'><td id='td_collections_" + i + "'";
 		if( (i % 2) == 1 ) {
 			html += " class='entity_oddrow' onclick='javascript:addToBill(" + kCollectionType + "," + i + ")'>";
@@ -196,6 +198,9 @@ function fillPackagesTable( data ) {
 	
 	for(var i=0; i < gArrayEntities[kPackageType].length; i++ ) {
 		var pkg = gArrayEntities[kPackageType][i];
+		
+		pkg.name = decodeURLEncodedString( pkg.name );
+		
 		html += "<tr id='tr_packages_" + i + "'><td id='td_packages_" + i + "'";
 		if( (i % 2) == 1 ) {
 			html += " class='entity_oddrow' onclick='javascript:addToBill(" + kPackageType + "," + i + ")'>";
@@ -210,6 +215,11 @@ function fillPackagesTable( data ) {
 	table.innerHTML = html; 
 	
 	dictEntities["tab_choice_packages"] = gArrayEntities[kPackageType];
+}
+
+function referencesFetched( data ) {
+	var obj = JSON.parse( data );
+	gArrayReferences = obj.result;
 }
 
 function addToBill( type, index ) {
@@ -289,7 +299,7 @@ function deleteFromBill( row_id, szCost ) {
 	gArrayBill.splice( itemIndex, 1 );
 	
 	// Updating the Sl no since we have deleted one row.
-	for( var i=itemIndex; i < table.rows.length; i++ ) {
+	for( var i=1; i < table.rows.length; i++ ) {
 		row = table.rows[i];
 		cells = row.cells[0];
 		cells.innerHTML = i;
@@ -326,7 +336,7 @@ function onAdvance() {
 	if( isNaN(advance) ) {
 		advance = 0.0;
 	} 
-		updateCosts();
+	updateCosts();
 }
 
 function clearBill() {
@@ -423,8 +433,21 @@ function generateBill() {
                                  'POST',
                                  szBill,
                                  "onBillCreateResponseFromServer");
-	
-	
+
+	// Save the reference name if it is a new one.
+	if( szReferredBy != "" ) {
+		var found = 0;
+		for( var iRef=0; iRef < gArrayReferences.length; iRef++ ) {
+			if( szReferredBy == gArrayReferences[iRef] ) {
+				found = 1;
+				break;
+			}
+		}
+		
+		if( found == 0 ) {
+			gArrayReferences.unshift( szReferredBy );
+		}
+	}
 }
 
 function onBillCreateResponseFromServer( resp ) {
@@ -438,7 +461,7 @@ function onBillCreateResponseFromServer( resp ) {
 	}
 	
 	clearBill();
-    
+	
     closeStatusDialog();
 }
 
@@ -469,7 +492,7 @@ function onGetBillResponseFromServer( resp ) {
 			showError( jresp.info, "Invalid Bill Number" );
 		}
 	} catch( e ) {
-		tab = window.open( );
+		tab = window.open( null, "bill" );
 		tab.document.write(resp);
 		tab.document.close();
 	}
@@ -538,4 +561,51 @@ function searchEntityAndScroll() {
 	document.getElementById( 'search_box_for_entities' ).style.backgroundColor = bkColor;
 	
 	
+}
+
+
+function showReferences( ) {
+	
+	var anchor = document.getElementById( 'references_search_button' );
+	
+	var search_results_container = document.createElement( 'DIV' );
+	search_results_container.className='popup_search_results_container';
+	search_results_container.id = 'popup_search_results_container';
+	
+	document.body.appendChild( search_results_container );
+	
+	var search_contents = document.createElement('DIV');
+	search_contents.className = 'popup_reference_search_contents';
+	search_contents.style.left = (anchor.offsetLeft + (anchor.offsetWidth / 2)) + 'px';
+	search_contents.style.top = (anchor.offsetTop + (anchor.offsetHeight / 2)) + 'px';
+	
+	search_results_container.appendChild( search_contents );
+	
+	szResults = "";
+	szResults += "<div class='close_icon_button'";
+	szResults += " 	onclick='javascript:closeCustomerListPopup()'></div>";
+	szResults += "<div class='popup_reference_lookup_title'>" + gArrayReferences.length + " References(s) Found</div>";
+	szResults += "<div class='popup_reference_search_table_holder'>";
+	
+	szResults += "<table width='100%'; border:0px; border-spacing:0px; border-collapse:collapse;' cellspacing=0>";
+	
+	for( var i=0; i < gArrayReferences.length; i++ ) {
+		var reference = gArrayReferences[i];
+		szResults += "	<tr class='search_result_row' ";
+		szResults += "onclick=" + "'javascript:referenceSelectedFromLookup(\"" + reference + "\")'>";
+		szResults += "		<td width='60%' class='search_name' style='padding:5px;'>" + reference;
+		szResults += "		</td>";
+		szResults += "	</tr>";
+	}
+	
+	szResults += "</table></div>";
+	
+	search_contents.innerHTML = szResults;
+}
+
+function referenceSelectedFromLookup( reference ) {
+	var editbox = document.getElementById( 'text_referred_by' );
+	editbox.value = reference;
+	
+	closeCustomerListPopup();
 }

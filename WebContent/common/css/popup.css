@@ -3,7 +3,7 @@
 div.popup_main_container {
     display: block;
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 10000;
+    z-index: 300;
 	text-align: center;
 	background-color: rgba(255,255,255,.2);
 }
@@ -12,7 +12,7 @@ div.popup_main_container {
 div.popup_container {
     display: block;
     position: absolute;
-    z-index:1000005;
+    z-index:301;
 	left: 30%;
 	top: 20%;
 }
@@ -27,7 +27,7 @@ div.popup_arrow{
 	top:0px;
 	background-repeat:no-repeat;
 	background-position:center top;
-	z-index:1000006;
+	z-index:302;
 }
 
 .popup-content-table {
@@ -48,7 +48,7 @@ div.popup_top_arrow {
 	height: 12px;
     width: 20px;
     margin: auto;
-	z-index:1000006;
+	z-index:302;
 	background-color: #3e4d64;
 	-webkit-border-top-left-radius: 10px;
 	-moz-border-top-left-radius: 10px;
@@ -68,7 +68,7 @@ div.popup_top_arrow {
 
 .nav-bar-left-button {
 	font-family: Tahoma;
-	font-size:11px;
+	font-size:12px;
 	text-align: center;
 	border-bottom: 1px solid gray;
 	cursor: pointer;
@@ -88,7 +88,7 @@ div.popup_top_arrow {
 
 .nav-bar-right-button {
 	font-family: Tahoma;
-	font-size:11px;
+	font-size:12px;
 	text-align: center;
 	border-bottom: 1px solid gray;
 	cursor: pointer;
@@ -135,14 +135,15 @@ div.popup_content_header {
     height: 1px;
     box-shadow: 0px 5px #999;
     background-color: #EEEEEE;
-	z-index:100006;
+	z-index:303;
 }
     
 .dialog_label {
 	display: block;
 	padding-right: 20px;
+	padding-top: 5px;
 	font-family:Tahoma;
-	font-size:11px;
+	font-size:12px;
 	color: #1c3c53;
 	float: left;
 	position: relative;
@@ -160,7 +161,7 @@ div.popup_content_header {
 
 .dialog_units {
 	font-family:Tahoma;
-	font-size:11px;
+	font-size:12px;
 	font-style:italic;
 	color: #1c3c53;
 	position: relative;
@@ -170,7 +171,7 @@ div.popup_content_header {
 
 .radioHeader {
 	font-family:Tahoma;
-	font-size:11px;
+	font-size:12px;
 	color: #1c3c53;
 	padding-left: 20px;
 	padding-top: 30px;
@@ -181,7 +182,7 @@ div.popup_content_header {
 
 .labelforoptioninput {
 	font-family:Tahoma;
-	font-size:11px;
+	font-size:12px;
 	font-style:italic;
 	color: #1c3c53;
 	padding-left: 40px;

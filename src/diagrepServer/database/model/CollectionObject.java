@@ -72,11 +72,8 @@ public class CollectionObject extends ModelObject implements IEntityObject {
 			
 			if( mo.getClass() == TestObject.class ) {
 				arr.add( mo );
-			} else if( mo.getClass() == CategoryObject.class ) {
-				CategoryObject co = (CategoryObject)mo;
-				for( int j=0; j < co.fk_tests.size(); j++ ) {
-					arr.add( co.fk_tests.get( j ) );
-				}
+			} else {
+				arr.addAll( mo.getContainedTests() );
 			} 
 		}
 		return arr;

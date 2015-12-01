@@ -8,8 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../common/css/alertdialog.css" />
     <link rel="stylesheet" type="text/css" href="../common/css/progressdialog.css" />
     <link rel="stylesheet" type="text/css" href="../common/css/statusdialog.css" />
-	<link rel='stylesheet' type="text/css" href='../common/css/calendar.css'>
-	<link rel='stylesheet' type="text/css" href='../common/css/calendar_blue.css'>
+	<link rel='stylesheet' type="text/css" href='../common/css/calendar_orange.css'>
 	<link rel='stylesheet' type="text/css" href='../common/css/texteditor.css'>
 	<link rel="stylesheet" type="text/css" href="styles/main.css" />
 	<link rel="stylesheet" type="text/css" href="styles/dialogs.css" />
@@ -28,13 +27,14 @@
 	<script type='text/javascript' src="js/dialogs.js"></script>
 	<script type='text/javascript' src='js/customers.js'></script>
 	<script type='text/javascript' src='js/report.js'></script>
+	<script type='text/javascript' src='js/analytics.js'></script>
 
 </HEAD>
 <BODY style='background-color: #222222;' onLoad="initializeDocument()">
 
 <table height="100%" width="98%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-    	<td colspan="3" style>
+    	<td colspan="3">
     	<img class="title" src="images/apptitle.png" style="display:inline" width='320px' height='48px'>
     	<span onclick="javascript:showSearchCustomers(this)" class='toolbar_button'>
 			<img src='images/search-user.png' style='height:20px; width:20px; padding-right:5px;'>Search Customers
@@ -50,6 +50,10 @@
 		
 		<span onclick="javascript:showSearchReport(this)" class='toolbar_button' style='width: 120px;'>
 			<img src='images/search-reports-icon.png' style='height:20px; width:20px; padding-right:5px;'>Search Report
+		</span>
+		
+		<span onclick="javascript:showAnalyticsDialog()" class='toolbar_button' style='width: 120px;'>
+			<img src='images/analytics-icon.png' style='height:20px; width:20px; padding-right:5px;'>Analytics
 		</span>
     	</td>
     <tr>
@@ -79,7 +83,8 @@
   							</tr>
   							<tr>
   								<td class='bill_params_key'>Referred By:</td>
-								<td><input type='text' class='text_box' style='width: 180px;' id='text_referred_by'></td>
+ 								<td><input type='text' class='text_box' style='width: 180px;' id='text_referred_by'>
+ 								<a href='javascript:void(0)' class='image_button' id="references_search_button" style='background-image: url(images/search.png)' onclick='showReferences()'></a></td></td>
   							</tr>
   							<tr>
   								<td class='bill_params_key'>Report Date:</td>
@@ -88,15 +93,14 @@
 									onmouseover="fnInitCalendar(this, 'text_report_date', 'drag=false,close=true,title=Report Date')"></span> </td>
   							</tr>
   						</table>
-					
-						<ul class='tabLayout' style='padding-left:20px'>
-	  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice_selected' id='tab_choice_tests' onclick="javascript:onTabSelected('tab_choice_tests')">Tests</a></li>
-	  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice' id='tab_choice_categories' onclick="javascript:onTabSelected('tab_choice_categories')">Categories</a></li>
-	  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice' id='tab_choice_collections' onclick="javascript:onTabSelected('tab_choice_collections')">Collections</a></li>
-	  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice' id='tab_choice_packages' onclick="javascript:onTabSelected('tab_choice_packages')">Packages</a></li>
-  						</ul>
 
-						<div style='width: 95%;height: 50%; padding-left:10px;'>
+						<div style='width: 95%;height: 50%; padding-left:10px; z-index:5;'>
+							<ul class='tabLayout' style='padding-left:20px'>
+		  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice_selected' id='tab_choice_tests' onclick="javascript:onTabSelected('tab_choice_tests')">Tests</a></li>
+		  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice' id='tab_choice_categories' onclick="javascript:onTabSelected('tab_choice_categories')">Categories</a></li>
+		  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice' id='tab_choice_collections' onclick="javascript:onTabSelected('tab_choice_collections')">Collections</a></li>
+		  						    <li class='tabItem'><a href='javascript:void(0)' class='tab_choice' id='tab_choice_packages' onclick="javascript:onTabSelected('tab_choice_packages')">Packages</a></li>
+	  						</ul>
 							<div class="search_box_for_entities" id="search_box_for_entities" onclick='javascript:clickInSearchEntityAndScroll();'>
 								<input type='text' id='text_search_and_scroll' onkeyup='javascript:searchEntityAndScroll();'>
 							</div>
@@ -180,7 +184,7 @@
                 <tr>
                     <td valign='top' height='10'>
 						<div style='padding-left: 20px; padding-top:10px; float:left;'>
-							<span class='bill_params_key' style='font-size:11px;float:left;'>Enter the bill number : </span><input type='text' id='report_bill_number' class='text_box' style='width: 150px;height:30px;'>
+							<span class='bill_params_key' style='font-size:12px;float:left;'>Enter the bill number : </span><input type='text' id='report_bill_number' class='text_box' style='width: 150px;height:30px;'>
 							<span class='text_button' style='padding-left: 30px; padding-right: 30px;' onclick='javascript:getBillDetailsForReportEditing()'> Get Details</span>
 						</div>
 					</td>

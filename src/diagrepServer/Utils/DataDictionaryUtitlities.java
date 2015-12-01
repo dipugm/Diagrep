@@ -20,17 +20,28 @@ public class DataDictionaryUtitlities {
 		
 	}
 	
-	public static String getNextBillNumber() {
-		return getDataFromDb( "Last_Bill_Number" );
+	public static String getNextBillNumber( String reference ) {
+		String billNum = reference;
+		if( billNum != null ) {
+			return getNextStringInSequenceWithStringManipulation( billNum );
+		} else {
+			return getDataFromDb( "Last_Bill_Number" );
+		}
 	}
 	
-	public static String getNextCustomerNumber() {
-		String custId = getDataFromDb( "Last_Customer_ID" );
-		String[] comp = custId.split("-");
-		
-		if( comp.length > 1 ) {
-			return "A00001";
+	public static String getNextCustomerNumber( String reference ) {
+		String custId = reference;
+		if( reference == null ) {
+			custId = getDataFromDb( "Last_Customer_ID" );
+		} else {
+			String[] comp = custId.split("-");
+			
+			if( comp.length > 1 ) {
+				custId = comp[1];
+			}
+			custId = getNextStringInSequenceWithStringManipulation( custId );
 		}
+		
 		return custId;
 	}
 	

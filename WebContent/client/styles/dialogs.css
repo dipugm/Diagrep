@@ -3,7 +3,7 @@
 	width:85%; 
 	margin:auto;
 	font-family: Tahoma;
-	font-size: 11px; 
+	font-size: 12px; 
 }
 
 div.search_results {
@@ -11,7 +11,7 @@ div.search_results {
 	width:500px;
 	border-top: 5px solid #3e4d64 ;
 	overflow: auto;
-	z-index: 110;
+	z-index: 101;
 	background-color: white;
 }
 
@@ -24,7 +24,7 @@ div.search_results {
 
 .no-data-message-cell {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	margin: auto;
 	text-align:center;
 	padding-top: 20px;
@@ -64,14 +64,14 @@ div.search_results {
 
 .search_age {
 	font-family: Tahoma;
-	font-size: 10px;
+	font-size: 12px;
 	color: #4C4C4C;
 	text-align: right;
 }
 
 .search_id {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	text-decoration: underline;
 	text-align: left;
 	color: #E65C00;
@@ -79,7 +79,7 @@ div.search_results {
 
 .search_contact {
 	font-family: Tahoma;
-	font-size: 10px;
+	font-size: 12px;
 	text-align: right;
 	color: #4C4C4C;
 	padding-top: 5px;
@@ -104,7 +104,7 @@ div.search_results {
 	height: 100%;
 	left: 0px;
 	top: 0px;
-	z-index: 9999999;
+	z-index: 102;
 	background-color: rgba(0,0,0,.4);
 }
 
@@ -127,7 +127,7 @@ div.search_results {
 
 .popup_customer_lookup_title {
 	font-family: Trebuchet MS, Arial, sans serif;
-	font-size:12;
+	font-size:12px;
 	font-weight: bold;
 	text-align: center;
 	width: 100%;
@@ -136,6 +136,38 @@ div.search_results {
 	color: #3e4d64;
 	border-bottom: 1px solid lightgray;
 }
+
+.popup_reference_search_contents {
+	display: block;
+    position: absolute;
+	width: 300px;
+	height: 300px;
+	border: 1px solid #4C4C4C;
+	background-color: #EBFFEB;
+	box-shadow: 2px 2px 5px darkgray;
+}
+
+.popup_reference_search_table_holder {
+	border-top: darkgray;
+	width: 100%;
+	height: 88%;
+	overflow: auto;
+	font-family: Trebuchet MS, Arial, sans serif;
+	font-size:10;
+}
+
+.popup_reference_lookup_title {
+	font-family: Trebuchet MS, Arial, sans serif;
+	font-size:12px;
+	font-weight: bold;
+	text-align: center;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #3e4d64;
+	border-bottom: 1px solid lightgray;
+}
+
 
 .close_icon_button {
 	background-image: url('../images/close_icon.png');
@@ -155,7 +187,7 @@ div.search_results {
 }
 
 .templates_list_area {
-	
+	height: 350px;
 }
 
 .templates_list_preview_area {
@@ -174,24 +206,24 @@ div.search_results {
 	width: 100%; 
 	border-collapse: collapse; 
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 }
 
 .templates_list_preview_label {
 	margin:10px;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 }
 
 .templates_list_preview_pane {
-	height:300px; 
+	height:200px; 
 	width:358px; 
 	overflow-x: none; 
 	overflow-y: auto; 
 	box-shadow: inset 0px 2px 10px darkgray;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	border-top: 1px solid lightgray;
 	padding: 10px;
 	background-color: white;
@@ -210,7 +242,7 @@ div.search_results {
 
 .search_results_header {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	color: #526629;
 	text-align: center;
@@ -242,7 +274,7 @@ div.search_results {
 .customer_report_list_table {
 	background-color: white;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	width: 100%;
 	border-spacing: 0px;
 	border-collapse: collapse;
@@ -264,7 +296,40 @@ div.search_results {
 
 .customer_report_list_dates {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+.segment_table {
+	font-family: Tahoma;
+	font-size: 12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: clear;
+	width: 100%;
+	color: darkgray;
+	
+}
+
+.segment_option {
+	font-size: 12px;
+	text-alilgn: center;
+	color: darkgray;
+	cursor: pointer;
+	width: 33%;
+	height: 25px;
+	background-color: clear;
+}
+
+.segment_option_selected {
+	text-alilgn: center;
+	font-size: 13px;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+	background-color: #3385D6;
+	width: 33%;
 }

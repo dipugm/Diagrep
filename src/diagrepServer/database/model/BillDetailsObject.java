@@ -3,6 +3,7 @@ package diagrepServer.database.model;
 import java.util.ArrayList;
 
 import diagrepServer.Utils.DiagrepTemplates;
+import diagrepServer.Utils.StringUtilities;
 import diagrepServer.Utils.DiagrepTemplates.TemplateType;
 import diagrepServer.database.actions.CommonDefs.EntityType;
 import diagrepServer.database.actions.category.GetSingleCategoryAction;
@@ -81,7 +82,7 @@ public class BillDetailsObject extends ModelObject implements IEntityObject  {
 				GetSingleTestAction action	= new GetSingleTestAction( entityId );
 				TestObject to = (TestObject)action.doAction();
 				if( to != null ) {
-					name = to.name;
+					name = StringUtilities.decodeURLEncodedString( to.name );
 				}
 				
 			} break;
@@ -91,7 +92,7 @@ public class BillDetailsObject extends ModelObject implements IEntityObject  {
 				CategoryObject co = (CategoryObject)action.doAction();
 				
 				if( co != null ) {
-					name = co.name;
+					name = StringUtilities.decodeURLEncodedString( co.name );
 				}
 	
 			} break;
@@ -101,7 +102,7 @@ public class BillDetailsObject extends ModelObject implements IEntityObject  {
 				CollectionObject co = (CollectionObject)action.doAction();
 				
 				if( co != null ) {
-					name = co.name;
+					name = StringUtilities.decodeURLEncodedString( co.name );
 				}
 	
 			} break;
@@ -111,7 +112,7 @@ public class BillDetailsObject extends ModelObject implements IEntityObject  {
 				PackageObject po = (PackageObject)action.doAction();
 				
 				if( po != null ) {
-					name = po.name;
+					name = StringUtilities.decodeURLEncodedString( po.name );
 				}
 	
 			} break;

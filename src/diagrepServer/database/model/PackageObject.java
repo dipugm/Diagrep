@@ -74,22 +74,13 @@ public class PackageObject extends ModelObject implements IEntityObject {
 		
 		for( int i=0; i < fk_subEntities.size(); i++ ) {
 			ModelObject mo = fk_subEntities.get( i );
+			//Package can have tests, categories and collections.
 			if( mo.getClass() == TestObject.class ) {
 				arr.add( mo );
-			} else if( mo.getClass() == CategoryObject.class ) {
-				CategoryObject co = (CategoryObject)mo;
-				for( int j=0; j < co.fk_tests.size(); j++ ) {
-					arr.add( co.fk_tests.get( j ) );
-				}
 			} else {
-				CollectionObject co = (CollectionObject)mo;
-				for( int j=0; j < co.fk_subEntities.size(); j++ ) {
-					ArrayList<ModelObject> tests = co.fk_subEntities.get( j ).getContainedTests();
-					
-					// If the sub entities also has any contained tests
-					if( tests != null ) {
-						arr.addAll( tests );
-					} 
+				ArrayList<ModelObject> tests = mo.getContainedTests();
+				if( tests != null ) {
+					arr.addAll( tests );
 				}
 			}
 		}

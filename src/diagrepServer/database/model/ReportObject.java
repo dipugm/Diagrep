@@ -1,7 +1,6 @@
 package diagrepServer.database.model;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.HashMap;
 
 import diagrepServer.Utils.DiagrepConfig;
 import diagrepServer.Utils.DiagrepTemplates;
+import diagrepServer.Utils.StringUtilities;
 import diagrepServer.Utils.DiagrepTemplates.TemplateType;
 import diagrepServer.database.actions.bill.GetBillContentsAction;
 import diagrepServer.database.actions.category.GetSingleCategoryAction;
@@ -92,7 +92,7 @@ public class ReportObject extends ModelObject implements IEntityObject {
 			sb.append( to.name );
 			sb.append( "\",\"normalValue\":\"" );
 			sb.append( to.normalValue );
-			sb.append( "\",\"units\":\"" );
+			sb.append( "\",\"unit\":\"" );
 			sb.append( to.unit );
 			sb.append( "\",\"testedValue\":\"" );
 			
@@ -229,43 +229,45 @@ public class ReportObject extends ModelObject implements IEntityObject {
 		
 		ReportDetailsObject rdo = fk_reportDetailsAsHash.get( to.id );
 		
-		String testName = to.name;
-		if( to.method != null && ! to.method.isEmpty() && ! to.method.equalsIgnoreCase("null") ) {
-			testName += " [" + to.method + "]";
-		}
-				
-		rowTemplate = rowTemplate.replace( "%Level%", String.valueOf( level ) );
+		if( rdo != null ) {
 		
-		rowTemplate = rowTemplate.replace( "%TestName%", testName );
-		rowTemplate = rowTemplate.replace( "%NormalValue%", to.normalValue);
-		rowTemplate = rowTemplate.replace( "%Units%", to.unit );
-		
-		String testValue = ((rdo != null) && (rdo.entityValue != null)) ? rdo.entityValue : "";
-		try {
-			testValue = URLDecoder.decode( testValue, "UTF-8" );
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if( rdo.isHighlighted != null && rdo.isHighlighted == 1 ) {
-			testValue = "<b><u>" + testValue + "</u></b>";
-		}
-		
-		rowTemplate = rowTemplate.replace( "%TestedValue%", testValue);
-		
-		sb.append( rowTemplate );
-		
-		// If the test contained some description, we need to show it in a subsequent
-		// row.
-		if( rdo.description != null ) {
-			rowDescTemplate 	= rowDescTemplate.replace( "%Level%", String.valueOf( level ) );
-			String rdesctempl 	= rowDescTemplate.replace( "%Description%", rdo.description );
+			String testName = to.name;
+			if( to.method != null && ! to.method.isEmpty() && ! to.method.equalsIgnoreCase("null") ) {
+				testName += " [" + StringUtilities.decodeURLEncodedString( to.method ) + "]";
+			}
+					
+			rowTemplate = rowTemplate.replace( "%Level%", String.valueOf( level ) );
 			
-			sb.append( rdesctempl );
+			rowTemplate = rowTemplate.replace( "%TestName%", StringUtilities.decodeURLEncodedString( testName ) );
+			rowTemplate = rowTemplate.replace( "%NormalValue%", StringUtilities.decodeURLEncodedString( to.normalValue ) );
+			rowTemplate = rowTemplate.replace( "%Units%", StringUtilities.decodeURLEncodedString( to.unit ) );
+			
+			String testValue = ((rdo != null) && (rdo.entityValue != null)) ? rdo.entityValue : "";
+			testValue = StringUtilities.decodeURLEncodedString( testValue );
+			
+			if( rdo.isHighlighted != null && rdo.isHighlighted == 1 ) {
+				testValue = "<b><u>" + testValue + "</u></b>";
+			}
+			
+			rowTemplate = rowTemplate.replace( "%TestedValue%", testValue);
+			
+			sb.append( rowTemplate );
+			
+			// If the test contained some description, we need to show it in a subsequent
+			// row.
+			if( rdo.description != null ) {
+				rowDescTemplate 	= rowDescTemplate.replace( "%Level%", String.valueOf( level ) );
+				String rdesctempl 	= rowDescTemplate.replace( "%Description%", rdo.description );
+				
+				sb.append( rdesctempl );
+			}
+			
+			return sb.toString();
 		}
-		
-		return sb.toString();
+		else {
+			System.out.println( "Could not get report details for test : " + to.name );
+		}
+		return "";
 	}
 	
 	private String getCategoryForReportAsHtml( int level, CategoryObject co ) {
@@ -280,7 +282,7 @@ public class ReportObject extends ModelObject implements IEntityObject {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		headingTemplate = headingTemplate.replace( "%CategoryName%", co.name );
+		headingTemplate = headingTemplate.replace( "%CategoryName%", StringUtilities.decodeURLEncodedString( co.name ) );
 		
 		sb.append( headingTemplate );
 		
@@ -305,7 +307,7 @@ public class ReportObject extends ModelObject implements IEntityObject {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		headingTemplate = headingTemplate.replace( "%CollectionName%", co.name );
+		headingTemplate = headingTemplate.replace( "%CollectionName%", StringUtilities.decodeURLEncodedString( co.name ) );
 		
 		// append the collection name row.
 		sb.append( headingTemplate );

@@ -35,7 +35,7 @@ function show_categories() {
 		body += " class='odd_row'";
 		body += " onclick=\"javascript:rowClickedForCategories(" + i + ")\">";
 		body += "	<td width='10%' align='center'>" + (i+1) + "</td>";
-		body += "	<td width='75%'>" + cat.name + "</td>";
+		body += "	<td width='75%'>" + decodeURLEncodedString( cat.name ) + "</td>";
 		body += "	<td width='15%' style='text-align:right;padding-right:30px;'>" + cat.cost + "</td>";
 		body += "</tr>";
 	}
@@ -171,7 +171,7 @@ function addTestToCategory( i ) {
 }
 
 function createCategoryOnServer() {
-	gCategoryEdited.name = document.getElementById('text_category_name').value;
+	gCategoryEdited.name = encodeWithCustomUrlEncoding( document.getElementById('text_category_name').value );
 	gCategoryEdited.cost = document.getElementById('text_category_cost').value;
 	
 	if( dataValidityCheck( gCategoryEdited.name, gCategoryEdited.cost ) == true ) {

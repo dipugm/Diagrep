@@ -19,8 +19,8 @@ img.title
 .dialog_caption {
 	font-family: Tahoma;
 	font-size: 13px;
-	margin-left:5px; 
-	margin-right: 5px;
+	margin-left:2px; 
+	margin-right: 2px;
 	color: #000000;
 }
 
@@ -56,13 +56,14 @@ table.newbill {
 	padding-top: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
-	padding-bottom: 4px;
+	padding-bottom: 2px;
 	border-left:1px solid #3e4d64;
 	border-right:1px solid #3e4d64;
 	border-top:1px solid #3e4d64;
 	font-family: Tahoma;
 	color: white;
-	font-size: 11px;
+	font-size: 12px;
+	z-order: 15;
 }
 
 .tab_choice_selected:link,.tab_choice_selected:visited {
@@ -82,15 +83,16 @@ table.newbill {
    	border-top-left-radius: 5px;
 	text-decoration: none;
 	padding-top: 10px;
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-bottom: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 2px;
 	border-left:1px solid #3e4d64;
 	border-right:1px solid #3e4d64;
 	border-top:1px solid #3e4d64;
 	font-family: Tahoma;
 	color: lightgray;
-	font-size: 11px;
+	font-size: 12px;
+	z-order: 9;
 }
 
 .tab_choice:link,.tab_choice:visited {
@@ -108,7 +110,7 @@ table.newbill {
 	border-right: 1px solid #3e4d64;
 	border-left: 1px solid #3e4d64;
 	border-bottom: 1px solid #3e4d64;
-	z-index: 110;
+	z-index: 10;
 	position: relative;
 	background-color:lightgray;
 	box-shadow: 5px 5px 5px #999;
@@ -128,7 +130,7 @@ table.newbill {
 	border-right: 1px solid #3e4d64;
 	border-left: 1px solid #3e4d64;
 	box-shadow: 5px 5px 5px #999;
-	z-index: 9999;
+	z-index: 5;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	background:#FFFFFF url('../images/search_gray.png') no-repeat 4px 4px;
@@ -141,7 +143,7 @@ table.newbill {
 	width:90%;
 	text-align: left;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	margin-left: 20px;
 }
 
@@ -153,6 +155,7 @@ table.newbill {
 	top: 0;
 	display: inline;
 	overflow: auto;
+	z-index: 8;
 }
 
 .bill_details_container {
@@ -160,7 +163,7 @@ table.newbill {
 	margin-left: 10px;
 	margin-right:10px;
 	font-family: Tahoma;
-	font-size: 10px;
+	font-size: 12px;
 	height:300px;
 	border: 1px solid #6d6d6d;
 	-webkit-border-top-right-radius: 5px;
@@ -196,7 +199,7 @@ table.newbill {
 	padding-bottom: 2px;
 	background-color:#ffce9d;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	color: black;
 }
 
@@ -206,7 +209,7 @@ table.newbill {
 	padding-bottom: 2px;
 	background-color:#ffe6d2;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	color: black;
 }
 
@@ -222,7 +225,7 @@ table.newbill {
 
 .billdetailsheader {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 13px;
 	padding-left: 10px;
 	font-weight: bold;
 	margin: 10px;
@@ -230,7 +233,7 @@ table.newbill {
 
 .td_bill_sl_no {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	font-style: italic;
 	text-align: right;
 	padding-right:20px;
@@ -238,7 +241,7 @@ table.newbill {
 
 .td_bill_particulars {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	text-decoration: none;
 	text-align: left;
 }
@@ -269,14 +272,14 @@ table.newbill {
 
 .td_bill_cost {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 13px;
 	text-align: right;
 	padding-right:10px;
 }
 
 .bill_params_key {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	text-align: right;
 	padding:10px;
@@ -284,7 +287,7 @@ table.newbill {
 
 .bill_params_value {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	text-align: right;
 	padding-right:20px;
@@ -313,7 +316,7 @@ table.newbill {
 	width:50px;
 	text-align: right;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 }
 
 .text_box {
@@ -323,7 +326,7 @@ table.newbill {
 	width:50px;
 	text-align: left;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 }
 
 .clickable_table {
@@ -344,14 +347,14 @@ table.newbill {
 	background-image: url('../images/translucent_black_bk.png');
 	background-repeat: repeat;
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 10000;
+    z-index: 11;
 	text-align: center;
 }
 
 .html_contents {
 	display: block;
     position: absolute;
-    z-index:1000005;
+    z-index:12;
 	width: 70%;
 	height: 90%;
 	left: 15%;
@@ -433,13 +436,13 @@ table.newbill {
 	float: left;
 	margin-left: 10px;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	overflow: auto;
 }
 
 .tableTextHolder {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 }
 
@@ -467,7 +470,7 @@ table.newbill {
 }
 
 .bill_contents_header th {
-	font-size:10px;
+	font-size:12px;
 	background-color: #3e4d64;
 	color: white;
 	font-family: Tahoma;
@@ -488,27 +491,27 @@ table.newbill {
 .bill_contents_slno {
 	width: 7%;
 	text-align:center;
-	font-size:11px;
+	font-size:12px;
 	padding-top: 3px;
 	padding-bottom: 3px;
 }
 
 .bill_contents_name {
 	width: 50%;
-	font-size:11px;
+	font-size:12px;
 	padding-top: 3px;
 	padding-bottom: 3px;
 }
 
 .bill_contents_value {
 	width: 15%;
-	font-size:11px;
+	font-size:12px;
 	padding-top: 3px;
 	padding-bottom: 3px;
 }
 
 .bill_contents_range {
-	font-size:11px;
+	font-size:12px;
 	padding-top: 3px;
 	padding-bottom: 3px;
 }

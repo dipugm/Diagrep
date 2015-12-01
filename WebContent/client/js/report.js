@@ -54,7 +54,7 @@ function onReportGenerationResponseFromServer( resp ) {
 			showError( "Bill number you specified does not exist. Please specify a valid bill number.", "Invalid Bill Number" );
 		} 
 	} catch( e ) {
-		tab = window.open( );
+		tab = window.open( null, "report");
 		tab.document.write(resp);
 		tab.document.close();
 	}
@@ -84,7 +84,7 @@ function getBillDetailsForReportEditing() {
 
 function onGetBillForEditingResponseFromServer( resp ) {
     var jresp = JSON.parse( resp );
-	if( jresp.result == 'failure' ) {
+	if( jresp.status == 'failure' ) {
 		showError( "Bill number you specified does not exist. Please specify a valid bill number.", "Invalid Bill Number" );
 	} else {
         
@@ -94,8 +94,11 @@ function onGetBillForEditingResponseFromServer( resp ) {
 		for( var i=0; i < tests.length; i++ ) {
 			var test = tests[i];
 			
+			test.name 		= decodeURLEncodedString( test.name );
 			test.description = decodeURLEncodedString( test.description );
 			test.testedValue = decodeURLEncodedString( test.testedValue );
+			test.normalValue = decodeURLEncodedString( test.normalValue );
+			test.unit		= decodeURLEncodedString( test.unit );
             
 			addToReportTests( test, i );
 		}
@@ -152,7 +155,7 @@ function addToReportTests( test, index ) {
 	var cell4 = row.insertCell(3);
 	cell4.className = "bill_contents_range";
 	if( test.normal_value != "" ) {
-		cell4.innerHTML = test.normalValue + " " + test.units;
+		cell4.innerHTML = test.normalValue + " " + test.unit;
 	}
 	
 	row.onclick = function() {
@@ -177,7 +180,7 @@ function testSelectedForEditing( test_id ) {
 	
 	var span = document.getElementById( 'span_normal_value' );
 	if( oTest.normal_value != '' ) {
-		span.innerHTML = oTest.normalValue + " " + oTest.units;
+		span.innerHTML = oTest.normalValue + " " + oTest.unit;
 	} else {
 		span.innerHTML = "";
 	}
@@ -249,17 +252,17 @@ function changeTestValue() {
 		}
 	}
 	
-	if( i == gTestValueDetails.length ) {
-		i = 0;
-	}
-	var nextTest = gTestValueDetails[ gTestValueDetails[ i ] ];
-
 	onUpdateReport( true );
 	
-	testSelectedForEditing( nextTest.id );
+	if( i < gTestValueDetails.length ) {
+		var nextTest = gTestValueDetails[ gTestValueDetails[ i ] ];
+
+		testSelectedForEditing( nextTest.id );
+		
+		textB.focus();
+		textB.select();
+	}
 	
-	textB.focus();
-	textB.select();
 	
 }
 
@@ -289,14 +292,14 @@ function onUpdateReport( updateTestsAlso ) {
 	
 	var jsonBody = "{\"bill_number\":\"" + billNum + "\",";
 	jsonBody += "\"fullUpdate\":" + (updateTestsAlso | 0 ) + ",";
-	jsonBody += "\"recommendations\":\"" + encodeURIComponent(recom.trim()) + "\",";
+	jsonBody += "\"recommendations\":\"" + encodeWithCustomUrlEncoding(recom.trim()) + "\",";
     
     if( updateTestsAlso ) {
         jsonBody += "\"test_results\":{";
         jsonBody += "\"id\":" + gCurrentEditedTest.id + ",";
         jsonBody += "\"is_highlighted\":" + gCurrentEditedTest.isHighlighted + ",";
-        jsonBody += "\"value\":\"" + encodeURIComponent(gCurrentEditedTest.testedValue) + "\",";
-        jsonBody += "\"description\":\"" + encodeURIComponent(gCurrentEditedTest.description) + "\"}";
+        jsonBody += "\"value\":\"" + encodeWithCustomUrlEncoding(gCurrentEditedTest.testedValue) + "\",";
+        jsonBody += "\"description\":\"" + encodeWithCustomUrlEncoding(gCurrentEditedTest.description) + "\"}";
     }
     jsonBody += "}";
 
@@ -334,6 +337,7 @@ function onGenerateReportFromMainView() {
 	var billNum = document.getElementById('report_bill_number').value;	
 	getReportDetailsAsHtml( billNum );
 }
+
 
 
 

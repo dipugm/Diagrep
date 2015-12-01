@@ -23,7 +23,7 @@
 }
 body {
 	font-family: Tahoma;
-	margin: 0px;
+	margin: 1px;
 }
 
 h1 {
@@ -110,13 +110,14 @@ h1 {
 	font-family: Tahoma;
 	font-size: 12px;
 	font-weight: bold;
+	padding-top:5px;
 	border-right: 1px solid darkgray;
 }
 
 .reporttable td {
 	font-family: Tahoma;
 	font-size: 12px;
-	padding-top:6px;
+	padding-top:4px;
 }
 
 .td_test_level_0 {
@@ -211,7 +212,7 @@ h1 {
 </Head>
 <body>
 
-<div style='height: 100%; width: 100%;padding: 0px;'>
+<div style='height: 90%; width: 100%;padding: 0px;'>
 		<div class='topBar'>
 			<div class='printButton' onclick='window.print(); return false;'>Print</div>
 		</div>

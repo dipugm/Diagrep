@@ -1,0 +1,11 @@
+<tr>
+	<td align='center' class='td_reference_data'>%SlNo%</td>
+	<td align='center' class='td_reference_data'>%BillNumber%</td>
+	<td align='center' class='td_reference_data'>%BillDate%</td>
+	<td align='center' class='td_reference_data'>%PatientName%</td>
+	<td align='center' class='td_reference_data'>%PatientID%</td>
+	<td align='center' class='td_reference_data'>%Cost%</td>
+</tr>
+<tr>
+<td colspan='6' class='td_bill_details'>%BillDetails%</td>
+</tr>

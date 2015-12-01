@@ -5,6 +5,7 @@ import diagrepServer.database.actions.CommonDefs.EntityType;
 import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseConnection;
 import diagrepServer.database.core.DatabaseConnectionPool;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.model.CategoryObject;
 
 public class DeleteCategoryAction extends BaseAction {
@@ -21,7 +22,7 @@ public class DeleteCategoryAction extends BaseAction {
 		DatabaseConnection dc 	= DatabaseConnectionPool.getPool().getMasterDbConnection();
 		DatabaseCallParams params = co.prepareForDelete();
 		
-		if( dc.execute( params ) ) {
+		if( EnumDBResult.DB_SUCCESS == dc.execute( params ) ) {
 			
 			// Clear entities relation table to remove all entries where the sub category is
 			// this id.

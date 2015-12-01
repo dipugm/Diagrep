@@ -12,6 +12,7 @@ import java.nio.channels.FileChannel;
 import diagrepServer.CommonDefs;
 import diagrepServer.database.core.*;
 import diagrepServer.database.core.DatabaseCallParams.*;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.model.DataDictionary;
 import diagrepServer.database.model.DbFileMapping;
 
@@ -26,6 +27,33 @@ public class DatabaseUtility {
 //		String fileName = DatabaseUtility.getDbFileNameForBillNumber( billNumber );
 //		System.out.println( "File for bill " + billNumber + " is " + fileName );
 //	}
+	
+	public static ArrayList<String> getDbFileNamesForType( int type ) {
+		
+		// Get the master Db connection.
+		DatabaseConnection dc	= DatabaseConnectionPool.getPool().getMasterDbConnection();
+		
+		DbFileMapping dfm = new DbFileMapping();
+		DatabaseCallParams params = dfm.prepareForFetch();
+		
+		params.addCondition( new ConditionEquals( "type", type ) );
+		
+		ArrayList<?> objects = dc.fetch(params);
+		ArrayList<String> filenames = new ArrayList<String>();
+		
+		// Go through the returned array and extract the file names.
+		for( int i=0; i < objects.size(); i++ ) {
+			dfm = (DbFileMapping)objects.get(i);
+			
+			// Only if the DB file exists, we will consider this file name.
+			File f = new File( DatabaseConnectionPool.getPool().getDbFolderPath() + "/" + dfm.databaseFileName );
+			if( f.exists() ) {
+				filenames.add( dfm.databaseFileName );
+			}
+		}
+		
+		return filenames;
+	}
 
 	public static String getDbFileNameForIdAndType( String identifier, int type ) {
 
@@ -82,7 +110,7 @@ public class DatabaseUtility {
 			DbFileMapping dfm = new DbFileMapping();
 			dfm.textPart 	= billSplit[0];
 			dfm.startNumber = Integer.parseInt( billSplit[1] );
-			dfm.endNumber	= dfm.startNumber + 10000; 
+			dfm.endNumber	= dfm.startNumber + 999;	// One Db for every 1000 bills 
 			dfm.type		= type;
 			
 			fileName += dfm.textPart + "_" + dfm.startNumber + "_" + dfm.endNumber + ".db";
@@ -93,7 +121,7 @@ public class DatabaseUtility {
 			DatabaseConnection dc	= DatabaseConnectionPool.getPool().getMasterDbConnection();
 			DatabaseCallParams params = dfm.prepareForSave( false );
 
-			if( false == dc.execute(params) ) {
+			if( EnumDBResult.DB_SUCCESS != dc.execute(params) ) {
 				return "";
 			}
 		} else {

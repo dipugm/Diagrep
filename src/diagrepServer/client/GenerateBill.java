@@ -58,8 +58,6 @@ public class GenerateBill extends BaseServlet {
 			billData += line;
 		}
 		
-		System.out.println( billData );
-		
 		JSONParser parser = new JSONParser();
 		try {
 			Object retObj = parser.parse( billData );

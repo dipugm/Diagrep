@@ -113,11 +113,25 @@ function getMutableCopy( obj ) {
 	return mutObj;
 }
 
+function encodeWithCustomUrlEncoding( sz ) {	
+	sz = sz.replace(/\+/g, "__PLUS__SIGN__");
+	sz = sz.replace(/'/g,"__SINGLE__QUOTES__");
+	sz = sz.replace(/%/g,"__PERCENT__");
+	
+	sz = encodeURIComponent( sz );
+	
+	return sz;
+}
+
 function decodeURLEncodedString( sz ) {
 	
 	try {
 		sz = decodeURIComponent( sz );
 		sz = sz.split("+").join(" ");
+		
+		sz = sz.replace(/__PLUS__SIGN__/g, "+");
+		sz = sz.replace(/__SINGLE__QUOTES__/g, "'");
+		sz = sz.replace(/__PERCENT__/g, "%");
 	} catch( e ) {
 		// Dummy lines to make flag that we have handled the exception
 		var i=0;

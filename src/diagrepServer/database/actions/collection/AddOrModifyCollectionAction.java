@@ -7,6 +7,7 @@ import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseConnection;
 import diagrepServer.database.core.DatabaseConnectionPool;
 import diagrepServer.database.core.DatabaseCallParams.ConditionEquals;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.model.CollectionObject;
 import diagrepServer.database.model.EntitiesRelationObject;
 
@@ -45,7 +46,7 @@ public class AddOrModifyCollectionAction extends BaseAction {
 			params.addCondition( new ConditionEquals("id", this.collectionIdForModify ) );
 		}
 		
-		if( dc.execute( params ) ) {
+		if( EnumDBResult.DB_SUCCESS == dc.execute( params ) ) {
 			
 			Integer collId = isForModify ? collectionIdForModify : this.collectionObject.id;
 			
@@ -61,7 +62,7 @@ public class AddOrModifyCollectionAction extends BaseAction {
 				ero.subEntityId		= Integer.parseInt( fields[1] );
 				
 				DatabaseCallParams params1 = ero.prepareForSave( false );
-				if( false == dc.execute( params1 ) ) {
+				if( EnumDBResult.DB_SUCCESS != dc.execute( params1 ) ) {
 					System.out.println( "Failed to insert into ElementRelations table for Collection, Failed value -> " + subEntity );
 				}
 			}

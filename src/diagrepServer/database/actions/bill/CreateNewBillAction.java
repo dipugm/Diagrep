@@ -20,6 +20,7 @@ import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseConnection;
 import diagrepServer.database.core.DatabaseConnectionPool;
 import diagrepServer.database.core.ModelObject;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.model.BillDetailsObject;
 import diagrepServer.database.model.BillObject;
 import diagrepServer.database.model.CategoryObject;
@@ -45,7 +46,7 @@ public class CreateNewBillAction extends BaseAction {
 		this.bill.reportDate	= reportDate;
 		this.bill.billDate 		= (new Date()).getTime();
 		
-		this.bill.billNumber	= DataDictionaryUtitlities.getNextBillNumber();
+		this.bill.billNumber	= DataDictionaryUtitlities.getNextBillNumber( null );
 		
 		this.entities			= entities;
 	}
@@ -58,53 +59,80 @@ public class CreateNewBillAction extends BaseAction {
 			return null;
 		}
 		
-		String dbFileName = DatabaseUtility.getOrCreateDbFileNameForIdAndType( this.bill.billNumber,CommonDefs.BILLREPORT_TYPE );
-		DatabaseConnection dc 	= DatabaseConnectionPool.getPool().getConnectionForDbFile( dbFileName );
-		DatabaseCallParams params = this.bill.prepareForSave( false );
+		EnumDBResult ret = EnumDBResult.DB_SUCCESS;
+		int tryCount = 0;
 		
-		if( dc.execute(params) ) {
+		do {
 			
-			// Make an entry into the report table.
-			ReportObject ro = new ReportObject();
-			ro.billNumber	= this.bill.billNumber;
+			String dbFileName = DatabaseUtility.getOrCreateDbFileNameForIdAndType( this.bill.billNumber,CommonDefs.BILLREPORT_TYPE );
+			DatabaseConnection dc 	= DatabaseConnectionPool.getPool().getConnectionForDbFile( dbFileName );
+			DatabaseCallParams params = this.bill.prepareForSave( false );
 			
-			params = ro.prepareForSave( false );
-			dc.execute( params );
+			ret = dc.execute(params);
 			
-			// Make entries into the bill details and report details table.
-			for( int iEnt=0; iEnt < this.entities.size(); iEnt++ ) {
-				HashMap<String, Object> entMap = (HashMap<String, Object>)this.entities.get( iEnt );
+			if( EnumDBResult.DB_SUCCESS == ret ) {
 				
-				BillDetailsObject bdo = new BillDetailsObject();
-				bdo.billNumber	= this.bill.billNumber;
-				bdo.entityId	= Integer.parseInt( String.valueOf(entMap.get( "id" )) );
-				bdo.entityType  = Integer.parseInt( String.valueOf(entMap.get( "type")) );
-				bdo.cost		= Double.parseDouble(entMap.get("cost").toString());
+				// Make an entry into the report table.
+				ReportObject ro = new ReportObject();
+				ro.billNumber	= this.bill.billNumber;
 				
-				DatabaseCallParams paramsDetails = bdo.prepareForSave( false );
-				dc.execute( paramsDetails );
+				params = ro.prepareForSave( false );
+				dc.execute( params );
 				
-				ArrayList<ModelObject> tests = 
-					getTestsForEntity( 
-							bdo.entityId, 
-							EntityType.fromValue( String.valueOf(bdo.entityType)) );
-				
-				for( int iTest=0; iTest < tests.size(); iTest++ ) {
+				// Make entries into the bill details and report details table.
+				for( int iEnt=0; iEnt < this.entities.size(); iEnt++ ) {
+					HashMap<String, Object> entMap = (HashMap<String, Object>)this.entities.get( iEnt );
 					
-					TestObject to 	= (TestObject)tests.get( iTest );
-					ReportDetailsObject rdo = new ReportDetailsObject();
-					rdo.billNumber	= this.bill.billNumber;
-					rdo.entityId 	= to.id;
+					BillDetailsObject bdo = new BillDetailsObject();
+					bdo.billNumber	= this.bill.billNumber;
+					bdo.entityId	= Integer.parseInt( String.valueOf(entMap.get( "id" )) );
+					bdo.entityType  = Integer.parseInt( String.valueOf(entMap.get( "type")) );
+					bdo.cost		= Double.parseDouble(entMap.get("cost").toString());
 					
-					paramsDetails	= rdo.prepareForSave( false );
+					DatabaseCallParams paramsDetails = bdo.prepareForSave( false );
 					dc.execute( paramsDetails );
+					
+					if( bdo.entityType == EntityType.Test.ordinal() ) {
+						TestObject to = (TestObject)new GetSingleTestAction( bdo.entityId ).doAction();
+						if( to != null ) {
+							ReportDetailsObject rdo = new ReportDetailsObject();
+							rdo.billNumber	= this.bill.billNumber;
+							rdo.entityId 	= to.id;
+							
+							paramsDetails	= rdo.prepareForSave( false );
+							dc.execute( paramsDetails );	
+						} else {
+							System.out.println( "No Test with id : " + String.valueOf( bdo.entityId ) );
+						}
+						
+					} else {
+						ArrayList<ModelObject> tests = 
+							getTestsForEntity( 
+									bdo.entityId, 
+									EntityType.fromValue( String.valueOf(bdo.entityType)) );
+						
+						for( int iTest=0; iTest < tests.size(); iTest++ ) {
+							
+							TestObject to 	= (TestObject)tests.get( iTest );
+							ReportDetailsObject rdo = new ReportDetailsObject();
+							rdo.billNumber	= this.bill.billNumber;
+							rdo.entityId 	= to.id;
+							
+							paramsDetails	= rdo.prepareForSave( false );
+							dc.execute( paramsDetails );
+						}
+					}
 				}
+				
+				// Save the bill number back to the Db.
+				DataDictionaryUtitlities.storeNextBillNumber( this.bill.billNumber );
+				
+			} else {
+				// Since we violated the unique bill number constraint, we try the next number. 
+				this.bill.billNumber	= DataDictionaryUtitlities.getNextBillNumber( this.bill.billNumber );
 			}
 			
-			// Save the bill number back to the Db.
-			DataDictionaryUtitlities.storeNextBillNumber( this.bill.billNumber );
-			
-		}
+		} while( (ret != EnumDBResult.DB_SUCCESS) && (tryCount++ < 5) );
 		
 		return this.bill.billNumber;
 	}

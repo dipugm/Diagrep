@@ -33,7 +33,7 @@ function show_collections() {
 		body += " class='odd_row'";
 		body += " onclick=\"javascript:rowClickedForCollections(" + i + ")\">";
 		body += "	<td width='10%' align='center'>" + (i+1) + "</td>";
-		body += "	<td width='70%'>" + col.name + "</td>";
+		body += "	<td width='70%'>" + decodeURLEncodedString( col.name ) + "</td>";
 		body += "	<td width='20%' style='text-align:right;padding-right:30px;'>" + col.cost + "</td>";	
 		body += "</tr>";
 	}
@@ -185,7 +185,7 @@ function validityCheckForCollection(name, cost) {
 }
 
 function createCollectionOnServer() {
-	gCollectionEdited.name = document.getElementById('text_collection_name').value;
+	gCollectionEdited.name = encodeWithCustomUrlEncoding( document.getElementById('text_collection_name').value );
 	gCollectionEdited.cost = document.getElementById('text_collection_cost').value;
 	
 	if( dataValidityCheck( gCollectionEdited.name, gCollectionEdited.cost ) == true ) {

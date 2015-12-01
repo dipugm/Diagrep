@@ -5,7 +5,7 @@ Style for Status Dialog.
 
 .statusdialog_background {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 700000;
+    z-index: 503;
 	text-align: center;
     opacity: 0.1;
     background-color: black;
@@ -13,7 +13,7 @@ Style for Status Dialog.
 
 .statusdialog_container {
     position: absolute;
-    z-index: 700010;
+    z-index: 504;
     background-color: white;
     opacity: 0.8;
     border-radius : 5px;

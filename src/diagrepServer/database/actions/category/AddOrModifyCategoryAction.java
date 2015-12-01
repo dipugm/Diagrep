@@ -6,6 +6,7 @@ import diagrepServer.database.actions.CommonDefs.EntityType;
 import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseCallParams.ConditionEquals;
 import diagrepServer.database.core.DatabaseConnection;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.core.DatabaseConnectionPool;
 import diagrepServer.database.model.CategoryObject;
 import diagrepServer.database.model.EntitiesRelationObject;
@@ -45,7 +46,7 @@ public class AddOrModifyCategoryAction extends BaseAction {
 			params.addCondition(new ConditionEquals("id", this.categoryIdForModify) );
 		} 
 				
-		if( dc.execute( params ) ) {
+		if( EnumDBResult.DB_SUCCESS == dc.execute( params ) ) {
 			
 			Integer entityId = (category.id != null)? category.id : categoryIdForModify;
 			

@@ -37,7 +37,7 @@ function showCreateCustomers( anchor ) {
 	szBody += "</td>";
 	szBody += "</tr>";
 	
-	createPopupContainer(400,200, 'Create Customers', szBody, 'Cancel', anchor );
+	createPopupContainer(400,200, 'Create Customers', szBody, 'Cancel' );
 	
 	var firstChild = document.getElementById( 'textName' );
 	firstChild.focus();
@@ -84,7 +84,7 @@ function showSearchCustomers( anchor ) {
 	szBody += "	</tr>";
 	szBody += "<table>";
 	
-	createPopupContainer(500, 500, 'Search Customers', szBody, 'Cancel', anchor);
+	createPopupContainer(500, 500, 'Search Customers', szBody, 'Cancel');
 }
 
 function onKeyUpInSearchBox( evt ) {
@@ -231,7 +231,7 @@ function showSearchBill( anchor ) {
 	szBody += "<tr><td colspan='2' align='center'><br><div onclick='javascript:getBillDetailsAsHtml()' class='text_button' style='width:100px;' >Get Bill</div></td>";
 	szBody += "</tr></table>";
 	
-    createPopupContainer(300, 200, 'Search Bill', szBody, 'Cancel', anchor );
+    createPopupContainer(300, 200, 'Search Bill', szBody, 'Cancel' );
 
 	var firstChild = document.getElementById( 'bill_number_for_bill_in_dialog' );
 	firstChild.focus();
@@ -253,7 +253,7 @@ function showSearchReport( anchor ) {
 	szBody += "<tr><td colspan='2' align='center'><br><div onclick='javascript:onGenerateReportFromDialog()' class='text_button' style='width:100px;'>Get Report</div></td>";
 	szBody += "</tr></table>";
 	
-    createPopupContainer(300, 200, 'Search Report', szBody, 'Cancel', anchor );
+    createPopupContainer(300, 200, 'Search Report', szBody, 'Cancel' );
 
 	var firstChild = document.getElementById( 'bill_number_for_report_in_dialog' );
 	firstChild.focus();
@@ -397,7 +397,7 @@ function displaySaveDataDialog( anchor ) {
 	szBody += "<tr><td colspan='2' align='center'><br><div style='width:100px;' onclick='javascript:onSaveAsTemplate()' class='text_button'>Save</div></td>";
 	szBody += "</tr></table>";
 	
-    createPopupContainer(300, 230, 'Save As Template', szBody, 'Cancel', undefined );
+    createPopupContainer(300, 230, 'Save As Template', szBody, 'Cancel' );
 
 	var firstChild = document.getElementById( 'name_for_template_data' );
 	firstChild.focus();
@@ -426,7 +426,7 @@ function onRecommendationTemplatesAvailable( resp ) {
 		
 		if( gArrayRecommendationTemplates.length > 0 ) {
 			
-			szBody = "<table style='width: 600px; height: 400px; border-collapse: collapse;'>";
+			szBody = "<table style='width: 600px; height: 300px; border-collapse: collapse;'>";
 			szBody += "<tr>";
 			szBody += "	<td width='40%' class='templates_list_area' valign='top'>";
 			szBody += "		<p class='templates_list_preview_label'>Select a saved template from the list to preview</p>";
@@ -460,7 +460,7 @@ function onRecommendationTemplatesAvailable( resp ) {
 			szBody += "		</div> <br>";
 			szBody += "		<div class='text_button' style='width: 100px;margin:auto;' onclick='javascript:onSelectSavedData()'>Select</div>";
 			szBody += "	</td>";
-			szBody += "	<td width='60%' height='100%' class='templates_list_preview_area'>";
+			szBody += "	<td width='60%' class='templates_list_preview_area'>";
 			szBody += "		<span class='templates_list_preview_label'>Preview:</span>";
 			szBody += "		<span class='templates_list_preview_label' id='template_selected' style='color: darkblue;'>None</span>";
 			szBody += "		<div class='templates_list_preview_pane' id='templates_list_preview_pane'></div>";
@@ -469,7 +469,7 @@ function onRecommendationTemplatesAvailable( resp ) {
 			szBody += "</table>";
 
 			
-			createPopupContainer(600, 400, 'Load a Template', szBody, 'Cancel', undefined );
+			createPopupContainer(600, 300, 'Load a Template', szBody, 'Cancel', undefined );
 		}
 	}	
 }
@@ -477,7 +477,7 @@ function onRecommendationTemplatesAvailable( resp ) {
 function onSavedTemplateClicked( name ) {
 	var dt = gArrayRecommendationTemplates[ name ];
 	var pane = document.getElementById('templates_list_preview_pane');
-	pane.innerHTML = dt.content;
+	pane.innerHTML = dt.content.replace( /SINGLE_QUOTES/g, "'");
 	
 	document.getElementById('template_selected').innerHTML = dt.name;
 	
@@ -499,7 +499,8 @@ function onSaveAsTemplate() {
 	
 	var name = document.getElementById( 'name_for_template_data' ).value;
 	var data = getTextFromEditor( 'holder_for_test_description' );
-	data 	 = encodeURIComponent( data );
+	
+	data 	 = encodeWithCustomUrlEncoding( data );
 	
 	var query = "name=" + name + "&content=" + data;
 	sendAsyncAjaxRequestToServer( '/Diagrep/StoreRecommendationTemplate', 'POST', query, "onSaveTemplateResponse" );

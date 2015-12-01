@@ -44,7 +44,7 @@ public class SearchBill extends BaseServlet {
 			
 			if( false == StringUtilities.isBillNumber( billNumber ) ) {
 				response.setContentType("text/json");
-				response.getWriter().print("{\"status\":\"failure\", \"info\":\"Invalid bill number specified.\"}");
+				response.getWriter().println("{\"status\":\"failure\", \"info\":\"Invalid bill number specified.\"}");
 			} else {
 				BillObject bo = (BillObject)(new GetBillContentsAction(billNumber).doAction());
 				
@@ -55,7 +55,7 @@ public class SearchBill extends BaseServlet {
 					response.getWriter().print( htmlText );
 				} else {
 					response.setContentType("text/json");
-					response.getWriter().print("{\"status\":\"failure\", \"info\":\"Bill does not exist or has been archived.\"}");
+					response.getWriter().println("{\"status\":\"failure\", \"info\":\"Bill does not exist or has been archived.\"}");
 				}
 			}			
 		}

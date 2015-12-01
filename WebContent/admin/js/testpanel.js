@@ -31,15 +31,13 @@ function show_tests() {
 	for( var i=0; i < gArrayEntities[kTestType].length; i++ ) {
 		var test = gArrayEntities[kTestType][i];
 		
-		test.normalValue = decodeURLEncodedString( test.normalValue );
-		
 		body += "<tr";
 		body += " class='odd_row'";
 		body += " onclick=\"javascript:rowClickedForTests(" + i + ")\">";
 		body += "	<td width='10%' align='center'>" + (i+1) + "</td>";
-		body += "	<td width='50%'>" + test.name + "</td>";
-		body += "	<td width='10%'>" + test.unit + "</td>";
-		body += "	<td width='20%'>" + test.normalValue + "</td>";
+		body += "	<td width='50%'>" + decodeURLEncodedString( test.name ) + "</td>";
+		body += "	<td width='10%'>" + decodeURLEncodedString( test.unit ) + "</td>";
+		body += "	<td width='20%'>" + decodeURLEncodedString( test.normalValue ) + "</td>";
 		body += "	<td width='10%' style='text-align:right;padding-right:30px;'>" + test.cost + "</td>";
 		body += "</tr>";
 	}
@@ -62,11 +60,11 @@ function showViewForTestDetails( test ) {
 	if( test != 0 ) {
 		fModify = 1;
 		
-		name = test.name;
-		method = test.method;
-		normalvalue = test.normalValue;
+		name = decodeURLEncodedString( test.name );
+		method = decodeURLEncodedString( test.method );
+		normalvalue = decodeURLEncodedString( test.normalValue );
 		cost = test.cost;
-		units = test.unit;
+		units = decodeURLEncodedString( test.unit );
 		
 		gTestEdited = getMutableCopy( test );
 		gArrayEntityEdited[ kTestType ] 	= gTestEdited;
@@ -165,11 +163,11 @@ function rowClickedForTests( rowNum ) {
 
 function createTestOnServer() {
 	
-	gTestEdited.name=document.getElementById('text_test_name').value;
-	gTestEdited.method=document.getElementById('text_test_method').value;
-	gTestEdited.normalValue = getTextFromEditor( 'text_test_normalvalue' );
-	gTestEdited.cost=document.getElementById('text_test_cost').value;
-	gTestEdited.unit=document.getElementById('text_test_units').value;
+	gTestEdited.name = encodeWithCustomUrlEncoding( document.getElementById('text_test_name').value );
+	gTestEdited.method = encodeWithCustomUrlEncoding( document.getElementById('text_test_method').value );
+	gTestEdited.normalValue = encodeWithCustomUrlEncoding( getTextFromEditor( 'text_test_normalvalue' ) );
+	gTestEdited.cost = document.getElementById('text_test_cost').value;
+	gTestEdited.unit = encodeWithCustomUrlEncoding( document.getElementById('text_test_units').value );
 	
 	if( dataValidityCheck( gTestEdited.name, gTestEdited.cost ) == false) {
 		return;
@@ -182,7 +180,7 @@ function createTestOnServer() {
 		queryparams += "&method=" + gTestEdited.method;
 	}
 	if( gTestEdited.normalValue != "" ){
-		queryparams += "&normalvalue=" + encodeURIComponent( gTestEdited.normalValue );
+		queryparams += "&normalvalue=" + gTestEdited.normalValue;
 	}
 	if( gTestEdited.unit != "" ){
 		queryparams += "&unit=" + gTestEdited.unit;
@@ -217,11 +215,8 @@ function onCreateTestResponseFromServer( resp ) {
 }
 
 function modifyTestOnServer() {
-	gTestEdited.method=document.getElementById('text_test_method').value;
-	if( gTestEdited.method == "" ) { 
-		gTestEdited.method = "-"; 
-	}
-	gTestEdited.normalValue = getTextFromEditor( 'text_test_normalvalue' );
+	gTestEdited.method = encodeWithCustomUrlEncoding( document.getElementById('text_test_method').value );
+	gTestEdited.normalValue = encodeWithCustomUrlEncoding( getTextFromEditor( 'text_test_normalvalue' ) );
 	gTestEdited.cost = document.getElementById('text_test_cost').value;
 	
 	if( dataValidityCheck("dummy", gTestEdited.cost) == false) {
@@ -231,7 +226,7 @@ function modifyTestOnServer() {
 	var queryparams = "id=" + gTestEdited.id;
 	queryparams += "&type=" + kTestType;
 	queryparams += "&method=" + gTestEdited.method;
-	queryparams += "&normalvalue=" + encodeURIComponent( gTestEdited.normalValue );
+	queryparams += "&normalvalue=" + gTestEdited.normalValue;
 	queryparams += "&cost=" + gTestEdited.cost;
 	
 	displayBusy( "Modify an existing test", "Please wait..." );

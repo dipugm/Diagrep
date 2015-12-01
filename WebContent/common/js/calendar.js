@@ -275,11 +275,9 @@ function _fnGetTitleRow(iIndex)
 	oRowLayout.push("</td>");
 	oRowLayout.push("</tr>");
 
-	return oRowLayout.join('');
 	oCalendarArray = null;
+	return oRowLayout.join('');
 }
-
-
 
 function _fnGetYearRow(iIndex)
 {

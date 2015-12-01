@@ -4,7 +4,7 @@ Styles for the progress dialog
 
 .progressdialog_background {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 800000;
+    z-index: 500;
 	text-align: center;
     opacity: 0.3;
     background-color: black;
@@ -12,7 +12,7 @@ Styles for the progress dialog
 
 .progressdialog_container {
     position: absolute;
-    z-index: 800010;
+    z-index: 501;
     background-color: #f9edea;
     border-radius : 10px;
     text-shadow: 2px 2px white;

@@ -39,7 +39,14 @@ public class BillObject extends ModelObject implements IEntityObject {
 	
 	@Override
 	public double getCost() {
-		return 0;
+		double totalCost = 0.0;
+		
+		for( int i=0; i < this.fk_arrayBillDetails.size(); i++ ) {
+			BillDetailsObject bdo = this.fk_arrayBillDetails.get( i );
+			totalCost += bdo.getCost();
+		}
+		
+		return totalCost;
 	}
 	
 	@Override

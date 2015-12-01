@@ -12,7 +12,7 @@ var view_stack = Array();
 var back_button_stack = Array();
 
 
-function createPopupContainer(width,height, szTitle, szBody, szDoneButtonText, anchor ) {
+function createPopupContainer(width,height, szTitle, szBody, szDoneButtonText ) {
 	
 	popup_width = width;
 	popup_height = height;
@@ -29,11 +29,6 @@ function createPopupContainer(width,height, szTitle, szBody, szDoneButtonText, a
 	var left = (window.innerWidth - width) / 2;
 	var top = (window.innerHeight - height) / 2;
 	
-	if( anchor != undefined ) {
-		left = anchor.offsetLeft - ((width - anchor.offsetWidth) / 2);
-		top = anchor.offsetTop + anchor.offsetHeight - 10;
-	} 
-
     popup_container = document.createElement('DIV');
     popup_container.className = 'popup_container';
     popup_container.id = 'popup_container';
@@ -49,16 +44,6 @@ function createPopupContainer(width,height, szTitle, szBody, szDoneButtonText, a
     table.className = "popup-content-table";
     
     var rowNum = 0;
-    if( anchor != undefined ) {
-        // First row
-        var arrowRow = table.insertRow(0);
-        var arrowCell = arrowRow.insertCell(0);
-        arrowCell.className = "popup_top_arrow";
-        arrowCell.colSpan = 3;
-        arrowCell.innerHTML = "<div class='popup_top_arrow'></div>";
-    	
-    	rowNum = rowNum + 1;
-    }
     
     // nav bar row.
     var navBarRow = table.insertRow(rowNum);
@@ -80,7 +65,7 @@ function createPopupContainer(width,height, szTitle, szBody, szDoneButtonText, a
     rightBut.style.width = "25%";
     rightBut.innerHTML = "Cancel";
     rightBut.onclick = function( event ) {
-		onDone();
+    	onDone();
 	};
     
     rowNum = rowNum + 1;

@@ -4,6 +4,7 @@ import diagrepServer.Utils.DatabaseUtility;
 import diagrepServer.database.actions.BaseAction;
 import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseCallParams.ConditionEquals;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.core.DatabaseConnection;
 import diagrepServer.database.core.DatabaseConnectionPool;
 import diagrepServer.database.model.TestObject;
@@ -39,7 +40,7 @@ public class AddOrModifyTestAction extends BaseAction {
 			params.addCondition( new ConditionEquals("id", this.testIdForModify ) );
 		}
 		
-		if( dc.execute( params ) ) {
+		if( EnumDBResult.DB_SUCCESS == dc.execute( params ) ) {
 			if( !this.isForModify ) {
 				DatabaseUtility.saveNextTestId( this.testObject.id );
 				return this.testObject.id;

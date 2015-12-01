@@ -54,8 +54,9 @@ public class TestObject extends ModelObject implements IEntityObject {
 		if( this.normalValue != null ) {
 			sb.append(",\"normalValue\":\"");
 			sb.append( this.normalValue.replace("\"", "'") );
+			sb.append("\"");
 		}
-		sb.append("\"");
+		
 		sb.append("}");
 		
 		return sb.toString();

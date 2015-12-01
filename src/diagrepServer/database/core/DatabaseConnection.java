@@ -8,6 +8,11 @@ public class DatabaseConnection {
 
 	private Connection dbConnection;
 	
+	public enum EnumDBResult {
+		DB_SUCCESS,
+		DB_FAILED_DUPLICATE_DATA
+	}
+	
 	@SuppressWarnings("unused")
 	private DatabaseConnection() {}
 	
@@ -38,10 +43,10 @@ public class DatabaseConnection {
 		}
 	}
 	
-	public boolean execute( DatabaseCallParams params ) {
+	public EnumDBResult execute( DatabaseCallParams params ) {
 		 String sql	= params.getSqlStatement();
 		 
-		 boolean ret	= true;
+		 EnumDBResult ret	= EnumDBResult.DB_SUCCESS;
 		 try {
 			 dbConnection.setReadOnly( false );
 			 
@@ -49,9 +54,16 @@ public class DatabaseConnection {
 			 stmt.executeUpdate( sql );
 			 stmt.close();
 			 
-		 } catch ( Exception e) {
-			 e.printStackTrace();
-			 ret	= false;
+		 } catch ( SQLException e) {
+//			 e.printStackTrace();
+			 
+			 System.out.println( e.getMessage() );
+			 System.out.println( e.getLocalizedMessage() );
+			 System.out.println( e.toString() );
+			 
+			 if( e.toString().contains( "UNIQUE constraint failed") ) {
+				 ret	= EnumDBResult.DB_FAILED_DUPLICATE_DATA ;
+			 }
 		 }
 		 
 		 return ret;

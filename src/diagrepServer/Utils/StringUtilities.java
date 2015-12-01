@@ -1,6 +1,5 @@
 package diagrepServer.Utils;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.regex.Pattern;
 
@@ -108,7 +107,10 @@ public class StringUtilities {
 	public static String decodeURLEncodedString( String input ) {
 		try {
 			input 	= URLDecoder.decode(input, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
+			input = input.replaceAll("__SINGLE__QUOTES__", "'");
+			input = input.replaceAll("__PERCENT__", "%");
+			input = input.replaceAll("__PLUS__SIGN__", "+");
+		} catch (Exception e) {
 			System.err.println( "Exception converting url encoded string : " + input );
 		}
 		

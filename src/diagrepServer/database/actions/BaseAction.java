@@ -10,6 +10,7 @@ import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseConnection;
 import diagrepServer.database.core.DatabaseConnectionPool;
 import diagrepServer.database.core.ModelObject;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.model.EntitiesRelationObject;
 
 public abstract class BaseAction {
@@ -53,7 +54,7 @@ public abstract class BaseAction {
 		return subEntities;
 	}
 	
-	public boolean clearEntitiesRelations( EntityType parentEntityType, Integer parentEntityId ) { 
+	public EnumDBResult clearEntitiesRelations( EntityType parentEntityType, Integer parentEntityId ) { 
 
 		EntitiesRelationObject ero	= new EntitiesRelationObject( parentEntityType, parentEntityId );
 		DatabaseCallParams params = ero.prepareForDelete();
@@ -62,7 +63,7 @@ public abstract class BaseAction {
 		return dc.execute( params );
 	}
 	
-	public boolean clearEntitiesRelationsForSubEntity( EntityType subEntityType, Integer subEntityId ) { 
+	public EnumDBResult clearEntitiesRelationsForSubEntity( EntityType subEntityType, Integer subEntityId ) { 
 
 		EntitiesRelationObject ero	= new EntitiesRelationObject();
 		ero.subEntityId		= subEntityId;

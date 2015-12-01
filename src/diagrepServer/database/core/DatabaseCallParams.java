@@ -53,10 +53,12 @@ public class DatabaseCallParams {
 	
 	public static class ConditionEquals extends ConditionBase {
 		public ConditionEquals( String columnName, Object value ) {
-			condition	= columnName + "=";
+			
 			if( value.getClass().equals( String.class ) ) {
-				condition += "'" + value + "'";
+				condition = "lower(" + columnName + ") = ";
+				condition += "lower('" + value + "')";
 			} else {
+				condition	= columnName + "=";
 				condition += String.valueOf( value );
 			}
 		}
@@ -64,11 +66,11 @@ public class DatabaseCallParams {
 	
 	public static class ConditionLike extends ConditionBase {
 		public ConditionLike( String columnName, Object value ) {
-			condition	= columnName + " like ";
-			if( value.getClass().equals( String.class ) == false ) {
-				value 	= String.valueOf( value );
+			
+			if( value.getClass().equals( String.class ) ) {
+				condition = "lower(" + columnName + ") like ";
+				condition += "lower('" + value + "%')";
 			}
-			condition += "'" + value + "%'";
 		}
 	}
 
@@ -79,6 +81,7 @@ public class DatabaseCallParams {
 	private ArrayList<ConditionBase> conditions;
 	public String orderByClause;
 	public boolean shouldOrderByDescending;
+	public boolean shouldFetchUniqueObjects;
 	
 	private Hashtable<String, Object> dbFields;
 	private String computedCondition;
@@ -157,14 +160,33 @@ public class DatabaseCallParams {
 
 		 // Go through the fields to fetch otherwise use *
 		 String fields 	= "rowid, *";
+		 if( this.shouldFetchUniqueObjects ) {
+			 fields = "*";
+		 }
 		 if( dbFields.size() > 0 ) {
 			 fields = "rowid";
-			 for( int i=0; i < dbFields.size(); i++ ) {
-				 fields += "," + dbFields.get(i);
+			 if( this.shouldFetchUniqueObjects ) {
+				 fields = "";
+			 } 
+
+			 // dbFields is a map between the field name and value.
+			 // In the context of fetch, we only need to get the field
+			 // name as that will be used in the SQL fetch as column names
+			 Enumeration<String> enmr = dbFields.keys();
+			 while( enmr.hasMoreElements() ) {
+				 String field = enmr.nextElement();
+				 
+				 if( !fields.isEmpty() ) {
+					 fields += ",";
+				 }
+				 fields += field;
 			 }
 		 } 
 		 
 		 sBuilder.append( "SELECT ");
+		 if( this.shouldFetchUniqueObjects ) {
+			 sBuilder.append("DISTINCT ");
+		 }
 		 sBuilder.append( fields );
 		 sBuilder.append( " FROM " );
 		 sBuilder.append( tableName );

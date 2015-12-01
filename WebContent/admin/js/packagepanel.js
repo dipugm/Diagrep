@@ -35,7 +35,7 @@ function show_packages() {
 		body += " class='odd_row'";
 		body += " onclick=\"javascript:rowClickedForPackages(" + i + ")\">";
 		body += "	<td width='10%' align='center'>" + (i+1) + "</td>";
-		body += "	<td width='75%'>" + pkg.name; 
+		body += "	<td width='75%'>" + decodeURLEncodedString( pkg.name ); 
 		if( pkg.description != null && pkg.description != "" ) {
 			body += "	<br><font size='1'>[" + pkg.description + "]</font></td>";
 		}
@@ -249,16 +249,16 @@ function validityCheckForPackage(name,cost) {
 }
 
 function createPackageOnServer() {
-	gPackageEdited.name = document.getElementById('text_package_name').value;
+	gPackageEdited.name = encodeWithCustomUrlEncoding( document.getElementById('text_package_name').value );
 	gPackageEdited.cost = document.getElementById('text_package_cost').value;
-	gPackageEdited.description = getTextFromEditor('text_package_description');
+	gPackageEdited.description = encodeWithCustomUrlEncoding( getTextFromEditor('text_package_description') );
 	
 	if( dataValidityCheck( gPackageEdited.name, gPackageEdited.cost ) == true ) {
 		
         var queryParams = "type=" + kPackageType;
 		queryParams += "&name=" + gPackageEdited.name;
 		queryParams += "&cost=" + gPackageEdited.cost;
-		queryParams += "&description=" + encodeURIComponent(gPackageEdited.description);
+		queryParams += "&description=" + gPackageEdited.description;
 		queryParams += "&subEntitiesWithOrder=" + getSubEntitiesOrderAsCommanSeparatedString( gPackageEdited );
 		
 		displayBusy( "Create Package", "Please wait..." );

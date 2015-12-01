@@ -10,6 +10,7 @@ import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseConnection;
 import diagrepServer.database.core.DatabaseConnectionPool;
 import diagrepServer.database.core.ModelObject;
+import diagrepServer.database.core.DatabaseConnection.EnumDBResult;
 import diagrepServer.database.model.Recommendation;
 
 
@@ -33,6 +34,12 @@ public class DiagrepTemplates {
 		kCollectionHeaderRow,
 		kPackageHeaderRow,
 		kReportRecommendationRow,
+		kReferenceReport,
+		kReferenceReportRow,
+		kMonthlyReport,
+		kMonthlyReportRow,
+		kDailyReport,
+		kDailyReportRow,
 		kTemplateTypeInvalid;
 		
 		public TemplateType fromValue( int value ) {
@@ -74,6 +81,29 @@ public class DiagrepTemplates {
 				tt = kReportRecommendationRow;
 				break;
 				
+			case 9:
+				tt = kReferenceReport;
+				break;
+				
+			case 10:
+				tt = kReferenceReportRow;
+				break;
+				
+			case 11:
+				tt = kMonthlyReport;
+				break;
+				
+			case 12:
+				tt = kMonthlyReportRow;
+				break;
+				
+			case 13:
+				tt = kDailyReport;
+				break;
+				
+			case 14:
+				tt = kDailyReportRow;
+				
 			default:
 				throw new IllegalArgumentException();
 			}
@@ -102,7 +132,9 @@ public class DiagrepTemplates {
 	public void readAllTemplates( String templatesFolder ) {
 		
 		String[] fileNames = {"BillTempl", "BillRowTempl", "ReportTempl", "ReportTestRowTempl", "ReportTestDescriptionRowTempl", 
-				"ReportCategoryHeaderRowTempl", "ReportCollectionHeaderRowTempl", "ReportPackageHeaderRowTempl", "ReportRecommendationRowTempl"};
+				"ReportCategoryHeaderRowTempl", "ReportCollectionHeaderRowTempl", "ReportPackageHeaderRowTempl", "ReportRecommendationRowTempl",
+						"ReferenceReportTempl", "ReferenceReportRowTempl", "MonthlyReportTempl", "MonthlyReportRowTempl",
+						"DailyReportTempl", "DailyReportRowTempl"};
 		
 		for( int i=0; i < fileNames.length; i++ ) {
 			try{
@@ -139,7 +171,7 @@ public class DiagrepTemplates {
 		dc.execute(params);
 	}
 	
-	public boolean deleteRecommendationTemplate( String name ) {
+	public EnumDBResult deleteRecommendationTemplate( String name ) {
 		DatabaseConnection dc = DatabaseConnectionPool.getPool().getSavedDataDbConnection();
 		Recommendation r = new Recommendation();
 		r.name = name;
