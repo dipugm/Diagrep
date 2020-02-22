@@ -220,22 +220,22 @@ h1 {
 		<h1>Report</h1>
 		<table class='simpletable' id='customer_info'>
 			<tr>
-				<td class='patientInformation_name'>Name</td>
+				<td class='patientInformation_name'>Name/ Reg.ID</td>
 				<td class='patientInformation_value'>!@#$Name$#@!</td>
-			    <td class='patientInformation_name'>Customer ID</td>
-				<td class='patientInformation_value'>!@#$CustomerID$#@!</td>
+			    <td class='patientInformation_name'>Reg. Date</td>
+				<td class='patientInformation_value'>!@#$RegDate$#@!</td>
 			</tr>
 			<tr>
 				<td class='patientInformation_name'>Age/Sex</td>
 				<td class='patientInformation_value'>!@#$Age$#@! / !@#$Sex$#@!</td>
-			    <td class='patientInformation_name'>Referred By</td>
-			    <td class='patientInformation_value'>!@#$ReferedBy$#@!</td>
+			    <td class='patientInformation_name'>Report Date</td>
+				<td class='patientInformation_value'>!@#$ReportDate$#@!</td>
 			</tr>
 			<tr>
 			   	<td class='patientInformation_name'>Bill Number</td>
 				<td class='patientInformation_value'>!@#$BillNumber$#@!</td>
-			   	<td class='patientInformation_name'>Report Date</td>
-				<td class='patientInformation_value'>!@#$ReportDate$#@!</td>
+				<td class='patientInformation_name'>Referred By</td>
+			    <td class='patientInformation_value'>!@#$ReferedBy$#@!</td>
 			</tr>
 		
 		</table>

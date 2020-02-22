@@ -402,13 +402,12 @@ function generateBill() {
 	szBill += "\"referred_by\":\"" + szReferredBy + "\",";
 	
 	var dat = document.getElementById('text_report_date').value;
-	if( dat == '' ) {
-		dat = new Date();
-	} else {
+	if( dat != '' ) {
 		dat = new Date( dat );
+		szBill += "\"report_date\":" + dat.getTime() + ",";
+	} else {
+		szBill += "\"report_date\":0,";
 	}
-	
-	szBill += "\"report_date\":" + dat.getTime() + ",";
 	
 	szBill += "\"advance_paid\":" + advancePaid + ",";
 	szBill += "\"entities\":[";
