@@ -31,7 +31,7 @@ public class GetMonthlyReportAction extends BaseAction {
 	public Object doAction() {
 		ArrayList<String> dbFilenames = DatabaseUtility.getDbFileNamesForType( CommonDefs.BILLREPORT_TYPE );
 		
-		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.DATE_FORMAT ) ;
+		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.BILL_DATE_FORMAT ) ;
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		
 		// Use the Calendar class to subtract one day

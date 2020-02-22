@@ -42,7 +42,7 @@ public class GetReferenceReportAction extends BaseAction {
 	public Object doAction() {
 		ArrayList<String> dbFilenames = DatabaseUtility.getDbFileNamesForType( CommonDefs.BILLREPORT_TYPE );
 		
-		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.DATE_FORMAT ) ;
+		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.BILL_DATE_FORMAT ) ;
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		
 		System.out.print( "Generating reference report for " + referenceName + " between " + formatter.format( new Date(startDate) ) );
@@ -74,7 +74,7 @@ public class GetReferenceReportAction extends BaseAction {
 		String refReportTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kReferenceReport );
 		String refReportRowTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kReferenceReportRow ); 
 		
-		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.DATE_FORMAT ) ;
+		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.REPORT_DATE_FORMAT ) ;
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		
 		refReportTempl = refReportTempl.replace("!@#$ReferenceName$#@!", this.referenceName );

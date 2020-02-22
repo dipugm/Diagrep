@@ -40,7 +40,7 @@ public class GetDailyReportAction extends BaseAction {
 	public Object doAction() {
 		ArrayList<String> dbFilenames = DatabaseUtility.getDbFileNamesForType( CommonDefs.BILLREPORT_TYPE );
 		
-		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.DATE_FORMAT ) ;
+		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.BILL_DATE_FORMAT ) ;
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		
 		System.out.print( "Generating daily report for " + formatter.format( new Date(this.referenceDate) ) );
@@ -78,7 +78,7 @@ public class GetDailyReportAction extends BaseAction {
 		String refReportTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kDailyReport );
 		String refReportRowTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kDailyReportRow ); 
 		
-		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.DATE_FORMAT ) ;
+		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.REPORT_DATE_FORMAT ) ;
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		
 		refReportTempl = refReportTempl.replace("!@#$Date$#@!", formatter.format( new Date(this.referenceDate)));

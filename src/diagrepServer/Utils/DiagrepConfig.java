@@ -7,11 +7,12 @@ import java.util.Properties;
 
 public class DiagrepConfig {
 
-	public final static String DB_FOLDER_PATH		= "databaseFolderPath";
-	public final static String DATE_FORMAT			= "dateFormat";
-	public final static String CUSTOMER_ID_PREFIX	= "customerIdPrefix";
-	public final static String CUSTOMER_DB_IMPORTED	= "customerDbImportedName";
-	public final static String CUSTOMER_SEARCH_LIMIT = "customerSearchResultsLimit";
+	public final static String DB_FOLDER_PATH			= "databaseFolderPath";
+	public final static String BILL_DATE_FORMAT			= "billDateFormat";
+	public final static String REPORT_DATE_FORMAT		= "reportDateFormat";
+	public final static String CUSTOMER_ID_PREFIX		= "customerIdPrefix";
+	public final static String CUSTOMER_DB_IMPORTED		= "customerDbImportedName";
+	public final static String CUSTOMER_SEARCH_LIMIT 	= "customerSearchResultsLimit";
 	
 	private static DiagrepConfig instance = null;
 	public static synchronized DiagrepConfig getConfig() {

@@ -94,7 +94,7 @@ public class BillObject extends ModelObject implements IEntityObject {
 		
 		CustomerObject cust	= (CustomerObject)new GetCustomerDetailsAction(customerId).doAction();
 		
-		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.DATE_FORMAT ) ;
+		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.BILL_DATE_FORMAT ) ;
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		
 		String templ = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kBill );
@@ -104,7 +104,7 @@ public class BillObject extends ModelObject implements IEntityObject {
 		templ = templ.replace( "!@#$Age$#@!", String.valueOf(cust.fk_currentAge / 12) + " yrs" );
 		templ = templ.replace( "!@#$Sex$#@!", cust.getGenderAsString( cust.fk_sex ) );
 		templ = templ.replace( "!@#$BillDate$#@!", formatter.format(new Date(billDate)) );
-		templ = templ.replace( "!@#$ReportDate$#@!", formatter.format(new Date(reportDate)) );
+		templ = templ.replace( "!@#$ReportDate$#@!", reportDate > 0 ? formatter.format(new Date(reportDate)) : "" );
 		templ = templ.replace( "!@#$ReferedBy$#@!", referredBy );
 		templ = templ.replace( "!@#$Advance$#@!", String.valueOf(advancePaid) );
 		

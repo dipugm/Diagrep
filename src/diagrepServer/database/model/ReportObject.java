@@ -153,9 +153,11 @@ public class ReportObject extends ModelObject implements IEntityObject {
 		reportString	= reportString.replace("!@#$ReferedBy$#@!", bo.referredBy );
 		reportString	= reportString.replace("!@#$BillNumber$#@!", billNumber );
 		
-		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.DATE_FORMAT ) ;
+		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.REPORT_DATE_FORMAT ) ;
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		reportString	= reportString.replace("!@#$ReportDate$#@!", formatter.format( new Date(bo.reportDate) ) );
+		
+		reportString	= reportString.replace("!@#$RegDate$#@!", formatter.format( new Date(co.dateOfCreation) ) );
 		
 		if( recommendations != null && ! recommendations.isEmpty() ) {
 			// Some reports might just have a line break in them. So eliminating that case also.

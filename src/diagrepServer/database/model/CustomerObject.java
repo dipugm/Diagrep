@@ -95,7 +95,7 @@ public class CustomerObject extends ModelObject {
 		sb.append(customerId);
 		sb.append("\",\"dateOfCreation\":\"");
 		
-		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.DATE_FORMAT ) ;
+		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.REPORT_DATE_FORMAT ) ;
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		sb.append( formatter.format(fk_dateOfCreation) );
 		
