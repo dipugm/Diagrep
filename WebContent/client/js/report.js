@@ -111,6 +111,9 @@ function onGetBillForEditingResponseFromServer( resp ) {
 }
 
 function clearReportEditForm() {
+	
+	gTestValueDetails = [];
+	
 	var table = document.getElementById('table_report_tests');
 	count = table.rows.length;
 	for( var i=0; i < count; i++ ) {
