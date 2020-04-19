@@ -1,0 +1,148 @@
+<html>
+<head>
+<style>
+
+@page {
+	size: auto;
+	margin-top: 0.5in; /* this affects the margin in the printer settings */
+	margin-bottom: 0.5in;
+	margin-left: 0.25in;
+	margin-right: 0.25in;
+}
+
+@media print {
+	
+ 	.topOffsetArea {
+		display: none;
+	}
+	
+	.topBar {
+		display: none;
+	}
+	
+}
+body {
+	font-family: Tahoma;
+	margin: 1px;
+}
+
+h1 {
+	font-family: Tahoma;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.topOffsetArea {
+	padding-top: 70px;
+}
+
+.printButton {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight:bold;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor: pointer;
+	text-align: center;
+	background-color: #3e4d64;
+	color: white;
+	width: 100px;
+	height: 15px;
+	margin-left: 10px;
+}
+
+.printButton:active {
+	background-color: #9EA6B2;
+}
+
+.topBar {
+	position: fixed;
+	top: 0px;
+	height: 50px; 
+	width: 100%; 
+	padding-left: 0px; 
+	padding-top:10px; 
+	background-color:orange;
+	box-shadow: 0px 2px 5px darkgray;
+}
+
+.simpletable {
+    width: 95%;
+    margin: auto;
+    border: 1px solid darkgray;
+	border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+.reporttable {
+	width: 95%;
+	margin: auto;
+	border-spacing: 0px;
+    border-collapse: collapse;
+    
+}
+
+.reporttable th {
+	margin: auto;
+	text-align: center;
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	border-right: 1px solid darkgray;
+}
+
+.td_monthly_data {
+	font-family: Tahoma;
+	font-size: 12px;
+	padding-top:6px;
+}
+
+.td_total {
+	padding-left: 0px;
+	font-family: Tahoma;
+	font-size: 12px;
+	padding-top:10px;
+	text-align: right;
+	font-weight: bold;
+}
+
+.td_bill_details {
+	padding-left: 20px;
+	font-family: Tahoma;
+	font-size: 10px;
+	padding-bottom: 6px;
+}
+
+</style>
+<title>Reference Report</title>
+</Head>
+<body>
+
+<div style='height: 90%; width: 100%;padding: 0px;'>
+		<div class='topBar'>
+			<div class='printButton' onclick='window.print(); return false;'>Print</div>
+		</div>
+		<p class='topOffsetArea'></p>
+		<h1>Monthly Report for !@#$Month$#@!</h1>
+		
+		<TABLE class='reporttable'>
+			<tr style='border: 1px solid darkgray;'>
+				<th width='5%'>SlNo</th>
+				<th width='10%' align='center'>Date</th>
+				<th width='10%' align='center'>Bill Number</th>
+				<th width='40%' align='center'>Details</th>
+				<th width='10%' align='center'>Cost (Rs)</th>
+			</tr>
+			!@#$ReportDetails$#@!
+			
+			<tr>
+				<td colspan=2 class='td_total'>Total</td>
+				<td align='center' class='td_total' style='text-align: center;'>!@#$Total$#@!</td>
+			</tr>
+		</TABLE>
+		
+</div>
+</body>
+
+</html>

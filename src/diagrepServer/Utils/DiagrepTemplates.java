@@ -38,6 +38,8 @@ public class DiagrepTemplates {
 		kReferenceReportRow,
 		kMonthlyReport,
 		kMonthlyReportRow,
+		kDaywiseMonthlyReport,
+		kDaywiseMonthlyReportRow,
 		kDailyReport,
 		kDailyReportRow,
 		kTemplateTypeInvalid;
@@ -98,10 +100,18 @@ public class DiagrepTemplates {
 				break;
 				
 			case 13:
-				tt = kDailyReport;
+				tt = kDaywiseMonthlyReport;
 				break;
 				
 			case 14:
+				tt = kDaywiseMonthlyReportRow;
+				break;
+				
+			case 15:
+				tt = kDailyReport;
+				break;
+				
+			case 16:
 				tt = kDailyReportRow;
 				
 			default:
@@ -134,7 +144,7 @@ public class DiagrepTemplates {
 		String[] fileNames = {"BillTempl", "BillRowTempl", "ReportTempl", "ReportTestRowTempl", "ReportTestDescriptionRowTempl", 
 				"ReportCategoryHeaderRowTempl", "ReportCollectionHeaderRowTempl", "ReportPackageHeaderRowTempl", "ReportRecommendationRowTempl",
 						"ReferenceReportTempl", "ReferenceReportRowTempl", "MonthlyReportTempl", "MonthlyReportRowTempl",
-						"DailyReportTempl", "DailyReportRowTempl"};
+						"DaywiseMonthlyReportTempl","DaywiseMonthlyReportRowTempl","DailyReportTempl", "DailyReportRowTempl"};
 		
 		for( int i=0; i < fileNames.length; i++ ) {
 			try{

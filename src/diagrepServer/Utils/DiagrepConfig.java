@@ -2,8 +2,11 @@ package diagrepServer.Utils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.File;
 import java.util.Properties;
+
 
 public class DiagrepConfig {
 
@@ -22,9 +25,22 @@ public class DiagrepConfig {
 		return instance;
 	}
 	
-	public void loadConfig( String rootFolder ) {
+	public synchronized void loadConfig( String rootFolder ) {
+		if( properties != null ) {
+			// Configuration properties file already loaded.
+			return;
+		}
+		
 		properties 	= new Properties();
 		
+		loadGeneralConfig(rootFolder);
+		loadLocalConfig(rootFolder);
+		
+		System.out.println(properties.toString());
+
+	}
+	
+	private void loadGeneralConfig( String rootFolder ) {
 		try {
 			properties.load( new FileInputStream( rootFolder + "general.properties" ) );
 		} catch (FileNotFoundException e) {
@@ -34,7 +50,64 @@ public class DiagrepConfig {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+	}
+	
+	private void loadLocalConfig( String rootFolder ) {
+		String tmpdir = System.getProperty("java.io.tmpdir");
+		if( !tmpdir.endsWith(File.separator) ) {
+			tmpdir += File.separator;
+		}
+		String tmpPropFile = tmpdir + "local.properties";
+		
+		System.out.println("Temp directory : " + tmpdir);
+		System.out.println("Local properties file : " + tmpPropFile);
+		
+		File tmpFile = new File(tmpPropFile);
+		
+		if( ! tmpFile.exists() ) {
+			copyFile( rootFolder + "local.properties", tmpPropFile );
+		}
+		
+		try {
+			properties.load( new FileInputStream( tmpPropFile ) );
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "local.properties file not found and could not be created either - " + tmpdir );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private boolean copyFile(String src, String dest ) {
+		return copyFile(src, dest, false);
+	}
+	
+	private boolean copyFile(String src, String dest, boolean shouldOverwrite) {
+		try { 
+	         
+	        File outFile = new File(dest);
+	        if( outFile.exists() && !shouldOverwrite ) {
+	        	return false;
+	        }
+	        
+	        FileInputStream fis = new FileInputStream(src);
+	        
+	        /* assuming that the file exists and need not to be 
+	           checked */
+	        FileOutputStream fos = new FileOutputStream(dest); 
+	  
+	        int b; 
+	        while  ((b=fis.read()) != -1) 
+	            fos.write(b); 
+	  
+	        fis.close(); 
+	        fos.close(); 
+	        
+	    } catch(Exception e) {
+	    	return false;
+	    }
+		return true;
 	}
 	
 	private Properties properties;
