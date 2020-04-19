@@ -76,6 +76,36 @@ public class BillDetailsObject extends ModelObject implements IEntityObject  {
 	@Override
 	public String getAsHtml() {
 		
+		String name = getEntityName();
+		
+		/*
+		 *  We use template files to create the final Html.
+		 *  Templates used :
+		 *  1. BillRowTempl
+		 *  
+		 *  Strings we look for :
+		 *  1. !@#$SlNo$#@!
+		 *  2. !@#$Particulars$#@!
+		 *  3. !@#$Cost$#@!
+		 */
+		
+		String templ = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kBillRow );
+		
+		templ = templ.replace( "%SlNo%", String.valueOf(fk_index) );
+		templ = templ.replace( "%TestName%", name );
+		templ = templ.replace( "%Cost%", String.valueOf( getCost() ) );
+		
+		return templ;
+	}
+
+	@Override
+	public ArrayList<ModelObject> getContainedTests() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	// Utility method
+	public String getEntityName() {
 		String name = "- DELETED ENTITY - ";
 		switch( EntityType.fromValue( String.valueOf(entityType) ) ) {
 			case Test: {
@@ -116,31 +146,11 @@ public class BillDetailsObject extends ModelObject implements IEntityObject  {
 				}
 	
 			} break;
+			
+			default:
+				break;
 		}
 		
-		/*
-		 *  We use template files to create the final Html.
-		 *  Templates used :
-		 *  1. BillRowTempl
-		 *  
-		 *  Strings we look for :
-		 *  1. !@#$SlNo$#@!
-		 *  2. !@#$Particulars$#@!
-		 *  3. !@#$Cost$#@!
-		 */
-		
-		String templ = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kBillRow );
-		
-		templ = templ.replace( "%SlNo%", String.valueOf(fk_index) );
-		templ = templ.replace( "%TestName%", name );
-		templ = templ.replace( "%Cost%", String.valueOf( getCost() ) );
-		
-		return templ;
-	}
-
-	@Override
-	public ArrayList<ModelObject> getContainedTests() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 }

@@ -18,13 +18,12 @@ import diagrepServer.database.core.DatabaseConnection;
 import diagrepServer.database.core.DatabaseConnectionPool;
 import diagrepServer.database.model.BillObject;
 
-public class GetMonthlyReportAction extends BaseAction {
+public class GetDaywiseMonthlyReportAction extends BaseAction {
 
 	long referenceMonth;
 	long referenceYear;
-	boolean shouldGetBills;
 	
-	public GetMonthlyReportAction( long month, long year ) {
+	public GetDaywiseMonthlyReportAction( long month, long year ) {
 		this.referenceMonth = month;
 		this.referenceYear 	= year;
 	}
@@ -47,12 +46,10 @@ public class GetMonthlyReportAction extends BaseAction {
         calendar.add( Calendar.MONTH, 1);
         Date dt2 = calendar.getTime();
 		
-        HashMap<String, Double> mapBillToCost = new HashMap<String, Double>();
         ArrayList<String> arrayDays = new ArrayList<String>();
-        
-        String currentBill = "";
-        Double currentCost = 0.0;
-        
+        HashMap<String, ArrayList<BillObject>> mapDayToBills = new HashMap<String, ArrayList<BillObject>>();
+        String currentBill;
+                
 		for( int iFile=0; iFile < dbFilenames.size(); iFile++ ) {
 			DatabaseConnection dc = DatabaseConnectionPool.getPool().getConnectionForDbFile( dbFilenames.get(iFile));
 			
@@ -71,35 +68,25 @@ public class GetMonthlyReportAction extends BaseAction {
 				
 				String billDate = formatter.format(b1.billDate);
 				
-				if( false == currentBill.isEmpty() && false == currentBill.equalsIgnoreCase( billDate ) ) {
-					// Bill changed...should save the current one and move to the new one.
-					mapBillToCost.put( currentBill, currentCost );
-					currentCost = 0.0;
-					
-					arrayDays.add( currentBill );
+				if( false == mapDayToBills.containsKey(billDate) ){
+					mapDayToBills.put(billDate, new ArrayList<BillObject>());
+					arrayDays.add( billDate );
 				}
 
-				currentCost += b1.getCost();
-				currentBill = billDate;
-				
+				mapDayToBills.get(billDate).add(b1);
 			}
 			
-			if( currentCost > 0.0 ) {
-				mapBillToCost.put( currentBill, currentCost );
-				currentCost = 0.0;
-				arrayDays.add( currentBill );
-			}
 		}
 
 		// Prepare the Html
-		return ReportAsHtml( arrayDays, mapBillToCost ); 
+		return ReportAsHtml( arrayDays, mapDayToBills ); 
 		
 	}
 	
-	private String ReportAsHtml( ArrayList<String> arrayDays, HashMap<String, Double> mapBillToCost ) {
+	private String ReportAsHtml( ArrayList<String> arrayDays, HashMap<String, ArrayList<BillObject>> mapDayToBills ) {
 
-		String refReportTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kMonthlyReport );
-		String refReportRowTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kMonthlyReportRow ); 
+		String refReportTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kDaywiseMonthlyReport );
+		String refReportRowTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kDaywiseMonthlyReportRow ); 
 		
 		SimpleDateFormat monthFormatter = new SimpleDateFormat( "MMM yyyy" );
 		
@@ -110,20 +97,33 @@ public class GetMonthlyReportAction extends BaseAction {
 		
 		StringBuilder sb = new StringBuilder();
 		Double grandTotal = 0.0;
+		Integer slNo = 0;
 		for( int i=0; i < arrayDays.size(); i++ ) {
 			
 			String key = (String)arrayDays.get(i);
+			ArrayList<BillObject> bills = mapDayToBills.get(key);
 			
-			String row = new String(refReportRowTempl);
-			row = row.replace("%SlNo%", String.valueOf( i+1 ));
-			row = row.replace("%Date%", key );
-
-			Double d = (Double)mapBillToCost.get(key);
-			grandTotal += d;
-			row = row.replace("%Cost%", String.valueOf( d ) );
+			for( int j=0; j < bills.size(); j++ ) {
+				BillObject bo = bills.get(j);
 			
-			sb.append( row );
-			sb.append( "\n" );
+				String row = new String(refReportRowTempl);
+				row = row.replace("%SlNo%", String.valueOf( ++slNo ));
+				row = row.replace("%Date%", key );
+				row = row.replace("%BillNumber%", bo.billNumber);
+				
+				StringBuilder sbDetails = new StringBuilder();
+				for( int bds=0; bds < bo.fk_arrayBillDetails.size(); bds++ ) {
+					sbDetails.append( bo.fk_arrayBillDetails.get(bds).getEntityName() );
+					sbDetails.append(",");
+				}
+				row = row.replace("%BillDetails%", sbDetails.toString());
+				row = row.replace("%Cost%", String.valueOf(bo.getCost()));
+	
+				grandTotal += bo.getCost();
+				
+				sb.append( row );
+				sb.append( "\n" );
+			}
 		}
 		
 		refReportTempl = refReportTempl.replace( "!@#$ReportDetails$#@!", sb.toString() );

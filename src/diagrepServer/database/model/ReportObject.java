@@ -155,7 +155,7 @@ public class ReportObject extends ModelObject implements IEntityObject {
 		
 		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.REPORT_DATE_FORMAT ) ;
 		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
-		reportString	= reportString.replace("!@#$ReportDate$#@!", formatter.format( new Date(bo.reportDate) ) );
+		reportString	= reportString.replace("!@#$ReportDate$#@!", formatter.format( new Date() ) );
 		
 		reportString	= reportString.replace("!@#$RegDate$#@!", formatter.format( new Date(co.dateOfCreation) ) );
 		

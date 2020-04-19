@@ -1,5 +1,7 @@
 package diagrepServer.client;
 
+import diagrepServer.database.actions.BaseAction;
+import diagrepServer.database.actions.analytics.GetDaywiseMonthlyReportAction;
 import diagrepServer.database.actions.analytics.GetMonthlyReportAction;
 import diagrepServer.servlets.BaseServlet;
 import java.io.IOException;
@@ -32,6 +34,7 @@ public class GetMonthlyReport extends BaseServlet {
 		// Input : reference date
 		String referenceMonth 	= request.getParameter("month");
 		String referenceYear 	= request.getParameter("year");
+		String shouldGetBills	= request.getParameter("shouldIncludeBills");
 		
 		response.setStatus( 200 );
 		if( referenceMonth == null && referenceYear == null ) {
@@ -40,8 +43,16 @@ public class GetMonthlyReport extends BaseServlet {
 			response.getWriter().println(
 				"{\"status\":\"failure\", \"info\":\"reference month or yearnot specified\"}");
 		} else {
-			String respHtml = (String)
-				new GetMonthlyReportAction( Long.parseLong(referenceMonth), Long.parseLong(referenceYear)).doAction();
+			BaseAction action = Boolean.parseBoolean(shouldGetBills) ?
+				new GetDaywiseMonthlyReportAction(
+						Long.parseLong(referenceMonth), 
+						Long.parseLong(referenceYear)) :
+				new GetMonthlyReportAction( 
+						Long.parseLong(referenceMonth), 
+						Long.parseLong(referenceYear));
+				
+							
+			String respHtml = (String)action.doAction();
 			
 			response.setContentType( "text/html" );
 			response.getWriter().println( respHtml );

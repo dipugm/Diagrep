@@ -36,7 +36,8 @@ function showAnalyticsDialog() {
 	
 	// Table for Monthly
 	szBody += "<table class='table-dialog-contents' id='table-monthly-analytics' style='display:none;'>";
-	szBody += "<tr><td style='padding-bottom:10px;'>Please select the month and year to generate a day-wise report for that month.</td></tr>";
+	szBody += "<tr><td style='padding-bottom:10px;' colspan='2'>Please select the month and year to generate a day-wise report for that month.</td></tr>";
+	szBody += "<tr><td colspan='2'><input type='checkbox' id='monthly-filter-include-bills'>&nbsp;&nbsp;Include Bill details</td></tr>";
 	szBody += "<tr'>";
 	szBody += "<td class='dialog_label'>Month: <select style='border:1px solid lightgray; width:50px; height: 24px;' id='monthly-filter-month-option'>";
 	var months = ['Jan', 'Feb','Mar','Apr','May','Jun','Aug', 'Sep','Oct', 'Nov', 'Dec' ];
@@ -165,9 +166,12 @@ function onGenerateMonthlyReport() {
 	var month = refMonth.selectedIndex;
 	var refYear = document.getElementById('monthly-filter-year-option');
 	var year = refYear.options[ refYear.selectedIndex].text;
+	var shouldIncludeBills = document.getElementById('monthly-filter-include-bills').checked;
 	
 	var query = "month=" + month.toString();
 	query += "&year=" + year;
+	query += "&shouldIncludeBills=" + shouldIncludeBills;
+	
 	showStatusDialog( "Please wait, this can take some time....");
 	sendAsyncAjaxRequestToServer( '/Diagrep/GetMonthlyReport', 'GET', query, "onMonthlyReportReceivedFromServer" );
 	

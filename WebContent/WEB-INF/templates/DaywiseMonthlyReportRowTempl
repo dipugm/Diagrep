@@ -1,0 +1,7 @@
+<tr>
+	<td align='center' class='td_monthly_data'>%SlNo%</td>
+	<td align='center' class='td_monthly_data'>%Date%</td>
+	<td align='center' class='td_monthly_data'>%BillNumber%</td>
+	<td align='center' class='td_monthly_data'>%BillDetails%</td>
+	<td align='center' class='td_monthly_data'>%Cost%</td>
+</tr>
