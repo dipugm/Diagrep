@@ -1,6 +1,7 @@
 package diagrepServer.Utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -139,7 +140,9 @@ public class DiagrepTemplates {
 		return instance;
 	}
 	
-	public void readAllTemplates( String templatesFolder ) {
+	public void readAllTemplates( String rootFolder ) {
+		
+		String templatesFolder = rootFolder + File.separator + "WEB-INF" + File.separator + "templates";
 		
 		String[] fileNames = {"BillTempl", "BillRowTempl", "ReportTempl", "ReportTestRowTempl", "ReportTestDescriptionRowTempl", 
 				"ReportCategoryHeaderRowTempl", "ReportCollectionHeaderRowTempl", "ReportPackageHeaderRowTempl", "ReportRecommendationRowTempl",
@@ -148,7 +151,7 @@ public class DiagrepTemplates {
 		
 		for( int i=0; i < fileNames.length; i++ ) {
 			try{
-				FileReader fr = new FileReader( templatesFolder + "/" + fileNames[i] );
+				FileReader fr = new FileReader( templatesFolder + File.separator + fileNames[i] );
 				BufferedReader reader = new BufferedReader( fr );
 				
 				StringBuffer buffer = new StringBuffer();

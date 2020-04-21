@@ -31,6 +31,11 @@ public class DiagrepConfig {
 			return;
 		}
 		
+		appName = getAppNameFromPath(rootFolder);
+		System.out.println("AppName : " + appName);
+		
+		rootFolder = rootFolder + File.separator + "WEB-INF" + File.separator;
+		
 		properties 	= new Properties();
 		
 		loadGeneralConfig(rootFolder);
@@ -39,6 +44,11 @@ public class DiagrepConfig {
 		System.out.println(properties.toString());
 
 	}
+	
+	private String getAppNameFromPath(String path) {
+    	String[] arr = path.split(File.separator);
+    	return arr[arr.length - 1];
+    }
 	
 	private void loadGeneralConfig( String rootFolder ) {
 		try {
@@ -57,7 +67,7 @@ public class DiagrepConfig {
 		if( !tmpdir.endsWith(File.separator) ) {
 			tmpdir += File.separator;
 		}
-		String tmpPropFile = tmpdir + "local.properties";
+		String tmpPropFile = tmpdir + String.format("local_%s.properties", this.appName.toLowerCase());
 		
 		System.out.println("Temp directory : " + tmpdir);
 		System.out.println("Local properties file : " + tmpPropFile);
@@ -111,11 +121,14 @@ public class DiagrepConfig {
 	}
 	
 	private Properties properties;
+	private String appName;
 	
 	private DiagrepConfig() {}
 	
 	public String get( String key ) {
 		return this.properties.getProperty( key ); 
 	}
+	
+	public String getAppName() { return this.appName; }
 	
 }

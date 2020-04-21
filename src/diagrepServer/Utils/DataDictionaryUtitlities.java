@@ -21,11 +21,15 @@ public class DataDictionaryUtitlities {
 	}
 	
 	public static String getNextBillNumber( String reference ) {
-		String billNum = reference;
-		if( billNum != null ) {
-			return getNextStringInSequenceWithStringManipulation( billNum );
+		if( reference != null ) {
+			return getNextStringInSequenceWithStringManipulation( reference );
 		} else {
-			return getDataFromDb( "Last_Bill_Number" );
+			// Moving to App specific entry for last bill number.
+			String billNum = getDataFromDb( "Last_Bill_Number_" + DiagrepConfig.getConfig().getAppName());
+			if( billNum == null ) {
+				billNum = getDataFromDb( "Last_Bill_Number" );
+			}
+			return billNum;
 		}
 	}
 	
@@ -42,11 +46,11 @@ public class DataDictionaryUtitlities {
 			custId = getNextStringInSequenceWithStringManipulation( custId );
 		}
 		
-		return custId;
+		return custId != null ? custId : "";
 	}
 	
 	public static void storeNextBillNumber( String billNumber ) {
-		storeDataInDb( "Last_Bill_Number", billNumber );
+		storeDataInDb( "Last_Bill_Number_" + DiagrepConfig.getConfig().getAppName(), billNumber );
 	}
 	
 	public static void storeNextCustomerId( String customerIdSuffixPart ) {
@@ -121,7 +125,7 @@ public class DataDictionaryUtitlities {
 			return getNextStringInSequenceWithStringManipulation( ddOut.paramValue );
 		}
 		
-		return "";
+		return null;
 	}
 	
 	private static void storeDataInDb( String key, String value ) {

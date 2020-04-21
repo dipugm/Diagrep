@@ -28,6 +28,21 @@ public class DatabaseUtility {
 //		System.out.println( "File for bill " + billNumber + " is " + fileName );
 //	}
 	
+	/*
+	 * This method gives a chance to perform any upgrades between versions that might be
+	 * needed. This method should be cleared in case you don't want any changes to be done
+	 * between versions.
+	 */
+	public static void performAnyUpgrades() {
+		DatabaseConnection dc	= DatabaseConnectionPool.getPool().getMasterDbConnection();
+		
+		DatabaseCallParams params = new DbFileMapping().prepareForSave(true);
+		params.addCondition( new ConditionEquals("appName", null));
+		params.addParam("appName", DiagrepConfig.getConfig().getAppName());
+		
+		dc.execute(params);
+	}
+	
 	public static ArrayList<String> getDbFileNamesForType( int type ) {
 		
 		// Get the master Db connection.

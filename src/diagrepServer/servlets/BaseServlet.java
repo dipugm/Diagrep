@@ -26,7 +26,7 @@ public class BaseServlet extends HttpServlet {
     // Should be called by subclasses in doGet and doPost methods.
     protected synchronized void doCommonStuff() {
     	if( DatabaseConnectionPool.getPool().getMasterDbConnection() == null ) {
-	    	String webInfoPath = getServletContext().getRealPath(getServletInfo()) + "/WEB-INF/";
+	    	String webInfoPath = getServletContext().getRealPath(getServletInfo());
 	    	
 	    	DiagrepConfig.getConfig().loadConfig( webInfoPath );
 	    	
@@ -34,8 +34,7 @@ public class BaseServlet extends HttpServlet {
 	        	DiagrepConfig.getConfig().get( DiagrepConfig.DB_FOLDER_PATH ) );
 	        
 	        // Read all templates files to memory.
-	        String templatePath = webInfoPath + "/templates";
-	        DiagrepTemplates.getInstance().readAllTemplates( templatePath );
+	        DiagrepTemplates.getInstance().readAllTemplates( webInfoPath );
     	}
     }
 
