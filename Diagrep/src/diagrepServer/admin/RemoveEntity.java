@@ -73,6 +73,8 @@ public class RemoveEntity extends BaseServlet {
 		case Package:
 			action = new DeletePackageObject( id );
 			break;
+		default:
+			break;
 		}
 		
 		boolean result = (Boolean)action.doAction();

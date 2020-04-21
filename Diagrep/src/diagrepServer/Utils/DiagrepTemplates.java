@@ -159,6 +159,7 @@ public class DiagrepTemplates {
 				while( (line = reader.readLine()) != null ) {
 					buffer.append( line );
 				}
+				reader.close();
 				
 				this.arrayTemplates.set( i, buffer.toString() );
 				

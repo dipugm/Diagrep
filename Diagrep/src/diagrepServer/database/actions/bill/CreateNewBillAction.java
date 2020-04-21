@@ -167,6 +167,9 @@ public class CreateNewBillAction extends BaseAction {
 				arr.addAll( po.getContainedTests() );
 			}
 			break;
+
+		default:
+			break;
 		}
 		
 		return arr;

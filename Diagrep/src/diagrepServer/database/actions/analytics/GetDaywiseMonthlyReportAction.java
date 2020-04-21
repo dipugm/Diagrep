@@ -28,7 +28,6 @@ public class GetDaywiseMonthlyReportAction extends BaseAction {
 		this.referenceYear 	= year;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Object doAction() {
 		ArrayList<String> dbFilenames = DatabaseUtility.getDbFileNamesForType( CommonDefs.BILLREPORT_TYPE );
 		
@@ -48,7 +47,6 @@ public class GetDaywiseMonthlyReportAction extends BaseAction {
 		
         ArrayList<String> arrayDays = new ArrayList<String>();
         HashMap<String, ArrayList<BillObject>> mapDayToBills = new HashMap<String, ArrayList<BillObject>>();
-        String currentBill;
                 
 		for( int iFile=0; iFile < dbFilenames.size(); iFile++ ) {
 			DatabaseConnection dc = DatabaseConnectionPool.getPool().getConnectionForDbFile( dbFilenames.get(iFile));

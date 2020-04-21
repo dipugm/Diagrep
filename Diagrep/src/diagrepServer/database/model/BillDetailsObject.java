@@ -68,6 +68,9 @@ public class BillDetailsObject extends ModelObject implements IEntityObject  {
 					}
 		
 				} break;
+				
+				default:
+					break;
 			}
 		}
 		return c;

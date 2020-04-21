@@ -11,13 +11,16 @@ public class CustomerObject extends ModelObject {
 	
 	public enum EnumSex {
 		Female,
-		Male;
+		Male,
+		Others;
 		
 		public static EnumSex fromValue( int val ) {
 			if( val == 0 ) {
 				return Female;
+			} else if( val == 1) {
+				return Male;
 			}
-			return Male;
+			return Others;
 		}
 	};
 
@@ -37,10 +40,14 @@ public class CustomerObject extends ModelObject {
 	public Integer fk_currentAge;
 	
 	public String getGenderAsString( EnumSex s ) {
-		String str = "M";
+		String str = "NA";
 		switch( s ) {
 		case Female:
 			str = "F";
+		case Male:
+			str = "M";
+		default:
+			break;
 		}
 		
 		return str;

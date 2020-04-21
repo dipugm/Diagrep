@@ -41,6 +41,8 @@ public abstract class BaseAction {
 			case Collection:
 				subEntityGetAction 	= new GetSingleCollectionAction( eroFetched.subEntityId );
 				break;
+			default:
+				break;
 			}
 			
 			ModelObject mo = (ModelObject)subEntityGetAction.doAction();

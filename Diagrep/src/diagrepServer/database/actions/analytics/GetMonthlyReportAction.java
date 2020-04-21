@@ -29,7 +29,6 @@ public class GetMonthlyReportAction extends BaseAction {
 		this.referenceYear 	= year;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Object doAction() {
 		ArrayList<String> dbFilenames = DatabaseUtility.getDbFileNamesForType( CommonDefs.BILLREPORT_TYPE );
 		

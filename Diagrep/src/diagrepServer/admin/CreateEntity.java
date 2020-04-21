@@ -186,6 +186,9 @@ public class CreateEntity extends BaseServlet {
 			}
 		} break;
 		
+
+		default:
+			break;
 		}
 	}
 	

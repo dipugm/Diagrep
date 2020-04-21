@@ -192,6 +192,9 @@ public class ModifyEntity extends BaseServlet {
 			}
 		} break;
 		
+		default:
+			break;
+		
 		}
 	}
 

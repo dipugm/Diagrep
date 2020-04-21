@@ -3,7 +3,6 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.sql.Connection;
@@ -620,19 +619,24 @@ public class DatabaseImporter {
 		FileChannel src	= null;
 		FileChannel dest = null;
 		try {
-			src = new FileInputStream(sourcePath).getChannel();
-			dest = new FileOutputStream(destPath).getChannel();
+			FileInputStream srcFI = new FileInputStream(sourcePath); 
+			src = srcFI.getChannel();
+			FileInputStream destFI = new FileInputStream(destPath);
+			dest = destFI.getChannel();
+			
+			dest.transferFrom(src, 0, src.size());
+			
+			srcFI.close();
+			destFI.close();
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		try {
-			dest.transferFrom(src, 0, src.size());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }
