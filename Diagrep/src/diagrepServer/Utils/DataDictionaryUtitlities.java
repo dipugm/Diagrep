@@ -25,9 +25,9 @@ public class DataDictionaryUtitlities {
 			return getNextStringInSequenceWithStringManipulation( reference );
 		} else {
 			// Moving to App specific entry for last bill number.
-			String billNum = getDataFromDb( "Last_Bill_Number_" + DiagrepConfig.getConfig().getAppName());
+			String billNum = getSequentialDataFromDb( "Last_Bill_Number_" + DiagrepConfig.getConfig().getAppName());
 			if( billNum == null ) {
-				billNum = getDataFromDb( "Last_Bill_Number" );
+				billNum = getSequentialDataFromDb( "Last_Bill_Number" );
 			}
 			return billNum;
 		}
@@ -36,7 +36,7 @@ public class DataDictionaryUtitlities {
 	public static String getNextCustomerNumber( String reference ) {
 		String custId = reference;
 		if( reference == null ) {
-			custId = getDataFromDb( "Last_Customer_ID" );
+			custId = getSequentialDataFromDb( "Last_Customer_ID" );
 		} else {
 			String[] comp = custId.split("-");
 			
@@ -111,7 +111,7 @@ public class DataDictionaryUtitlities {
 		return alpPart + numPartAsString;
 	}
 	
-	private static String getDataFromDb( String key ) {
+	private static String getSequentialDataFromDb( String key ) {
 		// Get the master Db connection.
 		DatabaseConnection dc	= DatabaseConnectionPool.getPool().getMasterDbConnection();
 		DataDictionary dd = new DataDictionary();
@@ -135,10 +135,12 @@ public class DataDictionaryUtitlities {
 		DatabaseCallParams params = dd.prepareForFetch();
 		
 		ArrayList<ModelObject> arr = dc.fetch(params);
-		dd = (DataDictionary)arr.get(0);
-		dd.paramValue	= value;
 		
-		params = dd.prepareForSave( false );
+		if( arr.size() > 0 ) {
+			dd = (DataDictionary)arr.get(0);
+		}
+		dd.paramValue	= value;
+		params = dd.prepareForSave( arr.size() > 0 );
 
 		dc.execute( params );
 		

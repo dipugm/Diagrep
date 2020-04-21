@@ -27,21 +27,6 @@ public class DatabaseUtility {
 //		System.out.println( "File for bill " + billNumber + " is " + fileName );
 //	}
 	
-	/*
-	 * This method gives a chance to perform any upgrades between versions that might be
-	 * needed. This method should be cleared in case you don't want any changes to be done
-	 * between versions.
-	 */
-	public static void performAnyUpgrades() {
-		DatabaseConnection dc	= DatabaseConnectionPool.getPool().getMasterDbConnection();
-		
-		DatabaseCallParams params = new DbFileMapping().prepareForSave(true);
-		params.addCondition( new ConditionEquals("appName", null));
-		params.addParam("appName", DiagrepConfig.getConfig().getAppName());
-		
-		dc.execute(params);
-	}
-	
 	public static ArrayList<String> getDbFileNamesForType( int type ) {
 		
 		// Get the master Db connection.
@@ -51,6 +36,9 @@ public class DatabaseUtility {
 		DatabaseCallParams params = dfm.prepareForFetch();
 		
 		params.addCondition( new ConditionEquals( "type", type ) );
+		if( type == CommonDefs.BILLREPORT_TYPE ) {
+			params.addCondition( new ConditionEquals( "appName", DiagrepConfig.getConfig().getAppName()));
+		}
 		
 		ArrayList<?> objects = dc.fetch(params);
 		ArrayList<String> filenames = new ArrayList<String>();
@@ -89,6 +77,9 @@ public class DatabaseUtility {
 		params.addCondition( new ConditionLessThanOrEqual( "startNumber", idSplit[1]) );
 		params.addCondition( new ConditionGreaterThanOrEqual( "endNumber", idSplit[1]) );
 		params.addCondition( new ConditionEquals( "type", type ) );
+		if( type == CommonDefs.BILLREPORT_TYPE ) {
+			params.addCondition( new ConditionEquals( "appName", DiagrepConfig.getConfig().getAppName()));
+		}
 		
 		ArrayList<?> objects = dc.fetch(params);
 		if( objects.size() > 0 ) {
@@ -113,7 +104,7 @@ public class DatabaseUtility {
 			fileDoesNotExist = true;
 			
 			if( type == 0 ) {
-				fileName = "dd_";
+				fileName = "dd_" + DiagrepConfig.getConfig().getAppName() + "_";
 			} else {
 				fileName = "custdata_";
 			}
@@ -126,6 +117,9 @@ public class DatabaseUtility {
 			dfm.startNumber = Integer.parseInt( billSplit[1] );
 			dfm.endNumber	= dfm.startNumber + 999;	// One Db for every 1000 bills 
 			dfm.type		= type;
+			if( type == CommonDefs.BILLREPORT_TYPE ) {
+				dfm.appName = DiagrepConfig.getConfig().getAppName();
+			}
 			
 			fileName += dfm.textPart + "_" + dfm.startNumber + "_" + dfm.endNumber + ".db";
 			
