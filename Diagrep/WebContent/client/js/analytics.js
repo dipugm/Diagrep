@@ -111,7 +111,7 @@ function onGenerateReferenceReport() {
 	query += "&endDate=" + ed.toString();
 	
 	showStatusDialog( "Please wait, this can take some time....");
-	sendAsyncAjaxRequestToServer( '/Diagrep/GetReferenceReport', 'GET', query, "onReferenceReportReceivedFromServer" );
+	sendAsyncAjaxRequestToServer( '/GetReferenceReport', 'GET', query, "onReferenceReportReceivedFromServer" );
 }
 
 function onReferenceReportReceivedFromServer( resp ) {
@@ -142,7 +142,7 @@ function onGenerateDailyReport() {
 	var query = "referenceDate=" + rd.toString();
 	
 	showStatusDialog( "Please wait, this can take some time....");
-	sendAsyncAjaxRequestToServer( '/Diagrep/GetDailyReport', 'GET', query, "onDailyReportReceivedFromServer" );
+	sendAsyncAjaxRequestToServer( '/GetDailyReport', 'GET', query, "onDailyReportReceivedFromServer" );
 	
 }
 
@@ -173,7 +173,7 @@ function onGenerateMonthlyReport() {
 	query += "&shouldIncludeBills=" + shouldIncludeBills;
 	
 	showStatusDialog( "Please wait, this can take some time....");
-	sendAsyncAjaxRequestToServer( '/Diagrep/GetMonthlyReport', 'GET', query, "onMonthlyReportReceivedFromServer" );
+	sendAsyncAjaxRequestToServer( '/GetMonthlyReport', 'GET', query, "onMonthlyReportReceivedFromServer" );
 	
 }
 

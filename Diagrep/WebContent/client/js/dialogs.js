@@ -188,7 +188,7 @@ function toggleSearchDisplay( tabToShow ) {
 function getCustomerReports( customerId ) {
 	var query = "customerId=" + customerId;
 	
-	sendAsyncAjaxRequestToServer( "/Diagrep/GetReportsForCustomer", "GET", query, "onGetReportsResponseFromServer" );
+	sendAsyncAjaxRequestToServer( "/GetReportsForCustomer", "GET", query, "onGetReportsResponseFromServer" );
 }
 
 function onGetReportsResponseFromServer( resp ) {
@@ -414,7 +414,7 @@ function displayLoadDataDialog() {
 		return;
 	}
 	
-	sendAsyncAjaxRequestToServer( '/Diagrep/LoadRecommendationTemplates', 'GET', '', "onRecommendationTemplatesAvailable" );
+	sendAsyncAjaxRequestToServer( '/LoadRecommendationTemplates', 'GET', '', "onRecommendationTemplatesAvailable" );
 }
 
 function onRecommendationTemplatesAvailable( resp ) {
@@ -503,7 +503,7 @@ function onSaveAsTemplate() {
 	data 	 = encodeWithCustomUrlEncoding( data );
 	
 	var query = "name=" + name + "&content=" + data;
-	sendAsyncAjaxRequestToServer( '/Diagrep/StoreRecommendationTemplate', 'POST', query, "onSaveTemplateResponse" );
+	sendAsyncAjaxRequestToServer( '/StoreRecommendationTemplate', 'POST', query, "onSaveTemplateResponse" );
 	
 }
 
@@ -527,7 +527,7 @@ function onDeleteRecommendationConfirm( option ) {
 	
 	if( option == 'Yes' ) {
 		var query = "name=" + gRecommendationToDelete;
-		sendAsyncAjaxRequestToServer( '/Diagrep/RemoveRecommendationTemplate', 'POST', query, "onDeleteRecommendationResponse" );
+		sendAsyncAjaxRequestToServer( '/RemoveRecommendationTemplate', 'POST', query, "onDeleteRecommendationResponse" );
 	}
 	
 }
@@ -589,7 +589,7 @@ function onCreateCustomer() {
 	query += "&age=" + szAge;
 	query += "&sex=" + szSex;
 	
-	sendAsyncAjaxRequestToServer( '/Diagrep/CreateCustomer', 'POST', query, "onCreateCustomerResponseFromServer" );
+	sendAsyncAjaxRequestToServer( '/CreateCustomer', 'POST', query, "onCreateCustomerResponseFromServer" );
 }
 
 function onCreateCustomerResponseFromServer( resp ) {

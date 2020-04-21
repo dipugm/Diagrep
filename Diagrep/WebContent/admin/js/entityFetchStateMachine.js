@@ -17,14 +17,14 @@ function startDataFetchStateMachine() {
 function changeState() {
     switch( gCurrentState ) {
         case 0:
-            sendAsyncAjaxRequestToServer( '/Diagrep/GetTests',
+            sendAsyncAjaxRequestToServer( '/GetTests',
                                     'GET',
                                     '',
                                     "handleFetchedData" );
             break;
             
         case 1:
-            sendAsyncAjaxRequestToServer( '/Diagrep/GetCategories',
+            sendAsyncAjaxRequestToServer( '/GetCategories',
                                          'GET',
                                          '',
                                          "handleFetchedData" );
@@ -32,7 +32,7 @@ function changeState() {
             break;
             
         case 2:
-            sendAsyncAjaxRequestToServer( '/Diagrep/GetCollections',
+            sendAsyncAjaxRequestToServer( '/GetCollections',
                                          'GET',
                                          '',
                                          "handleFetchedData" );
@@ -40,7 +40,7 @@ function changeState() {
             
         case 3:
             sendAsyncAjaxRequestToServer(
-                                         '/Diagrep/GetPackages',
+                                         '/GetPackages',
                                          'GET',
                                          '',
                                          "handleFetchedData" );

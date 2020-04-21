@@ -37,7 +37,7 @@ function getReportDetailsAsHtml( billNum ) {
     
     showStatusDialog( "Please wait..." );
     
-	sendAsyncAjaxRequestToServer( '/Diagrep/GetReportDetails',
+	sendAsyncAjaxRequestToServer( '/GetReportDetails',
                                  'GET',
                                  bn,
                                  "onReportGenerationResponseFromServer");
@@ -75,7 +75,7 @@ function getBillDetailsForReportEditing() {
 
 	showStatusDialog( "Please wait..." );
 	
-	sendAsyncAjaxRequestToServer( '/Diagrep/GetReportDetails',
+	sendAsyncAjaxRequestToServer( '/GetReportDetails',
                                  'GET',
                                  bn,
                                  "onGetBillForEditingResponseFromServer");
@@ -306,7 +306,7 @@ function onUpdateReport( updateTestsAlso ) {
     }
     jsonBody += "}";
 
-	sendAsyncAjaxRequestToServer( '/Diagrep/UpdateReportDetails', 'POST', jsonBody, "onUpdateReportResponseFromServer" );
+	sendAsyncAjaxRequestToServer( '/UpdateReportDetails', 'POST', jsonBody, "onUpdateReportResponseFromServer" );
     
 }
 

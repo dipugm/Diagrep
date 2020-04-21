@@ -184,7 +184,7 @@ function createCategoryOnServer() {
 		
         displayBusy( "Create new Category", "Please wait..." );
 
-		sendAsyncAjaxRequestToServer("/Diagrep/CreateEntity",
+		sendAsyncAjaxRequestToServer("/CreateEntity",
                                      "POST",
                                      queryParams,
                                      "onCreateCategoryResponseFromServer");
@@ -225,7 +225,7 @@ function modifyCategoryOnServer() {
 
 		displayBusy( "Modify Category", "Please wait..." );
 		
-		sendAsyncAjaxRequestToServer("/Diagrep/ModifyEntity",
+		sendAsyncAjaxRequestToServer("/ModifyEntity",
                                      "POST",
                                      queryParams,
                                      "onModifyCategoryResposeFromServer");
@@ -264,7 +264,7 @@ function onDeleteCategoryConfirmation( option ) {
         var queryParams = "type=" + kCategoryType;
         queryParams += "&id=" + gCategoryEdited.id;
 		
-		sendAsyncAjaxRequestToServer("/Diagrep/RemoveEntity",
+		sendAsyncAjaxRequestToServer("/RemoveEntity",
                                      "POST",
                                      queryParams,
                                      "onDeleteCategoryResponseFromServer");

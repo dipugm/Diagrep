@@ -6,7 +6,7 @@ function lookupCustomerByName( ) {
 		showError("Enter part or the complete name of the customer to search.", "Invalid Input");
 	} else {
 		var query = 'customerName=' + szSearchString + '&shouldSearchOldDb=true';
-		sendAsyncAjaxRequestToServer( '/Diagrep/SearchCustomers', 'GET', query, "onSearchCustomerResponseForAnchoring");
+		sendAsyncAjaxRequestToServer( '/SearchCustomers', 'GET', query, "onSearchCustomerResponseForAnchoring");
 		
 	}
 }
@@ -28,7 +28,7 @@ function searchCustomers( szSearchString, isId, shouldSearchOldDb ) {
 		query += "customerName=";
 	}
 	query += szSearchString + '&shouldSearchOldDb=' + shouldSearchOldDb;
-	sendAsyncAjaxRequestToServer( '/Diagrep/SearchCustomers', 'GET', query, "onSearchCustomersResponseReceived" );
+	sendAsyncAjaxRequestToServer( '/SearchCustomers', 'GET', query, "onSearchCustomersResponseReceived" );
 }
 
 function onSearchCustomersResponseReceived( resp ) {

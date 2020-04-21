@@ -188,7 +188,7 @@ function createTestOnServer() {
 	
 	displayBusy( "Create a new test", "Please wait..." );
 	
-    sendAsyncAjaxRequestToServer('/Diagrep/CreateEntity',
+    sendAsyncAjaxRequestToServer('/CreateEntity',
                                  'POST',
                                  queryparams,
                                  "onCreateTestResponseFromServer" );
@@ -230,7 +230,7 @@ function modifyTestOnServer() {
 	queryparams += "&cost=" + gTestEdited.cost;
 	
 	displayBusy( "Modify an existing test", "Please wait..." );
-	sendAsyncAjaxRequestToServer( '/Diagrep/ModifyEntity',
+	sendAsyncAjaxRequestToServer( '/ModifyEntity',
                                  'POST',
                                  queryparams,
                                  "onModifyTestResponseFromServer" );
@@ -265,7 +265,7 @@ function onDeleteTestConfirmation( option ) {
     if( option == "Yes" ) {
         displayBusy( "Deleting Test", "Please wait..." );
 
-        sendAsyncAjaxRequestToServer('/Diagrep/RemoveEntity',
+        sendAsyncAjaxRequestToServer('/RemoveEntity',
                                      'POST',
                                      'type=0&id=' + gTestEdited.id,
                                      "onDeleteTestResponseFromServer" );

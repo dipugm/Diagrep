@@ -263,7 +263,7 @@ function createPackageOnServer() {
 		
 		displayBusy( "Create Package", "Please wait..." );
 		
-		sendAsyncAjaxRequestToServer("/Diagrep/CreateEntity",
+		sendAsyncAjaxRequestToServer("/CreateEntity",
                                      "POST",
                                      queryParams,
                                      "onCreatePackageResponseFromServer");
@@ -301,7 +301,7 @@ function modifyPackageOnServer() {
 		
  		displayBusy( "Modify Package", "Please wait..." );
  				
-		sendAsyncAjaxRequestToServer("/Diagrep/ModifyEntity",
+		sendAsyncAjaxRequestToServer("/ModifyEntity",
                                      "POST",
                                      queryParams,
                                      "onModifyPackageResponseFromServer");
@@ -338,7 +338,7 @@ function onDeletePackageUserConfirmation( option ) {
         var queryParams = "id=" + gPackageEdited.id;
         queryParams += "&type=" + kPackageType;
 		
-		sendAsyncAjaxRequestToServer("/Diagrep/RemoveEntity",
+		sendAsyncAjaxRequestToServer("/RemoveEntity",
                                    "POST",
                                    queryParams,
                                    "onDeletePackageResponseFromServer");

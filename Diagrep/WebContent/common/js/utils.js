@@ -31,6 +31,14 @@
 //    return null;
 //}
 
+function getAppName() {
+	console.log(window.document.location.pathname);
+	var appName = window.document.location.pathname.slice(1, -1).split("/")[0];
+	console.log("App name : " + appName);
+	
+	return window.document.location.pathname.slice(1, -1).split("/")[0];
+}
+
 function sendAsyncAjaxRequestToServer( url, reqType, body, callbackFun ) {
     
 	var httpReq = 0;
@@ -59,7 +67,9 @@ function sendAsyncAjaxRequestToServer( url, reqType, body, callbackFun ) {
             window[ httpReq.myCallbackFunctionName ]( resp );
         }
     };
-    
+
+    // Append application name to the URL.
+    url = "/" + getAppName() + url;
     httpReq.open(reqType, url, true);
 	if( reqType == "POST" ) {
 		httpReq.setRequestHeader("Content-type","application/x-www-form-urlencoded");

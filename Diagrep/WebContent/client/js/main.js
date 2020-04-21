@@ -51,11 +51,11 @@ function initializeDocument() {
 	dictEntities = new Array();
 	
 	// get all entities from the server.
-	sendAsyncAjaxRequestToServer( "/Diagrep/GetTests", "GET", "", "fillTestsTable" );
-	sendAsyncAjaxRequestToServer( "/Diagrep/GetCategories", "GET", "", "fillCategoriesTable" );
-	sendAsyncAjaxRequestToServer( "/Diagrep/GetCollections", "GET", "", "fillCollectionsTable" );
-	sendAsyncAjaxRequestToServer( "/Diagrep/GetPackages", "GET", "", "fillPackagesTable" );
-	sendAsyncAjaxRequestToServer( "/Diagrep/GetReferences", "GET", "", "referencesFetched" );
+	sendAsyncAjaxRequestToServer( "/GetTests", "GET", "", "fillTestsTable" );
+	sendAsyncAjaxRequestToServer( "/GetCategories", "GET", "", "fillCategoriesTable" );
+	sendAsyncAjaxRequestToServer( "/GetCollections", "GET", "", "fillCollectionsTable" );
+	sendAsyncAjaxRequestToServer( "/GetPackages", "GET", "", "fillPackagesTable" );
+	sendAsyncAjaxRequestToServer( "/GetReferences", "GET", "", "referencesFetched" );
 	
 	var billNoForReport = document.getElementById( 'report_bill_number' );
 	
@@ -428,7 +428,7 @@ function generateBill() {
 	
     showStatusDialog( "Please wait..." );
     
-	sendAsyncAjaxRequestToServer('/Diagrep/GenerateBill',
+	sendAsyncAjaxRequestToServer('/GenerateBill',
                                  'POST',
                                  szBill,
                                  "onBillCreateResponseFromServer");
@@ -453,7 +453,10 @@ function onBillCreateResponseFromServer( resp ) {
 	var jresp = JSON.parse( resp );
 	if( jresp.status == "success" ) {
 		var billNum = jresp.billNumber;
-		url = '/Diagrep/SearchBill?billNumber=' + billNum;
+
+		url = window.document.location.origin;
+		url += '/' + getAppName(); 
+		url += '/SearchBill?billNumber=' + billNum;
 		window.open( url, '_newtab');
 	} else {
 		showError( jresp.info, "Create Failed" );
@@ -476,7 +479,7 @@ function getBillDetailsAsHtml() {
     
     showStatusDialog( "Please wait..." );
 	
-	sendAsyncAjaxRequestToServer( '/Diagrep/SearchBill',
+	sendAsyncAjaxRequestToServer( '/SearchBill',
                                  'GET',
                                  query,
                                  "onGetBillResponseFromServer");

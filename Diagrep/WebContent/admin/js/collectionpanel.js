@@ -197,7 +197,7 @@ function createCollectionOnServer() {
 
 		displayBusy( "Create Collection", "Please wait..." );
         
-		resp = sendAsyncAjaxRequestToServer("/Diagrep/CreateEntity",
+		resp = sendAsyncAjaxRequestToServer("/CreateEntity",
                                             "POST",
                                             queryParams,
                                             "onCreateCollectionResponseFromServer");
@@ -235,7 +235,7 @@ function modifyCollectionOnServer() {
 		queryParams += "&subEntitiesWithOrder=" + getSubEntitiesOrderAsCommanSeparatedString( gCollectionEdited );
 		
 		displayBusy( "Modify Collection", "Please wait..." );
-		sendAsyncAjaxRequestToServer("/Diagrep/ModifyEntity",
+		sendAsyncAjaxRequestToServer("/ModifyEntity",
                                      "POST",
                                      queryParams,
                                      "onModifyCollectionResposeFromServer");
@@ -272,7 +272,7 @@ function onDeleteCollectionUserConfirmation( option ) {
         var queryParams = "type=" + kCollectionType;
         queryParams += "&id=" + gCollectionEdited.id;
 		
-		sendAsyncAjaxRequestToServer("/Diagrep/RemoveEntity",
+		sendAsyncAjaxRequestToServer("/RemoveEntity",
                                      "POST",
                                      queryParams,
                                      "onDeleteCollectionResponseFromServer");
