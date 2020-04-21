@@ -59,7 +59,7 @@ public class LookupCustomers extends BaseAction {
 			limit = Integer.parseInt( sz );
 		}
 		if( arrCustomers.size() > limit ) {
-			arrCustomers = (ArrayList<CustomerObject>)arrCustomers.subList(0,  limit);
+			arrCustomers = new ArrayList<CustomerObject>(arrCustomers.subList(0,  limit));
 		}
 		// Return only 100 search hits.
 		searchedCustomers.put( "customers", arrCustomers );
