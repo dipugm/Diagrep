@@ -32,10 +32,6 @@
 //}
 
 function getAppName() {
-	console.log(window.document.location.pathname);
-	var appName = window.document.location.pathname.slice(1, -1).split("/")[0];
-	console.log("App name : " + appName);
-	
 	return window.document.location.pathname.slice(1, -1).split("/")[0];
 }
 

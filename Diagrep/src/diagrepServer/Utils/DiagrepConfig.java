@@ -18,9 +18,12 @@ public class DiagrepConfig {
 	public final static String CUSTOMER_SEARCH_LIMIT 	= "customerSearchResultsLimit";
 	
 	private static DiagrepConfig instance = null;
+	private static String lock = "config-lock";
 	public static synchronized DiagrepConfig getConfig() {
-		if( instance == null ) {
-			instance 	= new DiagrepConfig();
+		synchronized(DiagrepConfig.lock) {
+			if( instance == null ) {
+				instance 	= new DiagrepConfig();
+			}
 		}
 		return instance;
 	}
@@ -30,11 +33,8 @@ public class DiagrepConfig {
 			// Configuration properties file already loaded.
 			return;
 		}
-		
-		appName = getAppNameFromPath(rootFolder);
-		System.out.println("AppName : " + appName);
-		
-		rootFolder = rootFolder + File.separator + "WEB-INF" + File.separator;
+				
+		rootFolder = rootFolder + "/WEB-INF/";
 		
 		properties 	= new Properties();
 		
@@ -44,12 +44,7 @@ public class DiagrepConfig {
 		System.out.println(properties.toString());
 
 	}
-	
-	private String getAppNameFromPath(String path) {
-    	String[] arr = path.split(File.separator);
-    	return arr[arr.length - 1];
-    }
-	
+		
 	private void loadGeneralConfig( String rootFolder ) {
 		try {
 			properties.load( new FileInputStream( rootFolder + "general.properties" ) );
@@ -75,6 +70,7 @@ public class DiagrepConfig {
 		File tmpFile = new File(tmpPropFile);
 		
 		if( ! tmpFile.exists() ) {
+			System.out.println("Copying local config file from " + rootFolder);
 			copyFile( rootFolder + "local.properties", tmpPropFile );
 		}
 		
@@ -129,6 +125,10 @@ public class DiagrepConfig {
 		return this.properties.getProperty( key ); 
 	}
 	
+	public void setAppName(String appName) { 
+		System.out.println("App name : " + appName );
+		this.appName = appName; 
+	}
 	public String getAppName() { return this.appName; }
 	
 }

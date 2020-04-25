@@ -18,13 +18,7 @@ import diagrepServer.database.model.Recommendation;
 public class DiagrepTemplates {
 
 	static DiagrepTemplates instance;
-	
-	public static void main( String[] args ) {
 		
-		DiagrepTemplates.getInstance().readAllTemplates(
-				"/Users/tavant/springsource/vfabric-tc-server-developer-2.6.0.RELEASE/spring-insight-instance/wtpwebapps/Diagrep/WEB-INF/templates");
-	}
-	
 	public enum TemplateType {
 		kBill,
 		kBillRow,
@@ -142,7 +136,7 @@ public class DiagrepTemplates {
 	
 	public void readAllTemplates( String rootFolder ) {
 		
-		String templatesFolder = rootFolder + File.separator + "WEB-INF" + File.separator + "templates";
+		String templatesFolder = rootFolder + "/WEB-INF/templates";
 		
 		String[] fileNames = {"BillTempl", "BillRowTempl", "ReportTempl", "ReportTestRowTempl", "ReportTestDescriptionRowTempl", 
 				"ReportCategoryHeaderRowTempl", "ReportCollectionHeaderRowTempl", "ReportPackageHeaderRowTempl", "ReportRecommendationRowTempl",
@@ -151,7 +145,7 @@ public class DiagrepTemplates {
 		
 		for( int i=0; i < fileNames.length; i++ ) {
 			try{
-				FileReader fr = new FileReader( templatesFolder + File.separator + fileNames[i] );
+				FileReader fr = new FileReader( templatesFolder + "/" + fileNames[i] );
 				BufferedReader reader = new BufferedReader( fr );
 				
 				StringBuffer buffer = new StringBuffer();
