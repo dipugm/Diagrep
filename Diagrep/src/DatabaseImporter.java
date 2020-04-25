@@ -3,6 +3,7 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.sql.Connection;
@@ -621,7 +622,7 @@ public class DatabaseImporter {
 		try {
 			FileInputStream srcFI = new FileInputStream(sourcePath); 
 			src = srcFI.getChannel();
-			FileInputStream destFI = new FileInputStream(destPath);
+			FileOutputStream destFI = new FileOutputStream(destPath);
 			dest = destFI.getChannel();
 			
 			dest.transferFrom(src, 0, src.size());
