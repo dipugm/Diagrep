@@ -41,10 +41,10 @@ public class ModifyMaster {
 			Iterator<String> iter = params.iterator();
 			while(iter.hasNext()) {
 				String param = iter.next();
-				String[] comp = param.split(":");
+				int ind = param.indexOf(":");
 				
-				if(comp.length == 2) {
-					this.put(comp[0], comp[1]);
+				if( ind > -1 ) {
+					this.put( param.substring(0, ind), param.substring(ind+1, param.length()) );
 				}
 			}
 			
