@@ -40,7 +40,7 @@ function showAnalyticsDialog() {
 	szBody += "<tr><td colspan='2'><input type='checkbox' id='monthly-filter-include-bills'>&nbsp;&nbsp;Include Bill details</td></tr>";
 	szBody += "<tr'>";
 	szBody += "<td class='dialog_label'>Month: <select style='border:1px solid lightgray; width:50px; height: 24px;' id='monthly-filter-month-option'>";
-	var months = ['Jan', 'Feb','Mar','Apr','May','Jun','Aug', 'Sep','Oct', 'Nov', 'Dec' ];
+	var months = ['Jan', 'Feb','Mar','Apr','May','Jun', 'Jul', 'Aug', 'Sep','Oct', 'Nov', 'Dec' ];
 	for( var m=0; m < months.length; m++ ) {
 		szBody += "<option>" + months[m] + "</option>";
 	}
@@ -49,7 +49,7 @@ function showAnalyticsDialog() {
 	szBody += "<select style='border:1px solid lightgray; width:60px; height: 24px;'  id='monthly-filter-year-option'>";
 
 	var year = new Date().getFullYear();
-	for( var m=0; m < 10; m++ ) {
+	for( var m=0; m < 20; m++ ) {
 		szBody += "<option>" + (year - m).toString() + "</option>";
 	}
 	
