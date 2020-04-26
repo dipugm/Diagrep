@@ -44,8 +44,16 @@ public class CustomerObject extends ModelObject {
 		switch( s ) {
 		case Female:
 			str = "F";
+			break;
+			
 		case Male:
 			str = "M";
+			break;
+			
+		case Others:
+			str = "NA";
+			break;
+			
 		default:
 			break;
 		}
