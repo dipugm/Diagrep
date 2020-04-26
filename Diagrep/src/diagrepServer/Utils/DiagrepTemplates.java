@@ -1,7 +1,6 @@
 package diagrepServer.Utils;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -135,34 +134,14 @@ public class DiagrepTemplates {
 	}
 	
 	public void readAllTemplates( String rootFolder ) {
-		
-		String templatesFolder = rootFolder + "/WEB-INF/templates";
-		
-		String[] fileNames = {"BillTempl", "BillRowTempl", "ReportTempl", "ReportTestRowTempl", "ReportTestDescriptionRowTempl", 
-				"ReportCategoryHeaderRowTempl", "ReportCollectionHeaderRowTempl", "ReportPackageHeaderRowTempl", "ReportRecommendationRowTempl",
-						"ReferenceReportTempl", "ReferenceReportRowTempl", "MonthlyReportTempl", "MonthlyReportRowTempl",
-						"DaywiseMonthlyReportTempl","DaywiseMonthlyReportRowTempl","DailyReportTempl", "DailyReportRowTempl"};
-		
-		for( int i=0; i < fileNames.length; i++ ) {
-			try{
-				FileReader fr = new FileReader( templatesFolder + "/" + fileNames[i] );
-				BufferedReader reader = new BufferedReader( fr );
-				
-				StringBuffer buffer = new StringBuffer();
-				String line = null;
-				while( (line = reader.readLine()) != null ) {
-					buffer.append( line );
-				}
-				reader.close();
-				
-				this.arrayTemplates.set( i, buffer.toString() );
-				
-			} catch( FileNotFoundException e) {
-				e.printStackTrace();
-			} catch( IOException e ) {
-				e.printStackTrace();
-			}
+		String templatesFolder = DiagrepConfig.getConfig().get(DiagrepConfig.TEMPLATES_FOLDER_PATH);
+		if( templatesFolder == null ) {
+			templatesFolder = rootFolder + "/WEB-INF/templates";
+			System.out.println("No path for templates specified in local config. Reading from backup " + templatesFolder);
 		}
+		
+		readTemplatesFromFolder(templatesFolder);
+		
 	}
 	
 	public String getTemplateFor( TemplateType tt ) {
@@ -211,4 +190,36 @@ public class DiagrepTemplates {
 		
 		return sb.toString();
 	}
+	
+	private void readTemplatesFromFolder(String templatesFolder) {
+		
+		System.out.println("Reading templates from : " + templatesFolder);
+		
+		String[] fileNames = {"BillTempl", "BillRowTempl", "ReportTempl", "ReportTestRowTempl", "ReportTestDescriptionRowTempl", 
+				"ReportCategoryHeaderRowTempl", "ReportCollectionHeaderRowTempl", "ReportPackageHeaderRowTempl", "ReportRecommendationRowTempl",
+						"ReferenceReportTempl", "ReferenceReportRowTempl", "MonthlyReportTempl", "MonthlyReportRowTempl",
+						"DaywiseMonthlyReportTempl","DaywiseMonthlyReportRowTempl","DailyReportTempl", "DailyReportRowTempl"};
+		
+		for( int i=0; i < fileNames.length; i++ ) {
+			try{
+				FileReader fr = new FileReader( templatesFolder + "/" + fileNames[i] );
+				BufferedReader reader = new BufferedReader( fr );
+				
+				StringBuffer buffer = new StringBuffer();
+				String line = null;
+				while( (line = reader.readLine()) != null ) {
+					buffer.append( line );
+				}
+				reader.close();
+				
+				this.arrayTemplates.set( i, buffer.toString() );
+				
+			} catch( FileNotFoundException e) {
+				e.printStackTrace();
+			} catch( IOException e ) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }

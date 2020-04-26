@@ -16,6 +16,7 @@ public class DiagrepConfig {
 	public final static String CUSTOMER_ID_PREFIX		= "customerIdPrefix";
 	public final static String CUSTOMER_DB_IMPORTED		= "customerDbImportedName";
 	public final static String CUSTOMER_SEARCH_LIMIT 	= "customerSearchResultsLimit";
+	public final static String TEMPLATES_FOLDER_PATH	= "templatesFolderPath";
 	
 	private static DiagrepConfig instance = null;
 	private static String lock = "config-lock";
