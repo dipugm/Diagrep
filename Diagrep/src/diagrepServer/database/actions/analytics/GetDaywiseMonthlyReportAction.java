@@ -37,12 +37,14 @@ public class GetDaywiseMonthlyReportAction extends BaseAction {
 		// Use the Calendar class to subtract one day
         Calendar calendar = Calendar.getInstance();
         calendar.set((int)this.referenceYear, (int)this.referenceMonth, 1);
-        calendar.add( Calendar.DAY_OF_MONTH, -1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
         Date dt1 = calendar.getTime();
         
         // Next month for the upper limit
-        calendar.set((int)this.referenceYear, (int)this.referenceMonth, 1);
         calendar.add( Calendar.MONTH, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
         Date dt2 = calendar.getTime();
 		
         ArrayList<String> arrayDays = new ArrayList<String>();

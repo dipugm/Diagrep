@@ -48,9 +48,14 @@ public class GetDailyReportAction extends BaseAction {
 		// Use the Calendar class to subtract one day
         Calendar calendar = Calendar.getInstance();
         calendar.setTime( new Date( this.referenceDate ) );
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        
+        Date refDate = calendar.getTime();
+        
         // Use the date formatter to produce a formatted date string
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
         Date previousDate = calendar.getTime();
 		
 		ArrayList<BillObject> matchingBills = new ArrayList<BillObject>();
@@ -62,7 +67,7 @@ public class GetDailyReportAction extends BaseAction {
 			DatabaseCallParams param = bo.prepareForFetch();
 			param.orderByClause = "billDate";
 			param.addCondition( new DatabaseCallParams.ConditionGreaterThanOrEqual("billDate", previousDate.getTime()) );
-			param.addCondition( new DatabaseCallParams.ConditionLessThanOrEqual("billDate", this.referenceDate) );
+			param.addCondition( new DatabaseCallParams.ConditionLessThanOrEqual("billDate", refDate.getTime()) );
 			
 			ArrayList<?> bills = dc.fetch(param);
 			matchingBills.addAll( (ArrayList<BillObject>)bills );
@@ -78,8 +83,7 @@ public class GetDailyReportAction extends BaseAction {
 		String refReportTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kDailyReport );
 		String refReportRowTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kDailyReportRow ); 
 		
-		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.REPORT_DATE_FORMAT ) ;
-		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
+		SimpleDateFormat formatter = new SimpleDateFormat( "MMM yyyy" );
 		
 		refReportTempl = refReportTempl.replace("!@#$Date$#@!", formatter.format( new Date(this.referenceDate)));
 		
