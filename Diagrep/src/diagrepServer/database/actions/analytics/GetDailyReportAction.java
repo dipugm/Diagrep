@@ -83,7 +83,8 @@ public class GetDailyReportAction extends BaseAction {
 		String refReportTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kDailyReport );
 		String refReportRowTempl = DiagrepTemplates.getInstance().getTemplateFor( TemplateType.kDailyReportRow ); 
 		
-		SimpleDateFormat formatter = new SimpleDateFormat( "MMM yyyy" );
+		String dateFormat = DiagrepConfig.getConfig().get( DiagrepConfig.REPORT_DATE_FORMAT ) ;
+		SimpleDateFormat formatter = new SimpleDateFormat( dateFormat );
 		
 		refReportTempl = refReportTempl.replace("!@#$Date$#@!", formatter.format( new Date(this.referenceDate)));
 		
