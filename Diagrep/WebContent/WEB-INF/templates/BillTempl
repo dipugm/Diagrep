@@ -163,10 +163,10 @@ body {
 				<td class='patientInformation_value'>!@#$BillDate$#@!</td>
 			</tr>
 			<tr>
-				<td class='patientInformation_name'>Refered By</td>
+				<td class='patientInformation_name'>Referred By</td>
 				<td class='patientInformation_value'>!@#$ReferedBy$#@!</td>
-				<td class='patientInformation_name'>Report On</td>
-				<td class='patientInformation_value'>!@#$ReportDate$#@!</td>
+				<td class='patientInformation_name'>Customer ID</td>
+				<td class='patientInformation_value'>!@#$CustomerID$#@!</td>
 			</tr>
 		</table>
 		<br>
