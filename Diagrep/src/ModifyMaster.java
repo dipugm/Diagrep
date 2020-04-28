@@ -135,13 +135,14 @@ public class ModifyMaster {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("CREATE TABLE \"References\" ");
-		sb.append("( `Name` TEXT NOT NULL, ");
-		sb.append("`ID` INTEGER PRIMARY KEY AUTOINCREMENT )");
+		sb.append("( `name` TEXT NOT NULL, ");
+		sb.append("`id` INTEGER PRIMARY KEY AUTOINCREMENT )");
 		
 		Connection conn = getDbConnectionForFile(subparams.get("dbp") + "/master.db");
 		
 		try {
 			conn.createStatement().execute(sb.toString());
+			conn.createStatement().execute("INSERT INTO `References` (`name`) VALUES('Self')");
 			conn.close();
 			
 			System.out.println("Successfully added the Reference table!");
