@@ -62,9 +62,14 @@ public class ModifyMaster {
 		for(int i=0; i < args.length; i++) arguments.push(args[i]);
 		
 		if( arguments.size() > 0 ) {
+			SubParameters subparams = new SubParameters().processParameters(arguments);
 			switch(arguments.pop()) {
 				case "-apdfm":
-					handleAddingAppNameToDBFileMappingTable(arguments);
+					handleAddingAppNameToDBFileMappingTable(subparams);
+					break;
+					
+				case "-addRef":
+					handleAddReferenceTable(subparams);
 					break;
 				
 				default:
@@ -89,8 +94,8 @@ public class ModifyMaster {
 		System.out.println(sb.toString());
 	}
 	
-	private void handleAddingAppNameToDBFileMappingTable(Parameters args) {
-		SubParameters subparams = new SubParameters().processParameters(args);
+	private void handleAddingAppNameToDBFileMappingTable(SubParameters subparams) {
+		
 		if( subparams.containsKey("a") && subparams.containsKey("dbp") ) {
 			System.out.println("Modifying Db file mapping table for : " + subparams.get("a"));
 			
@@ -117,6 +122,38 @@ public class ModifyMaster {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Invalid application name");
 		sb.append("\nUsage : -apdfm a:<application name> dbp:<db folder path>\n\n");
+		
+		System.out.println(sb);
+	}
+	
+	private void handleAddReferenceTable(SubParameters subparams) {
+		
+		if( subparams.get("dbp") == null ) {
+			printAddReferenceUsage();
+			return;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("CREATE TABLE \"References\" ");
+		sb.append("( `Name` TEXT NOT NULL, ");
+		sb.append("`ID` INTEGER PRIMARY KEY AUTOINCREMENT )");
+		
+		Connection conn = getDbConnectionForFile(subparams.get("dbp") + "/master.db");
+		
+		try {
+			conn.createStatement().execute(sb.toString());
+			conn.close();
+			
+			System.out.println("Successfully added the Reference table!");
+		} catch( Exception e) {
+			System.err.println(e);
+		}
+	}
+	
+	private void printAddReferenceUsage() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Invalid application name");
+		sb.append("\nUsage : -addRef dbp:<db folder path>\n\n");
 		
 		System.out.println(sb);
 	}
