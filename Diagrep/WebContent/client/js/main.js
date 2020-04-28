@@ -437,14 +437,14 @@ function generateBill() {
 	if( szReferredBy != "" ) {
 		var found = 0;
 		for( var iRef=0; iRef < gArrayReferences.length; iRef++ ) {
-			if( szReferredBy == gArrayReferences[iRef] ) {
+			if( szReferredBy == gArrayReferences[iRef].name ) {
 				found = 1;
 				break;
 			}
 		}
 		
 		if( found == 0 ) {
-			gArrayReferences.unshift( szReferredBy );
+			gArrayReferences.unshift( {'name':szReferredBy, 'id':-1} );
 		}
 	}
 }
@@ -594,8 +594,11 @@ function showReferences( ) {
 	for( var i=0; i < gArrayReferences.length; i++ ) {
 		var reference = gArrayReferences[i];
 		szResults += "	<tr class='search_result_row' ";
-		szResults += "onclick=" + "'javascript:referenceSelectedFromLookup(\"" + reference + "\")'>";
-		szResults += "		<td width='60%' class='search_name' style='padding:5px;'>" + reference;
+		szResults += "onclick=" + "'javascript:referenceSelectedFromLookup(\"" + reference.name + "\")'>";
+		szResults += "		<td width='80%' class='search_name' style='padding:5px;'>" + reference.name;
+		szResults += "		</td>";
+		szResults += "		<td width='20%' class='search_name' style='padding:5px;'>";
+		szResults += (reference.id == -1) ? "New" : reference.id;
 		szResults += "		</td>";
 		szResults += "	</tr>";
 	}

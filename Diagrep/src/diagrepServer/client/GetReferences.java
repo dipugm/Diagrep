@@ -1,8 +1,10 @@
 package diagrepServer.client;
 
-import diagrepServer.database.actions.analytics.GetAllReferencesAction;
+import diagrepServer.database.actions.reference.GetAllReferencesAction;
+import diagrepServer.database.model.ReferenceObject;
 import diagrepServer.servlets.BaseServlet;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,22 +29,22 @@ public class GetReferences extends BaseServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doCommonStuff();
 		
 		GetAllReferencesAction action = new GetAllReferencesAction();
-		Object[] references = (Object[])action.doAction();
+		ArrayList<ReferenceObject> references = (ArrayList<ReferenceObject>)action.doAction();
 		
 		StringBuilder sBuilder = new StringBuilder();
 		sBuilder.append( "{\"result\":[" );
-		for( int i=0; i < references.length; i++ ) {
-			String sz = references[i].toString().trim();
-			if( ! sz.isEmpty() ) {
-				sBuilder.append( "\"" );
-				sBuilder.append( sz );
-				sBuilder.append( "\"" );
-				sBuilder.append( "," );
-			}
+		for( int i=0; i < references.size(); i++ ) {
+			ReferenceObject ro = references.get(i);
+			sBuilder.append( "{\"name\":\"" );
+			sBuilder.append( ro.name );
+			sBuilder.append( "\", \"id\":" );
+			sBuilder.append( ro.id.toString() );
+			sBuilder.append( "}," );
 		}
 	
 		String data = sBuilder.toString();

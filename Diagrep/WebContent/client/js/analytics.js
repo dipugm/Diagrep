@@ -18,7 +18,7 @@ function showAnalyticsDialog() {
 	szBody += "<td><select style='border:1px solid lightgray; width:180px; height: 25px;' id='reference_filter_name'>";
 	szBody += "<option></option>";
 	for( var i=0; i < gArrayReferences.length; i++ ) {
-		szBody += "<option>" + gArrayReferences[i] + "</option>\n";
+		szBody += "<option>" + gArrayReferences[i].name + "</option>\n";
 	}
 	szBody += "</select></td></tr>";
 	szBody += "<tr>";

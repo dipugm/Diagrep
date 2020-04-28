@@ -15,6 +15,7 @@ import diagrepServer.database.actions.category.GetSingleCategoryAction;
 import diagrepServer.database.actions.collection.GetSingleCollectionAction;
 import diagrepServer.database.actions.customer.GetCustomerDetailsAction;
 import diagrepServer.database.actions.packages.GetSinglePackageAction;
+import diagrepServer.database.actions.reference.StoreReferenceAction;
 import diagrepServer.database.actions.test.GetSingleTestAction;
 import diagrepServer.database.core.DatabaseCallParams;
 import diagrepServer.database.core.DatabaseConnection;
@@ -126,6 +127,8 @@ public class CreateNewBillAction extends BaseAction {
 				
 				// Save the bill number back to the Db.
 				DataDictionaryUtitlities.storeNextBillNumber( this.bill.billNumber );
+				
+				new StoreReferenceAction(this.bill.referredBy).doAction();
 				
 			} else {
 				// Since we violated the unique bill number constraint, we try the next number. 
