@@ -172,6 +172,7 @@ public class DiagrepTemplates {
 	public String getRecommendationTemplates() {
 		DatabaseConnection dc = DatabaseConnectionPool.getPool().getSavedDataDbConnection();
 		DatabaseCallParams params = new Recommendation().prepareForFetch();
+		params.orderByClause = "name";
 		
 		ArrayList<ModelObject> arr = dc.fetch(params);
 		
