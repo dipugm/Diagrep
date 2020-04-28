@@ -27,7 +27,10 @@ public class DataDictionaryUtitlities {
 			// Moving to App specific entry for last bill number.
 			String billNum = getSequentialDataFromDb( "Last_Bill_Number_" + DiagrepConfig.getConfig().getAppName());
 			if( billNum == null ) {
-				billNum = getSequentialDataFromDb( "Last_Bill_Number" );
+				billNum = DiagrepConfig.getConfig().get(DiagrepConfig.BILL_NUMBER_START_VALUE);
+				if( billNum == null) {
+					billNum = getSequentialDataFromDb( "Last_Bill_Number" );
+				}
 			}
 			return billNum;
 		}
