@@ -116,5 +116,12 @@ public class StringUtilities {
 		
 		return input;
 	}
+	
+	public static String formatAge( Integer age) {
+		int years = age / 12, months = age % 12;
+		String szAge = years > 0 ? String.valueOf(years) + " Years" : "";
+		szAge += years == 0 && months > 0 ? String.valueOf(months) + " Months" : "";
+		return szAge;
+	}
 		
 }

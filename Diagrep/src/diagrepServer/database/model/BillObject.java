@@ -7,6 +7,7 @@ import java.util.Date;
 import diagrepServer.Utils.DiagrepConfig;
 import diagrepServer.Utils.DiagrepTemplates;
 import diagrepServer.Utils.DiagrepTemplates.TemplateType;
+import diagrepServer.Utils.StringUtilities;
 import diagrepServer.database.actions.customer.GetCustomerDetailsAction;
 import diagrepServer.database.core.ModelObject;
 
@@ -90,6 +91,7 @@ public class BillObject extends ModelObject implements IEntityObject {
 		 *  9. !@#$Total$#@!
 		 *  10. !@#$Advance$#@!
 		 *  11. !@#$Balance$#@!
+		 *  12. !@#$CustomerID$#@!
 		 */
 		
 		CustomerObject cust	= (CustomerObject)new GetCustomerDetailsAction(customerId).doAction();
@@ -101,12 +103,14 @@ public class BillObject extends ModelObject implements IEntityObject {
 		templ = templ.replace( "%BillNumber%", this.billNumber );
 		templ = templ.replace( "!@#$Name$#@!", cust.name );
 		templ = templ.replace( "!@#$BillNumber$#@!", billNumber );
-		templ = templ.replace( "!@#$Age$#@!", String.valueOf(cust.fk_currentAge / 12) + " yrs" );
+		templ = templ.replace( "!@#$Age$#@!", StringUtilities.formatAge(cust.fk_currentAge ) );
 		templ = templ.replace( "!@#$Sex$#@!", cust.getGenderAsString( cust.fk_sex ) );
 		templ = templ.replace( "!@#$BillDate$#@!", formatter.format(new Date(billDate)) );
 		templ = templ.replace( "!@#$ReportDate$#@!", reportDate > 0 ? formatter.format(new Date(reportDate)) : "" );
 		templ = templ.replace( "!@#$ReferedBy$#@!", referredBy );
 		templ = templ.replace( "!@#$Advance$#@!", String.valueOf(advancePaid) );
+		templ = templ.replace( "!@#$CustomerID$#@!", cust.customerId );
+		
 		
 		double totalCost = 0.0;
 		StringBuffer buf = new StringBuffer();

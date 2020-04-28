@@ -148,7 +148,7 @@ public class ReportObject extends ModelObject implements IEntityObject {
 		reportString	= reportString.replace("%BillNumber%", billNumber );
 		reportString	= reportString.replace("!@#$Name$#@!", co.name );
 		reportString	= reportString.replace("!@#$CustomerID$#@!", co.customerId );
-		reportString	= reportString.replace("!@#$Age$#@!", String.valueOf( co.fk_currentAge / 12 ) + "Y" );
+		reportString	= reportString.replace("!@#$Age$#@!", StringUtilities.formatAge(12) );
 		reportString	= reportString.replace("!@#$Sex$#@!", co.getGenderAsString( co.fk_sex ) );
 		reportString	= reportString.replace("!@#$ReferedBy$#@!", bo.referredBy );
 		reportString	= reportString.replace("!@#$BillNumber$#@!", billNumber );
