@@ -158,7 +158,7 @@ body {
 			</tr>
 			<tr>
 				<td class='patientInformation_name'>Age/Sex</td>
-				<td class='patientInformation_value'>!@#$Age$#@!/!@#$Sex$#@!</td>
+				<td class='patientInformation_value'>!@#$Age$#@! / !@#$Sex$#@!</td>
 				<td class='patientInformation_name'>Bill Date</td>
 				<td class='patientInformation_value'>!@#$BillDate$#@!</td>
 			</tr>
